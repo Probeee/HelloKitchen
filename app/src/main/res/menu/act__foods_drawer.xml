@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ingredients"
+            android:icon = "@drawable/ingredients_icon"
+            android:title="食材管理" />
+        <item
+            android:id="@+id/nav_recipe"
+            android:icon="@drawable/recipe_icon"
+            android:title="食譜天地" />
+        <item
+            android:id="@+id/nav_repair"
+            android:icon="@drawable/repair_icon"
+            android:title="找裝修" />
+    </group>
+
+</menu>
