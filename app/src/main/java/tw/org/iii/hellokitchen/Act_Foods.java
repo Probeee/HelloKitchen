@@ -62,14 +62,12 @@ public class Act_Foods extends AppCompatActivity implements NavigationView.OnNav
                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                    fragmentTransaction.replace(R.id.frag_container_food,frag_foods_register);
                    fragmentTransaction.commit();
-
                }
                if(position==2)
                {
                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                    fragmentTransaction.replace(R.id.frag_container_food,frag_foods_shopSearch);
                    fragmentTransaction.commit();
-
                }
 
             }
