@@ -3,11 +3,20 @@ package tw.org.iii.hellokitchen;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 /**
@@ -15,7 +24,7 @@ import android.widget.TextView;
  * Use the {@link Frag_Foods_ShopSearch#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_Foods_ShopSearch extends Fragment
+public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallback
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +34,8 @@ public class Frag_Foods_ShopSearch extends Fragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    double latitude ;
+    double longitude;
 
 
     public Frag_Foods_ShopSearch()
@@ -69,27 +79,37 @@ public class Frag_Foods_ShopSearch extends Fragment
                              Bundle savedInstanceState)
     {
         //AIzaSyA-EBSxktno4wjq7jMwbx50Rb6O_rTZFac
-        View v  = inflater.inflate(R.layout.frag__foods__shop_search, container, false);
+        v  = inflater.inflate(R.layout.frag__foods__shop_search, container, false);
         // Inflate the layout for this fragment
         tv_location = (TextView) v.findViewById(R.id.textView_shopSearch);
         InitialLocation();
-        GetNearByMarket();
         return v;
     }
 
-
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        mMapView = (MapView)v.findViewById(R.id.mapView);
+        if(mMapView != null)
+        {
+            mMapView.onCreate(null);
+            mMapView.onResume();
+            mMapView.getMapAsync(this);
+        }
+    }
 
     private void InitialLocation()
     {
         gps = new GPS_Tracker(getActivity());
         if(gps.canGetLocation()){
 
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
 
             // \n is for new line
             // Toast.makeText(getActivity(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-            tv_location.setText("Your Location is - \nLat: " + latitude + "\nLong: "+ longitude  + "\n");
+            tv_location.setText("Your Location is - Lat: " + latitude + " Long: "+ longitude  + "\n");
         }
         else
         {
@@ -99,10 +119,21 @@ public class Frag_Foods_ShopSearch extends Fragment
         }
 
     }
-    private void GetNearByMarket()
-    {
-    }
+
 
     GPS_Tracker gps;
     TextView tv_location;
+    GoogleMap mgoogleMap;
+    MapView mMapView;
+    View v ;
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        MapsInitializer.initialize(getActivity());
+        mgoogleMap = googleMap;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("You are here").snippet("Hello Kitty"));
+        CameraPosition position = CameraPosition.builder().target(new LatLng(latitude,longitude)).zoom(16).bearing(0).tilt(0).build();
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+    }
 }
