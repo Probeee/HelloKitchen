@@ -19,7 +19,17 @@ public class MyDBHelper extends SQLiteOpenHelper
     //存取登入者
     private  static String login_user;
 
-
+    //建立Table-tmember
+    private final static String sqltmember = " CREATE TABLE tmember " +
+            "(member_id VARCHAR(100) NOT NULL ," +"member_name VARCHAR(50) NOT NULL,"
+            + "member_email VARCHAR(100) NOT NULL," + "member_password VARCHAR(50) NOT NULL,"
+            + "member_tel VARCHAR(15) NULL DEFAULT NULL," + "member_fb VARCHAR(50) NULL DEFAULT NULL ,"
+            +" PRIMARY KEY (member_id));";
+    //建立Table-tingredients
+    private final static  String sqlingredients = " CREATE TABLE tingredients " +
+            "(ingredients_id VARCHAR(100) NOT NULL ," +"ingredients_name VARCHAR(50) NOT NULL,"
+            + "ingredients_buyDate VARCHAR(100) NOT NULL," + "ingredients_deadDate VARCHAR(50) NOT NULL,"
+            + "member_id VARCHAR(50) NULL DEFAULT NULL,"   +" PRIMARY KEY (ingredients_id));";
 
     public static  MyDBHelper getInstance(Context ctx)
     {
@@ -38,14 +48,8 @@ public class MyDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        //建立Table
-        String sql = " CREATE TABLE tmember " +
-                "(member_id VARCHAR(100) NOT NULL ," +"member_name VARCHAR(50) NOT NULL,"
-                + "member_email VARCHAR(100) NOT NULL," + "member_password VARCHAR(50) NOT NULL,"
-                + "member_tel VARCHAR(15) NULL DEFAULT NULL," + "member_fb VARCHAR(50) NULL DEFAULT NULL ,"
-                +" PRIMARY KEY (member_id));";
-
-        db.execSQL(sql);
+        db.execSQL(sqltmember);
+        db.execSQL(sqlingredients);
     }
 
     @Override

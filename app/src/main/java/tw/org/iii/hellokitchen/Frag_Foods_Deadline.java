@@ -59,7 +59,8 @@ public class Frag_Foods_Deadline extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag__foods__deadline, container, false);
+        View v = inflater.inflate(R.layout.frag__foods__deadline, container, false);
+        return v;
     }
 
 }
