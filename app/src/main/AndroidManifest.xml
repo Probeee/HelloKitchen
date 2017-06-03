@@ -40,8 +40,8 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".Act_Foods"
-            android:label="@string/title_activity_act__foods"
+            android:name=".ActRealMain"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data

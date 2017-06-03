@@ -4,12 +4,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,9 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
-public class Act_Foods extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ActRealMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     @Override
@@ -31,60 +28,13 @@ public class Act_Foods extends AppCompatActivity implements NavigationView.OnNav
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        //初始化頁面
-        frag_foods_deadline = new Frag_Foods_Deadline();
-        frag_foods_register = new Frag_Foods_Register();
-        frag_foods_shopSearch = new Frag_Foods_ShopSearch();
-        FragmentManager fragMgr = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragMgr.beginTransaction();
-        fragmentTransaction.add(R.id.frag_container_food,frag_foods_deadline).commit();
-
-        //設置TabLayout
-        TabLayout mTabs = (TabLayout) findViewById(R.id.tab_food);
-        mTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-        {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab)
-            {
-                int position = tab.getPosition();
-                FragmentManager fragMgr = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragMgr.beginTransaction();
-               if(position==0)
-               {
-                   //進入註冊頁面
-                   fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                   fragmentTransaction.replace(R.id.frag_container_food,frag_foods_deadline);
-                   fragmentTransaction.commit();
-               }
-               if(position==1)
-               {
-                   fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                   fragmentTransaction.replace(R.id.frag_container_food,frag_foods_register);
-                   fragmentTransaction.commit();
-               }
-               if(position==2)
-               {
-                   fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                   fragmentTransaction.replace(R.id.frag_container_food,frag_foods_shopSearch);
-                   fragmentTransaction.commit();
-               }
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab)
-            {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab)
-            {
-
-            }
-        });
-
+        //初始化三個主頁面
+        frag_foods_container = new Frag_Foods_Container();
+        frag_recipe_container = new Frag_Recipe_Container();
+        //一開始先顯示食材頁面
+        fragMgr = getFragmentManager();
+        fragmentTransaction = fragMgr.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_main_of_three_container,frag_foods_container).commit();
 
         //左方導覽列初始化
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -177,10 +127,19 @@ public class Act_Foods extends AppCompatActivity implements NavigationView.OnNav
 
         if (id == R.id.nav_ingredients)
         {
-            // 選食譜
-        } else if (id == R.id.nav_recipe)
+            //選食材
+            fragMgr = getFragmentManager();
+            fragmentTransaction = fragMgr.beginTransaction();
+           // fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_foods_container).commit();
+        }
+        else if (id == R.id.nav_recipe)
         {
-
+            // 選食譜
+            fragMgr = getFragmentManager();
+            fragmentTransaction = fragMgr.beginTransaction();
+           // fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_recipe_container).commit();
         } else if (id == R.id.nav_repair)
         {
 
@@ -190,8 +149,9 @@ public class Act_Foods extends AppCompatActivity implements NavigationView.OnNav
         return true;
     }
 
+    Frag_Foods_Container frag_foods_container;
+    Frag_Recipe_Container frag_recipe_container;
+    FragmentManager fragMgr ;
+    FragmentTransaction fragmentTransaction;
 
-    Frag_Foods_Deadline frag_foods_deadline;
-    Frag_Foods_Register frag_foods_register;
-    Frag_Foods_ShopSearch frag_foods_shopSearch;
 }

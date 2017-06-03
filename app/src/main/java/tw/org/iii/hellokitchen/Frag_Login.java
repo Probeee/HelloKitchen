@@ -121,7 +121,7 @@ public class Frag_Login extends Fragment {
                 Toast.makeText(getActivity(), c.getString(0), Toast.LENGTH_LONG).show();
                 dbHelper.setLogin_user(c.getString(0));
                 Intent intent = new Intent();
-                intent.setClass(getActivity(),Act_Foods.class);
+                intent.setClass(getActivity(),ActRealMain.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(TheDefined.LOGIN_USER_NAME,c.getString(0));
                 bundle.putString(TheDefined.LOGIN_USER_MAIL ,email.getText().toString());
