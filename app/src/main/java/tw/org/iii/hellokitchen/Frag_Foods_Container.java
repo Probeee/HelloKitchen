@@ -1,12 +1,11 @@
 package tw.org.iii.hellokitchen;
 
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +115,7 @@ public class Frag_Foods_Container extends Fragment {
             {
 
             }
+
         });
         return  v;
     }
