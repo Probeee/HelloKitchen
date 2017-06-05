@@ -127,7 +127,7 @@ public class Frag_Register extends Fragment {
         values.put("member_password",password.getText().toString().trim());
         values.put("member_tel",tel.getText().toString().trim());
         values.put("member_email",email.getText().toString().trim());
-        values.put("member_fb",email.getText().toString().trim());
+        values.put("member_fb_id",email.getText().toString().trim());
 
         try
         {

@@ -9,7 +9,7 @@ import com.facebook.stetho.Stetho;
 
 public class ActMain extends Activity {
 
-
+    private static boolean Login_Status = false;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

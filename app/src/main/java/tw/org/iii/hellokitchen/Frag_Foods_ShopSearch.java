@@ -1,15 +1,16 @@
 package tw.org.iii.hellokitchen;
 
 
+import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -101,9 +102,8 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
         v  = inflater.inflate(R.layout.frag__foods__shop_search, container, false);
         // Inflate the layout for this fragment
         tv_location = (TextView) v.findViewById(R.id.textView_shopSearch);
+
         InitialLocation();
-
-
 
         return v;
     }
@@ -112,6 +112,7 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
         mMapView = (MapView)v.findViewById(R.id.mapView);
         if(mMapView != null)
         {
@@ -119,6 +120,7 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
             mMapView.onResume();
             mMapView.getMapAsync(this);
         }
+
         StringBuilder sbValue = new StringBuilder(sbMethod());
         PlacesTask placesTask = new PlacesTask();
         placesTask.execute(sbValue.toString());
@@ -127,7 +129,8 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
     private void InitialLocation()
     {
         gps = new GPS_Tracker(getActivity());
-        if(gps.canGetLocation()){
+        if(gps.canGetLocation())
+        {
 
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
@@ -181,8 +184,22 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
     }
     private class PlacesTask extends AsyncTask<String, Integer, String>
     {
-
+        ParserTask parserTask;
         String data = null;
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+
+            try{
+                parserTask.cancel(true);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+
+        }
 
         // Invoked by execute() method of this object
         @Override
@@ -191,7 +208,9 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
             try
             {
                 data = downloadUrl(url[0]);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Log.d("Background Task", e.toString());
             }
             return data;
@@ -201,18 +220,27 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
         @Override
         protected void onPostExecute(String result)
         {
-            ParserTask parserTask = new ParserTask();
+            parserTask = new ParserTask();
 
             // Start parsing the Google places in JSON format
             // Invokes the "doInBackground()" method of the class ParserTask
-            parserTask.execute(result);
+            try
+            {
+                parserTask.execute(result);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
-    private String downloadUrl(String strUrl) throws IOException {
+    private String downloadUrl(String strUrl) throws IOException
+    {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
-        try {
+        try
+        {
             URL url = new URL(strUrl);
 
             // Creating an http connection to communicate with url
@@ -229,7 +257,8 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
             StringBuffer sb = new StringBuffer();
 
             String line = "";
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null)
+            {
                 sb.append(line);
             }
 
@@ -237,33 +266,39 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
 
             br.close();
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             Log.d("Exception download url", e.toString());
-        } finally {
+        }
+        finally
+        {
             iStream.close();
             urlConnection.disconnect();
         }
         return data;
     }
 
-    private class ParserTask extends AsyncTask<String, Integer, List<HashMap<String, String>>> {
+    private class ParserTask extends AsyncTask<String, Integer, List<HashMap<String, String>>>
+    {
 
         JSONObject jObject;
 
         // Invoked by execute() method of this object
         @Override
-        protected List<HashMap<String, String>> doInBackground(String... jsonData) {
+        protected List<HashMap<String, String>> doInBackground(String... jsonData)
+        {
 
             List<HashMap<String, String>> places = null;
             Place_JSON placeJson = new Place_JSON();
 
-            try {
+            try
+            {
                 jObject = new JSONObject(jsonData[0]);
-
                 places = placeJson.parse(jObject);
-
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Log.d("Exception", e.toString());
             }
             return places;
@@ -274,49 +309,58 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
         protected void onPostExecute(List<HashMap<String, String>> list)
         {
 
-            Log.d("Map", "list size: " + list.size());
+            //Log.d("Map", "list size: " + list.size());
             // Clears all the existing markers;
             //mgoogleMap.clear();
+            if(list != null)
+            {
+                for (int i = 0; i < list.size(); i++)
+                {
 
-            for (int i = 0; i < list.size(); i++) {
+                    // Creating a marker
+                    MarkerOptions markerOptions = new MarkerOptions();
 
-                // Creating a marker
-                MarkerOptions markerOptions = new MarkerOptions();
-
-                // Getting a place from the places list
-                HashMap<String, String> hmPlace = list.get(i);
+                    // Getting a place from the places list
+                    HashMap<String, String> hmPlace = list.get(i);
 
 
-                // Getting latitude of the place
-                double lat = Double.parseDouble(hmPlace.get("lat"));
+                    // Getting latitude of the place
+                    double lat = Double.parseDouble(hmPlace.get("lat"));
 
-                // Getting longitude of the place
-                double lng = Double.parseDouble(hmPlace.get("lng"));
+                    // Getting longitude of the place
+                    double lng = Double.parseDouble(hmPlace.get("lng"));
 
-                // Getting name
-                String name = hmPlace.get("place_name");
+                    // Getting name
+                    String name = hmPlace.get("place_name");
 
-                Log.d("Map", "place: " + name);
+                    Log.d("Map", "place: " + name);
 
-                // Getting vicinity
-                String vicinity = hmPlace.get("vicinity");
+                    // Getting vicinity
+                    String vicinity = hmPlace.get("vicinity");
 
-                LatLng latLng = new LatLng(lat, lng);
+                    LatLng latLng = new LatLng(lat, lng);
 
-                // Setting the position for the marker
-                markerOptions.position(latLng);
+                    // Setting the position for the marker
+                    markerOptions.position(latLng);
 
-                markerOptions.title(name + " : " + vicinity);
+                    markerOptions.title(name + " : " + vicinity);
 
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
 
-                // Placing a marker on the touched position
-                Marker m = mgoogleMap.addMarker(markerOptions);
+                    // Placing a marker on the touched position
+                    Marker m = mgoogleMap.addMarker(markerOptions);
 
+                }
             }
+            else
+            {
+                return;
+            }
+
         }
     }
-    public class Place_JSON {
+    public class Place_JSON
+    {
 
         /**
          * Receives a JSONObject and returns a list
@@ -324,10 +368,13 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
         public List<HashMap<String, String>> parse(JSONObject jObject) {
 
             JSONArray jPlaces = null;
-            try {
+            try
+            {
                 /** Retrieves all the elements in the 'places' array */
                 jPlaces = jObject.getJSONArray("results");
-            } catch (JSONException e) {
+            }
+            catch (JSONException e)
+            {
                 e.printStackTrace();
             }
             /** Invoking getPlaces with the array of json object

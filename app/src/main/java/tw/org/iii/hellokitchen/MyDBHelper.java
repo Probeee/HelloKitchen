@@ -23,12 +23,12 @@ public class MyDBHelper extends SQLiteOpenHelper
     private final static String sqltmember = " CREATE TABLE tmember " +
             "(member_id VARCHAR(100) NOT NULL ," +"member_name VARCHAR(50) NOT NULL,"
             + "member_email VARCHAR(100) NOT NULL," + "member_password VARCHAR(50) NOT NULL,"
-            + "member_tel VARCHAR(15) NULL DEFAULT NULL," + "member_fb VARCHAR(50) NULL DEFAULT NULL ,"
+            + "member_tel VARCHAR(15) NULL DEFAULT NULL," + "member_fb_id VARCHAR(128) NULL DEFAULT NULL ,"
             +" PRIMARY KEY (member_id));";
     //建立Table-tingredients
     private final static  String sqlingredients = " CREATE TABLE tingredients " +
             "(ingredients_id VARCHAR(100) NOT NULL ," +"ingredients_name VARCHAR(50) NOT NULL,"
-            + "ingredients_buyDate VARCHAR(100) NOT NULL," + "ingredients_deadDate VARCHAR(50) NOT NULL,"
+            + "ingredients_buyDate VARCHAR(100) NOT NULL," + "ingredients_deadDate VARCHAR(50) NOT NULL,"+"ingredients_amount VARCHAR(50) NOT NULL,"
             + "member_id VARCHAR(50) NULL DEFAULT NULL,"   +" PRIMARY KEY (ingredients_id));";
 
     public static  MyDBHelper getInstance(Context ctx)
