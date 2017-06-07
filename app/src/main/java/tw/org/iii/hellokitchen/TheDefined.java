@@ -23,6 +23,6 @@ public class TheDefined
     public static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
     public static final String TAG = ActMain.class.getSimpleName();
     public static final int CAMERA_ID = 66 ;
-    public static final int PHOTO_ID = 99 ; 
+    public static final int PHOTO_ID = 99 ;
 
 }
