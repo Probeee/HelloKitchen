@@ -42,7 +42,7 @@ public class MyDBHelper extends SQLiteOpenHelper
     private MyDBHelper(Context context)
     {
         super(context, _DBName, null, _DBVersion);
-        //context.deleteDatabase(_DBName);
+        //context.deleteDatabase(_DBName);//刪除整個資料庫用
     }
 
     @Override

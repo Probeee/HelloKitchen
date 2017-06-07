@@ -20,11 +20,12 @@ public class Ingredients
     private String buyDate;
     private String deadDate;
     private String member_id;
-
-
     private Integer amount;
     private String day;
-    private Long time;
+
+
+    private Long time;//計算時間用
+
 
     public Long getTime()
     {

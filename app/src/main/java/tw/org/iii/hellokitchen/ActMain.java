@@ -29,7 +29,7 @@ public class ActMain extends Activity {
         fragMgr.beginTransaction().add(R.id.frag_container,frag_main).commit();
     }
 
-    private void GetStetho()
+    private void GetStetho()//用來看資料庫的外掛程式
     {
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)

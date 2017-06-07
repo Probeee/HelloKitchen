@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:maxHeight="@android:dimen/notification_large_icon_width"
+        android:maxWidth="@android:dimen/notification_large_icon_width"
+        app:srcCompat="@color/cast_intro_overlay_button_background_color" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtRecipeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="食譜名稱"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtProducerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="作者" />
+
+    </LinearLayout>
+
+</LinearLayout>
