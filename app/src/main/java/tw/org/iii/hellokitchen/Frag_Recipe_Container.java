@@ -1,11 +1,17 @@
 package tw.org.iii.hellokitchen;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 
 /**
@@ -57,9 +63,69 @@ public class Frag_Recipe_Container extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.frag__recipe__container, container, false);
+        View v = inflater.inflate(R.layout.frag__recipe__container, container, false);
+        lv = (ListView) v.findViewById(R.id.listview_recipe);
+        myAdapter = new CustomAdapter_Recipe(getActivity());
+        lv.setAdapter(myAdapter);
+
+        return v;
     }
 
+    public class CustomAdapter_Recipe extends BaseAdapter
+    {
+        private Context context;
+        private LayoutInflater inflater;
+        public CustomAdapter_Recipe(Context context)
+        {
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public int getCount()
+        {
+            return 20;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            ViewHolder_Recipe viewHolder = null;
+            if (convertView == null)
+            {
+                viewHolder = new ViewHolder_Recipe();
+                convertView = inflater.inflate(R.layout.layout_list_of_recipe, null);
+                viewHolder.txt_recipe_name = (TextView) convertView.findViewById(R.id.txtRecipeName);
+                viewHolder.txt_producer_name = (TextView) convertView.findViewById(R.id.txtProducerName);
+                convertView.setTag(viewHolder);
+            }
+            else
+            {
+                viewHolder = (ViewHolder_Recipe) convertView.getTag();
+            }
+            return convertView;
+        }
+    }
+    class ViewHolder_Recipe
+    {
+        private TextView txt_recipe_name;
+        private TextView txt_producer_name;
+    }
+
+    List<Recipes> recipesList;
+    CustomAdapter_Recipe myAdapter;
+    ListView lv ;
 }

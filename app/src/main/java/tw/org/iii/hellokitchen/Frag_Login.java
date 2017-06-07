@@ -118,7 +118,7 @@ public class Frag_Login extends Fragment {
             {
                 Cursor c = sqLiteDatabase.query("tmember", new String[]{"member_name"}, sqlselection, null, null, null, null);
                 c.moveToFirst();
-                Toast.makeText(getActivity(), c.getString(0), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), c.getString(0), Toast.LENGTH_LONG).show();
                 dbHelper.setLogin_user(c.getString(0));
                 Intent intent = new Intent();
                 intent.setClass(getActivity(),ActRealMain.class);

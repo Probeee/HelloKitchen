@@ -170,15 +170,15 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
 
         //use your current location here
 
-        StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        StringBuilder sb = new StringBuilder(TheDefined.StringBuilder_URL);
         sb.append("location=" + latitude + "," + longitude);
-        sb.append("&radius=1000");
-        sb.append("&language=zh-TW");
-        sb.append("&keyword=supermarket+%E8%B6%85%E5%B8%82+%e8%8f%9c%e5%b8%82%e5%a0%b4%0d%0a");
-        sb.append("&sensor=true");
-        sb.append("&key=AIzaSyDdKE-JYbnGeOJCZ6CeL7nt4cjvZdqqXDU");
+        sb.append("&radius="+TheDefined.Radius);
+        sb.append("&language="+TheDefined.Language);
+        sb.append("&keyword="+TheDefined.KeyWords);
+        sb.append("&sensor="+TheDefined.Sensor);
+        sb.append("&key="+TheDefined.ApiKey);
 
-        Log.d("Map", "api: " + sb.toString());
+       // Log.d("Map", "api: " + sb.toString());
 
         return sb;
     }
@@ -389,8 +389,10 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
             HashMap<String, String> place = null;
 
             /** Taking each place, parses and adds to list object */
-            for (int i = 0; i < placesCount; i++) {
-                try {
+            for (int i = 0; i < placesCount; i++)
+            {
+                try
+                {
                     /** Call getPlace with place JSON object to parse the place */
                     place = getPlace((JSONObject) jPlaces.get(i));
                     placesList.add(place);

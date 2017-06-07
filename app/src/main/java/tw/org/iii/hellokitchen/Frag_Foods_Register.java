@@ -74,12 +74,12 @@ public class Frag_Foods_Register extends Fragment {
 
 
     //宣告
-    private static final String CLOUD_VISION_API_KEY = "AIzaSyCUQswIVonpnGupn5qZM1PlniXQfh8S2Z4";
+    /*private static final String CLOUD_VISION_API_KEY = "AIzaSyCUQswIVonpnGupn5qZM1PlniXQfh8S2Z4";
     private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
     private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
     private static final String TAG = ActMain.class.getSimpleName();
     private final static int CAMERA_ID = 66 ;
-    private final static int PHOTO_ID = 99 ;
+    private final static int PHOTO_ID = 99 ;*/
 
     private View v ;
     private TextView lblDetails;
@@ -156,7 +156,7 @@ public class Frag_Foods_Register extends Fragment {
             Uri uri= getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, value);
             Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri.getPath());
-            startActivityForResult(intent, CAMERA_ID);
+            startActivityForResult(intent, TheDefined.CAMERA_ID);
         }
     };
 
@@ -171,7 +171,7 @@ public class Frag_Foods_Register extends Fragment {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intent, PHOTO_ID);
+            startActivityForResult(intent, TheDefined.PHOTO_ID);
         }
     };
 
@@ -288,7 +288,7 @@ public class Frag_Foods_Register extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //藉由requestCode判斷是否為開啟相機或開啟相簿而呼叫的，且data不為null
-        if ((requestCode == CAMERA_ID || requestCode == PHOTO_ID ) && data != null) {
+        if ((requestCode == TheDefined.CAMERA_ID || requestCode == TheDefined.PHOTO_ID ) && data != null) {
             //取得照片路徑uri
             Uri uri = data.getData();
             ContentResolver cr = getActivity().getContentResolver();
@@ -327,7 +327,7 @@ public class Frag_Foods_Register extends Fragment {
                     JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
 
                     VisionRequestInitializer requestInitializer =
-                            new VisionRequestInitializer(CLOUD_VISION_API_KEY) {
+                            new VisionRequestInitializer(TheDefined.CLOUD_VISION_API_KEY) {
                                 /**
                                  * We override this so we can inject important identifying fields into the HTTP
                                  * headers. This enables use of a restricted cloud platform API key.
@@ -338,11 +338,11 @@ public class Frag_Foods_Register extends Fragment {
                                     super.initializeVisionRequest(visionRequest);
 
                                     String packageName = getActivity().getPackageName();
-                                    visionRequest.getRequestHeaders().set(ANDROID_PACKAGE_HEADER, packageName);
+                                    visionRequest.getRequestHeaders().set(TheDefined.ANDROID_PACKAGE_HEADER, packageName);
 
                                     String sig = PackageManagerUtils.getSignature(getActivity().getPackageManager(), packageName);
 
-                                    visionRequest.getRequestHeaders().set(ANDROID_CERT_HEADER, sig);
+                                    visionRequest.getRequestHeaders().set(TheDefined.ANDROID_CERT_HEADER, sig);
                                 }
                             };
 
@@ -384,15 +384,15 @@ public class Frag_Foods_Register extends Fragment {
                             vision.images().annotate(batchAnnotateImagesRequest);
                     // Due to a bug: requests to Vision API containing large images fail when GZipped.
                     annotateRequest.setDisableGZipContent(true);
-                    Log.d(TAG, "created Cloud Vision request object, sending request");
+                    Log.d(TheDefined.TAG, "created Cloud Vision request object, sending request");
 
                     BatchAnnotateImagesResponse response = annotateRequest.execute();
                     return convertResponseToString(response);
 
                 } catch (GoogleJsonResponseException e) {
-                    Log.d(TAG, "failed to make API request because " + e.getContent());
+                    Log.d(TheDefined.TAG, "failed to make API request because " + e.getContent());
                 } catch (IOException e) {
-                    Log.d(TAG, "failed to make API request because of other IOException " +
+                    Log.d(TheDefined.TAG, "failed to make API request because of other IOException " +
                             e.getMessage());
                 }
                 return "Cloud Vision API request failed. Check logs for details.";
@@ -430,6 +430,8 @@ public class Frag_Foods_Register extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
+                        Log.d("測試用",String.valueOf(which));
+
                         txtIngredient.setText(strMsg[index]);
                         myIngredients.setName(strMsg[index]);
                     }
