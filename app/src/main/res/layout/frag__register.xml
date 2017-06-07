@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tw.org.iii.hellokitchen.Frag_Register">
+    tools:context="tw.org.iii.hellokitchen.Frag_LoginPage.Frag_Register">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
