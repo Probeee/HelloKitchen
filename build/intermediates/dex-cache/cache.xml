@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kevin\.gradle\caches\modules-2\files-2.1\org.jbundle.util.osgi.wrapped\org.jbundle.util.osgi.wrapped.org.apache.http.client\4.1.2\98c86e42679fe7ac066f6c242e0d14f0bce0bb7c\org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="98c86e42679fe7ac066f6c242e0d14f0bce0bb7c">
+        <dex dex="C:\Users\Kevin\AndroidStudioProjects\HelloKitchen0607\app\build\intermediates\transforms\dex\debug\folders\1000\10\org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2_7553d49a5b564f667fbcbd45f8df9f39aed90a1f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kevin\AndroidStudioProjects\HelloKitchen0607\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="C:\Users\Kevin\AndroidStudioProjects\HelloKitchen0607\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_19c37936c92545aa588e3578a4ac9179fe70a35d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kevin\AndroidStudioProjects\HelloKitchen0607\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="1295f1d497aa4497e7de90d446bdcd2da228c3ee">
+        <dex dex="C:\Users\Kevin\AndroidStudioProjects\HelloKitchen0607\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_02375178f3aeaf3c01d3a668bf46b38e063f4bc2\classes.dex" />
+    </item>
+
+</items>
