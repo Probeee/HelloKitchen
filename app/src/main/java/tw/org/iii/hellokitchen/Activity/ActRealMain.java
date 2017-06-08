@@ -1,8 +1,24 @@
 package tw.org.iii.hellokitchen.Activity;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -15,13 +31,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Container;
 import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Container;
 import tw.org.iii.hellokitchen.R;
+import tw.org.iii.hellokitchen.Utility.AlarmBroadCastReceiver;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
 
-public class ActRealMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import static android.content.DialogInterface.BUTTON_NEGATIVE;
+import static android.content.DialogInterface.BUTTON_POSITIVE;
+
+public class ActRealMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+{
+    private SharedPreferences table_time;
+    private AlarmManager am;
+    private java.util.Calendar calendar;
 
 
     @Override
@@ -81,6 +107,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             }
         });
 
+        am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        calendar = java.util.Calendar.getInstance();
     }
 
     @Override
@@ -115,13 +143,105 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        if (id == R.id.action_settings_time)
         {
-            return true;
+            //設定過期通知時間
+            TimePickerDialog message = new TimePickerDialog(this, myTimeSetListener, java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY),
+                    java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE),true);
+            message.setButton(BUTTON_NEGATIVE, "關閉提醒", new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    Intent intent = new Intent(ActRealMain.this, AlarmBroadCastReceiver.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                            ActRealMain.this, 0, intent, 0);
+                    //取消該Intent
+                    am.cancel(pendingIntent);
+                    Toast.makeText(ActRealMain.this,"鬧鐘已取消！",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            message.show();
+            //return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    private TimePickerDialog.OnTimeSetListener myTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+    {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute)
+        {
+            String hours ;
+            String minutes ;
+            String time ;
+            // TODO Auto-generated method stub
+            if(hourOfDay<10)
+            {
+                hours = "0" + String.valueOf(hourOfDay);
+            }
+            else
+            {
+                hours = String.valueOf(hourOfDay);
+            }
+            if(minute<10)
+            {
+                minutes = "0"+String.valueOf(minute);
+            }
+            else
+            {
+                minutes =  String.valueOf(minute);
+            }
+            time = hours + ":" +  minutes ;
+            Toast.makeText(ActRealMain.this,time,Toast.LENGTH_SHORT).show();
+           // table_time = ActRealMain.this.getSharedPreferences("TimeSetting",0);
+           // SharedPreferences.Editor row = table_time.edit();
+          //  row.putString("AlarmTime",hours).commit();
+          //  row.putString("AlarmTime",minutes).commit();
+
+            scheduleNotification(getNotification("123456"),hourOfDay,minute);
+
+
+        }
+    };
+
+    private void scheduleNotification(Notification notification,int hour,int min)
+    {
+
+        Intent notificationIntent = new Intent(this, AlarmBroadCastReceiver.class);
+        notificationIntent.putExtra("notification_id", 1);
+        notificationIntent.putExtra("notification", notification);
+
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, hour);
+        calendar.set(java.util.Calendar.MINUTE, min);
+        calendar.set(java.util.Calendar.SECOND, 0);
+        calendar.set(java.util.Calendar.MILLISECOND, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 3000, (24 * 60 * 60 * 1000),pendingIntent);
+
+    }
+
+
+    private Notification getNotification(String content)
+    {
+
+        Notification.Builder builder = new Notification.Builder(ActRealMain.this);
+        builder.setContentTitle("過期通知");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.account_icon);
+        builder.setDefaults(Notification.DEFAULT_ALL);
+
+        return builder.build();
+
+    }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -145,7 +265,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             fragmentTransaction = fragMgr.beginTransaction();
            // fragmentTransaction.addToBackStack(null);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_recipe_container).commit();
-        } else if (id == R.id.nav_repair)
+        }
+        else if (id == R.id.nav_repair)
         {
 
         }
@@ -158,5 +279,5 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     Frag_Recipe_Container frag_recipe_container;
     FragmentManager fragMgr ;
     FragmentTransaction fragmentTransaction;
-
+    TimePickerDialog timePickerDialog;
 }

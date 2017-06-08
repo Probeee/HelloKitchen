@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +71,29 @@ public class Frag_Main extends Fragment {
         Button btn_login = (Button)v.findViewById(R.id.btn_main_login);
         btn_login.setOnClickListener(btn_login_click);
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        //自動跳頁
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                //Second fragment after 5 seconds appears
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.frag_container, new Frag_Login())
+                        .commit();
+            }
+
+        };
+
+
+        handler.postDelayed(runnable, 2000);
     }
 
     View.OnClickListener btn_login_click = new View.OnClickListener()
