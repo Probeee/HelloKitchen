@@ -132,7 +132,7 @@ public class Frag_Register extends Fragment {
             }
             else
             {
-                try
+                /*try
                 {
                     Toast.makeText(getActivity(),"InTO Servlet",Toast.LENGTH_SHORT).show();
                     servlet_Add_New_Account();
@@ -140,8 +140,8 @@ public class Frag_Register extends Fragment {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
-                //add_New_Account();
+                }*/
+                add_New_Account();
             }
         }
     };

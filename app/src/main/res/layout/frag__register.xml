@@ -113,7 +113,8 @@
                                         android:layout_weight="1"
                                         android:hint="Email"
                                         android:inputType="textEmailAddress"
-                                        android:padding="3dp" />
+                                        android:padding="3dp"
+                                        android:text="test01@gmail.com" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -161,7 +162,8 @@
                                         android:layout_weight="1"
                                         android:hint="Password"
                                         android:inputType="textPassword"
-                                        android:padding="3dp" />
+                                        android:padding="3dp"
+                                        android:text="1234567" />
 
                                 </LinearLayout>
                             </LinearLayout>
@@ -202,7 +204,8 @@
                                         android:layout_weight="1"
                                         android:hint="Confirm Password"
                                         android:inputType="textPassword"
-                                        android:padding="3dp" />
+                                        android:padding="3dp"
+                                        android:text="1234567" />
 
                                 </LinearLayout>
                             </LinearLayout>
@@ -249,8 +252,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:hint="Your Name Here"
-                                        android:inputType = "textPersonName"
-                                        android:padding="3dp" />
+                                        android:inputType="textPersonName"
+                                        android:padding="3dp"
+                                        android:text="test01" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -295,7 +299,8 @@
                                         android:layout_weight="1"
                                         android:hint="Phone NO."
                                         android:inputType="phone"
-                                        android:padding="3dp" />
+                                        android:padding="3dp"
+                                        android:text="0987654321" />
                                 </LinearLayout>
                             </LinearLayout>
 

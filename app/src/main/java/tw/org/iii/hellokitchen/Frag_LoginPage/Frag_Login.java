@@ -5,10 +5,12 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,10 @@ public class Frag_Login extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private SharedPreferences table ;
+
+
+
 
 
     public Frag_Login()
@@ -83,10 +89,29 @@ public class Frag_Login extends Fragment {
         btn_register = (Button)v.findViewById(R.id.btn_register);
         btn_login.setOnClickListener(btn_login_click);
         btn_register.setOnClickListener(btn_register_click);
-
         email = (EditText)v.findViewById(R.id.editText_login_email);
         password = (EditText)v.findViewById(R.id.editText_login_password);
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        table = getActivity().getSharedPreferences("LoginUser",0);
+        if(!table.getString("UserEmail","").isEmpty() && !table.getString("UserName","").isEmpty())
+        {
+            Toast.makeText(getActivity(), table.getString("UserEmail", "") + "-" + table.getString("UserName", ""), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setClass(getActivity(),ActRealMain.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(TheDefined.LOGIN_USER_NAME, table.getString("UserName", ""));
+            bundle.putString(TheDefined.LOGIN_USER_MAIL ,table.getString("UserEmail", ""));
+            intent.putExtras(bundle);
+            startActivity(intent);
+            getActivity().finish();
+        }
+
     }
 
     View.OnClickListener btn_login_click = new View.OnClickListener()
@@ -124,14 +149,19 @@ public class Frag_Login extends Fragment {
                 Cursor c = sqLiteDatabase.query("tmember", new String[]{"member_name"}, sqlselection, null, null, null, null);
                 c.moveToFirst();
                 //Toast.makeText(getActivity(), c.getString(0), Toast.LENGTH_LONG).show();
-                dbHelper.setLogin_user(c.getString(0));
+                //dbHelper.setLogin_user(c.getString(0));
                 Intent intent = new Intent();
                 intent.setClass(getActivity(),ActRealMain.class);
                 Bundle bundle = new Bundle();
                 bundle.putString(TheDefined.LOGIN_USER_NAME,c.getString(0));
                 bundle.putString(TheDefined.LOGIN_USER_MAIL ,email.getText().toString());
+                table = getActivity().getSharedPreferences("LoginUser",0);
+                SharedPreferences.Editor row = table.edit();
+                row.putString("UserEmail",email.getText().toString()).commit();
+                row.putString("UserName",c.getString(0)).commit();
                 intent.putExtras(bundle);
                 startActivity(intent);
+                getActivity().finish();
             }
             catch (Exception e)
             {

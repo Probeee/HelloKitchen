@@ -207,7 +207,6 @@ public class Frag_Foods_Deadline extends Fragment {
             String amount = cursor.getString(4);
             String member = cursor.getString(5);
             Ingredients i  = new Ingredients(_id, name, startDate, endDate,amount,member);
-
             indegredientList.add(i);
         }
         Collections.sort(indegredientList, new Comparator<Ingredients>()
