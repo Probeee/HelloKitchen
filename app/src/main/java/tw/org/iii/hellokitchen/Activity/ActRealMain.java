@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,10 +36,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import tw.org.iii.hellokitchen.Entity.Ingredients;
 import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Container;
 import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Container;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.AlarmBroadCastReceiver;
+import tw.org.iii.hellokitchen.Utility.MyDBHelper;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
@@ -145,7 +154,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_time)
         {
-            //設定過期通知時間
+            //產生TimepickerDialog 物件 初始顯示時間為現在
             TimePickerDialog message = new TimePickerDialog(this, myTimeSetListener, java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY),
                     java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE),true);
             message.setButton(BUTTON_NEGATIVE, "關閉提醒", new DialogInterface.OnClickListener()
@@ -153,6 +162,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
                 @Override
                 public void onClick(DialogInterface dialog, int which)
                 {
+                    //關閉鬧鐘功能
                     Intent intent = new Intent(ActRealMain.this, AlarmBroadCastReceiver.class);
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(
                             ActRealMain.this, 0, intent, 0);
@@ -163,7 +173,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             });
 
             message.show();
-            //return true;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -174,6 +184,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute)
         {
+            //設定呼叫時間
             String hours ;
             String minutes ;
             String time ;
@@ -196,50 +207,42 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             }
             time = hours + ":" +  minutes ;
             Toast.makeText(ActRealMain.this,time,Toast.LENGTH_SHORT).show();
-           // table_time = ActRealMain.this.getSharedPreferences("TimeSetting",0);
-           // SharedPreferences.Editor row = table_time.edit();
-          //  row.putString("AlarmTime",hours).commit();
-          //  row.putString("AlarmTime",minutes).commit();
-
-            scheduleNotification(getNotification("123456"),hourOfDay,minute);
+            scheduleNotification(hourOfDay,minute);
 
 
         }
     };
 
-    private void scheduleNotification(Notification notification,int hour,int min)
+    private void scheduleNotification(int hour,int min)
     {
-
-        Intent notificationIntent = new Intent(this, AlarmBroadCastReceiver.class);
-        notificationIntent.putExtra("notification_id", 1);
-        notificationIntent.putExtra("notification", notification);
-
+        //設定時間
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(java.util.Calendar.HOUR_OF_DAY, hour);
         calendar.set(java.util.Calendar.MINUTE, min);
         calendar.set(java.util.Calendar.SECOND, 0);
         calendar.set(java.util.Calendar.MILLISECOND, 0);
+        //加入notification
+        Intent notificationIntent = new Intent(this, AlarmBroadCastReceiver.class);
 
+        Notification notification = getNotification();
+        notificationIntent.putExtra("notification_id", 1);
+        notificationIntent.putExtra("notification", notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 3000, (24 * 60 * 60 * 1000),pendingIntent);
-
+        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1000, 3000,pendingIntent);//am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 1000, (24 * 60 * 60 * 1000),pendingIntent);
     }
 
-
-    private Notification getNotification(String content)
+    private Notification getNotification()
     {
-
         Notification.Builder builder = new Notification.Builder(ActRealMain.this);
         builder.setContentTitle("過期通知");
-        builder.setContentText(content);
+        builder.setContentText("您有過期食材");
         builder.setSmallIcon(R.drawable.account_icon);
         builder.setDefaults(Notification.DEFAULT_ALL);
-
         return builder.build();
-
     }
+
 
 
 
@@ -279,5 +282,6 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     Frag_Recipe_Container frag_recipe_container;
     FragmentManager fragMgr ;
     FragmentTransaction fragmentTransaction;
-    TimePickerDialog timePickerDialog;
+
+
 }
