@@ -313,7 +313,6 @@ public class Frag_Foods_Register extends Fragment {
     private void callCloudVision(final Bitmap bitmap) throws IOException {
         // Switch text to loading
         lblDetails.setText(R.string.loading_message);
-
         final ProgressDialog message = new ProgressDialog(getActivity());
         message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         message.setTitle("正在讀取資料");

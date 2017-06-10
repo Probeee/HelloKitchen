@@ -12,19 +12,47 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <SearchView
-            android:queryHint="Enter the name you want to search"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        </SearchView>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="上傳食譜" />
 
-        <ListView
-            android:id="@+id/listview_recipe"
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:queryHint="Enter the name you want to search">
+
+            </SearchView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_recipe_gallery"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9" />
+            android:layout_height="match_parent"
+            android:background="@color/blanchedalmond"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gridRecipePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp">
+
+            </GridView>
+        </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>
