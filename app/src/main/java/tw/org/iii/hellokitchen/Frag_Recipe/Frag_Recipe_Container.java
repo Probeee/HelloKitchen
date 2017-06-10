@@ -1,20 +1,29 @@
 package tw.org.iii.hellokitchen.Frag_Recipe;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import tw.org.iii.hellokitchen.Activity.ActRealMain;
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
+import tw.org.iii.hellokitchen.Utility.RecipePhotoGalleryAdapter;
 
 
 /**
@@ -31,6 +40,17 @@ public class Frag_Recipe_Container extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    /**
+     * 用來展示圖片的Gallery
+     */
+    private GridView photoGallery;
+
+    /**
+     * GridView所使用的Adapter
+     */
+    private RecipePhotoGalleryAdapter adapter;
 
 
     public Frag_Recipe_Container() {
@@ -70,65 +90,40 @@ public class Frag_Recipe_Container extends Fragment {
     {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.frag__recipe__container, container, false);
-        lv = (ListView) v.findViewById(R.id.listview_recipe);
-        myAdapter = new CustomAdapter_Recipe(getActivity());
-        lv.setAdapter(myAdapter);
+        this.photoGallery = (GridView)v.findViewById(R.id.gridRecipePhoto );
+        recipesList = new ArrayList<>();
+        for(int i=0;i<100;i+=4)
+        {
+            Recipes r1 = new Recipes(""+i,"第"+i+"份食譜","第"+i+"份作者","20170601",true,"1","10","http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-05.jpg");
+            Recipes r2 = new Recipes(""+(i+1),"第"+(i+1)+"份食譜","第"+(i+1)+"份作者","20170602",true,"1","10","http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-04.jpg");
+            Recipes r3 = new Recipes(""+(i+2),"第"+(i+2)+"份食譜","第"+(i+2)+"份作者","20170603",true,"1","10","http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg");
+            Recipes r4 = new Recipes(""+(i+3),"第"+(i+3)+"份食譜","第"+(i+3)+"份作者","20170604",true,"1","10","http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-04.jpg");
+            recipesList.add(r1);
+            recipesList.add(r2);
+            recipesList.add(r3);
+            recipesList.add(r4);
+        }
 
+        this.adapter = new RecipePhotoGalleryAdapter(getActivity(), recipesList, photoGallery );
+        this.photoGallery.setAdapter( adapter );
         return v;
     }
 
-    public class CustomAdapter_Recipe extends BaseAdapter
+
+    @Override
+    public void onDestroyView()
     {
-        private Context context;
-        private LayoutInflater inflater;
-        public CustomAdapter_Recipe(Context context)
-        {
-            this.context = context;
-            inflater = LayoutInflater.from(context);
-        }
-
-        @Override
-        public int getCount()
-        {
-            return 20;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            ViewHolder_Recipe viewHolder = null;
-            if (convertView == null)
-            {
-                viewHolder = new ViewHolder_Recipe();
-                convertView = inflater.inflate(R.layout.layout_list_of_recipe, null);
-                viewHolder.txt_recipe_name = (TextView) convertView.findViewById(R.id.txtRecipeName);
-                viewHolder.txt_producer_name = (TextView) convertView.findViewById(R.id.txtProducerName);
-                convertView.setTag(viewHolder);
-            }
-            else
-            {
-                viewHolder = (ViewHolder_Recipe) convertView.getTag();
-            }
-            return convertView;
-        }
+        super.onDestroyView();
+        this.adapter.cancelAllTasks();
     }
-    class ViewHolder_Recipe
+
+    @Override
+    public void onDestroy()
     {
-        private TextView txt_recipe_name;
-        private TextView txt_producer_name;
+        super.onDestroy();
+        this.adapter.cancelAllTasks();
     }
 
     List<Recipes> recipesList;
-    CustomAdapter_Recipe myAdapter;
-    ListView lv ;
+
 }
