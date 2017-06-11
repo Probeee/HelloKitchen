@@ -18,19 +18,21 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
+                android:id="@+id/button_Up"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="上傳食譜" />
+                android:text="搜尋食譜" />
 
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <EditText
+                android:id="@+id/editText_Search_Recipe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:queryHint="Enter the name you want to search">
+                android:ems="10"
 
-            </SearchView>
+                android:hint="請輸入關鍵字" />
+
         </LinearLayout>
 
         <LinearLayout
