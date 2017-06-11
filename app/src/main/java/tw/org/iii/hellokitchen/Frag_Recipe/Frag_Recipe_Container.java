@@ -11,8 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +27,7 @@ import java.util.List;
 import tw.org.iii.hellokitchen.Activity.ActRealMain;
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
+import tw.org.iii.hellokitchen.Utility.RecipeGalleryAdapter;
 import tw.org.iii.hellokitchen.Utility.RecipePhotoGalleryAdapter;
 
 
@@ -45,13 +50,15 @@ public class Frag_Recipe_Container extends Fragment {
     /**
      * 用來展示圖片的Gallery
      */
-    private GridView photoGallery;
+    public GridView photoGallery;
 
     /**
      * GridView所使用的Adapter
      */
-    private RecipePhotoGalleryAdapter adapter;
+    private RecipeGalleryAdapter adapter;
 
+
+    private List<Recipes> newRecipesList ;
 
     public Frag_Recipe_Container() {
         // Required empty public constructor
@@ -90,25 +97,88 @@ public class Frag_Recipe_Container extends Fragment {
     {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.frag__recipe__container, container, false);
+        newRecipesList = new ArrayList<>();
         this.photoGallery = (GridView)v.findViewById(R.id.gridRecipePhoto );
-        recipesList = new ArrayList<>();
-        for(int i=0;i<100;i+=4)
-        {
-            Recipes r1 = new Recipes(""+i,"第"+i+"份食譜","第"+i+"份作者","20170601",true,"1","10","http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-05.jpg");
-            Recipes r2 = new Recipes(""+(i+1),"第"+(i+1)+"份食譜","第"+(i+1)+"份作者","20170602",true,"1","10","http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-04.jpg");
-            Recipes r3 = new Recipes(""+(i+2),"第"+(i+2)+"份食譜","第"+(i+2)+"份作者","20170603",true,"1","10","http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg");
-            Recipes r4 = new Recipes(""+(i+3),"第"+(i+3)+"份食譜","第"+(i+3)+"份作者","20170604",true,"1","10","http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-04.jpg");
-            recipesList.add(r1);
-            recipesList.add(r2);
-            recipesList.add(r3);
-            recipesList.add(r4);
-        }
 
-        this.adapter = new RecipePhotoGalleryAdapter(getActivity(), recipesList, photoGallery );
+        getAllRecipe();
+
+        this.adapter = new RecipeGalleryAdapter(getActivity(), recipesList, photoGallery,true);
         this.photoGallery.setAdapter( adapter );
+        editText_search = (EditText) v.findViewById(R.id.editText_Search_Recipe);
+
+        button = (Button)v.findViewById(R.id.button_Up);
+        button.setOnClickListener(button__Click);
         return v;
     }
+    private List<Recipes> getAllRecipe()
+    {
+        if(recipesList == null)
+        {
+            recipesList = new ArrayList<>();
+        }
 
+        else
+        {
+            recipesList.clear();
+        }
+
+        for(int i = 0;i<50;i++)
+        {
+
+            if( i % 5 == 0)
+            {
+                Recipes r0 = new Recipes("" + String.valueOf(i), "第" + i + "份食譜", "第" + i + "份作者", "20170601", true, "1", "10", "http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-08.jpg");
+                Recipes r1 = new Recipes("" + String.valueOf(i + 1), "第" + (i + 1) + "份食譜", "第" + (i + 1) + "份作者", "20170602", true, "1", "10", "http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg");
+                Recipes r2 = new Recipes("" + String.valueOf(i + 2), "第" + (i + 2) + "份食譜", "第" + (i + 2) + "份作者", "20170603", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-04.jpg");
+                Recipes r3 = new Recipes("" + String.valueOf(i + 3), "第" + (i + 3) + "份食譜", "第" + (i + 3) + "份作者", "20170604", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-06.jpg");
+                Recipes r4 = new Recipes("" + String.valueOf(i + 4), "第" + (i + 4) + "份食譜", "第" + (i + 4) + "份作者", "20170604", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-02.jpg");
+                recipesList.add(r0);
+                recipesList.add(r1);
+                recipesList.add(r2);
+                recipesList.add(r3);
+                recipesList.add(r4);
+            }
+        }
+        return recipesList;
+    }
+    private View.OnClickListener button__Click = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            String condition = editText_search.getText().toString();
+            recipesList = getAllRecipe();
+            newRecipesList.clear();
+            if(condition != null)
+            {
+                //有搜尋條件時候
+                for(int count = 0; count<recipesList.size();count++)
+                {
+                    if(recipesList.get(count).getRecipe_name().contains(condition))
+                    {
+                        newRecipesList.add(recipesList.get(count));
+                    }
+                }
+
+                photoGallery.setAdapter(null);
+                adapter.notifyDataSetChanged();
+                adapter.cancelAllTasks();
+                adapter = new RecipeGalleryAdapter(getActivity(), newRecipesList, photoGallery,false);
+                photoGallery.setAdapter(adapter);
+            }
+            else
+            {
+                //沒有搜尋條件時候
+                photoGallery.setAdapter(null);
+                adapter.notifyDataSetChanged();
+                adapter.cancelAllTasks();
+                adapter = new RecipeGalleryAdapter(getActivity(), recipesList, photoGallery,false);
+                photoGallery.setAdapter(adapter);
+
+            }
+        }
+
+    };
 
     @Override
     public void onDestroyView()
@@ -126,4 +196,6 @@ public class Frag_Recipe_Container extends Fragment {
 
     List<Recipes> recipesList;
 
+    EditText editText_search;
+    Button button;
 }
