@@ -290,7 +290,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_gravity="center_vertical|center_horizontal"
-                                        android:layout_weight="0.96" />
+                                        android:layout_weight="0.96"
+                                        android:layout_marginLeft="45dp"
+                                        android:layout_marginRight="45dp"/>
 
                                 </LinearLayout>
 

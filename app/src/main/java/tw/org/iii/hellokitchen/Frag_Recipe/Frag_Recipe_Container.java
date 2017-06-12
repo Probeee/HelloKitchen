@@ -2,9 +2,13 @@ package tw.org.iii.hellokitchen.Frag_Recipe;
 
 
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +16,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -22,6 +40,7 @@ import java.util.List;
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.RecipeGalleryAdapterPicasso;
+import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 
 /**
@@ -90,58 +109,57 @@ public class Frag_Recipe_Container extends Fragment {
     {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.frag__recipe__container, container, false);
-        newRecipesList = new ArrayList<>();
-        this.photoGallery = (GridView)v.findViewById(R.id.gridRecipePhoto );
-
-        getAllRecipe();
-
-        this.adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery);
-        this.photoGallery.setAdapter( adapter );
-        editText_search = (EditText) v.findViewById(R.id.editText_Search_Recipe);
-
-        button = (Button)v.findViewById(R.id.button_Up);
-        button.setOnClickListener(button__Click);
-        return v;
-    }
-    private List<Recipes> getAllRecipe()
-    {
         if(recipesList == null)
         {
             recipesList = new ArrayList<>();
         }
-
         else
         {
             recipesList.clear();
         }
 
-        for(int i = 0;i<100;i++)
+        if(newRecipesList == null)
         {
-
-            if( i % 5 == 0)
-            {
-                Recipes r0 = new Recipes("" + String.valueOf(i), "第" + i + "份食譜", "第" + i + "份作者", "20170601", true, "1", "10", "http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-08.jpg");
-                Recipes r1 = new Recipes("" + String.valueOf(i + 1), "第" + (i + 1) + "份食譜", "第" + (i + 1) + "份作者", "20170602", true, "1", "10", "http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg");
-                Recipes r2 = new Recipes("" + String.valueOf(i + 2), "第" + (i + 2) + "份食譜", "第" + (i + 2) + "份作者", "20170603", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-04.jpg");
-                Recipes r3 = new Recipes("" + String.valueOf(i + 3), "第" + (i + 3) + "份食譜", "第" + (i + 3) + "份作者", "20170604", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-06.jpg");
-                Recipes r4 = new Recipes("" + String.valueOf(i + 4), "第" + (i + 4) + "份食譜", "第" + (i + 4) + "份作者", "20170604", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-02.jpg");
-
-                recipesList.add(r0);
-                recipesList.add(r1);
-                recipesList.add(r2);
-                recipesList.add(r3);
-                recipesList.add(r4);
-            }
+            newRecipesList = new ArrayList<>();
         }
-        return recipesList;
+        else
+        {
+            newRecipesList.clear();
+        }
+
+        this.photoGallery = (GridView)v.findViewById(R.id.gridRecipePhoto );
+        //getAllRecipe();
+        editText_search = (EditText) v.findViewById(R.id.editText_Search_Recipe);
+        button = (Button)v.findViewById(R.id.button_Up);
+        button.setOnClickListener(button__Click);
+        return v;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+        try
+        {
+            servlet_Recipe_Data();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     private View.OnClickListener button__Click = new View.OnClickListener()
     {
         @Override
         public void onClick(View v)
         {
             String condition = editText_search.getText().toString();
-            recipesList = getAllRecipe();
+            //recipesList = getAllRecipe();
             newRecipesList.clear();
             if(condition != null)
             {
@@ -185,8 +203,79 @@ public class Frag_Recipe_Container extends Fragment {
 
     }
 
-    List<Recipes> recipesList;
+    /*從servlet將食譜抓下來*/
+    private void servlet_Recipe_Data() throws IOException, JSONException
+    {
 
+        final ProgressDialog message = new ProgressDialog(getActivity());
+        message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        message.setTitle("正在讀取資料");
+        message.setCancelable(false);
+        message.show();
+
+        new AsyncTask<Object, Object, List<Recipes>>()
+        {
+
+            @Override
+            protected List<Recipes> doInBackground(Object... params)
+            {
+                try {
+                    URL url = new URL(TheDefined.Web_Server_URL + "/AndroidRecipeServlet");
+                    //URLConnection connection = url.openConnection();
+
+                    HttpClient httpClient = new DefaultHttpClient();
+
+                   // httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
+                    //httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
+
+                    HttpPost post = new HttpPost(String.valueOf(url));
+
+                    //執行POST Request
+                    HttpResponse httpResponse = httpClient.execute(post);
+
+                    //取得回傳的內容
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    String responseString = EntityUtils.toString(httpEntity, "UTF-8");
+                    //回傳的內容轉存為JSON物件
+                    JSONArray responseJSON = new JSONArray(responseString);
+
+                    for (int i = 0; i < responseJSON.length(); i++) {
+                        JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
+                        Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
+                                jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
+                                jsonObject.getString(TheDefined.Android_JSON_Key_Member_id),
+                                jsonObject.getString(TheDefined.Android_JSON_Key_Upload_date),
+                                Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
+                                jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
+                                jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
+                                TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture));
+
+                        recipesList.add(myRecipes);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
+                    message.cancel();
+                    e.printStackTrace();
+                }
+
+                return recipesList;
+            }
+
+            @Override
+            protected void onPostExecute(List<Recipes> objects)
+            {
+                super.onPostExecute(objects);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery);
+                photoGallery.setAdapter( adapter );
+                message.cancel();
+            }
+        }.execute();
+    }
+
+
+    List<Recipes> recipesList;
     EditText editText_search;
     Button button;
 }

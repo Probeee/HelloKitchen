@@ -1,5 +1,10 @@
 package tw.org.iii.hellokitchen.Utility;
 
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
+
 import tw.org.iii.hellokitchen.Activity.ActMain;
 
 /**
@@ -26,5 +31,42 @@ public class TheDefined
     public static final String TAG = ActMain.class.getSimpleName();
     public static final int CAMERA_ID = 66 ;
     public static final int PHOTO_ID = 99 ;
+
+    //自訂showToastByRunnable方法
+    public static void showToastByRunnable(final Context context, final CharSequence text, final int duration)     {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, text, duration).show();
+            }
+        });
+    }
+
+    /*server URL*/
+    public static final String Web_Server_URL = "http://192.168.1.120:8080/HelloKitchen0607_(mix)";
+
+    /*JSON Key & Value*/
+    public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
+    public static final String Android_JSON_Key_Member_Name = "Android_JSON_Key_Member_Name";
+    public static final String Android_JSON_Key_Member_Password = "Android_JSON_Key_Member_Password";
+    public static final String Android_JSON_Key_Member_Tel = "Android_JSON_Key_Member_Tel";
+    public static final String Android_JSON_Key_Member_Email = "Android_JSON_Key_Member_Email";
+    public static final String Android_JSON_Key_Member_FB_Id = "Android_JSON_Key_Member_FB_Id";
+    //---- JSON KEY For Recipe
+    public static final String Android_JSON_Key_Recipe_id = "Android_JSON_Key_Recipe_id";
+    public static final String Android_JSON_Key_Recipe_name = "Android_JSON_Key_Recipe_name";
+    public static final String Android_JSON_Key_Member_id = "Android_JSON_Key_Member_id";
+    public static final String Android_JSON_Key_Upload_date = "Android_JSON_Key_Upload_date";
+    public static final String Android_JSON_Key_Recipe_status = "Android_JSON_Key_Recipe_status";
+    public static final String Android_JSON_Key_Recipe_amount = "Android_JSON_Key_Recipe_amount";
+    public static final String Android_JSON_Key_Recipe_cooktime = "Android_JSON_Key_Recipe_cooktime";
+    public static final String Android_JSON_Key_Recipe_picture = "Android_JSON_Key_Recipe_picture";
+    public static final String Android_JSON_Key_Recipe_detail = "Android_JSON_Key_Recipe_detail";
+
+    public static final String Android_JSON_Key_Information = "Android_JSON_Key_Information";  //JSON 回傳訊息Key
+    public static final String Android_JSON_Value_Success = "Android_JSON_Value_Success";      //JSON 回傳訊息Value
+    public static final String Android_JSON_Value_Fail = "Android_JSON_Value_Fail";            //JSON 回傳訊息Value
+    public static final String Android_JSON_Value_Null = "Android_JSON_Value_Null";            //JSON 回傳訊息Value
 
 }

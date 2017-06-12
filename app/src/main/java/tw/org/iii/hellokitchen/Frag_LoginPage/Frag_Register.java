@@ -1,6 +1,7 @@
 package tw.org.iii.hellokitchen.Frag_LoginPage;
 
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,22 +17,21 @@ import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.MyDBHelper;
+import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 
 /**
@@ -132,73 +132,17 @@ public class Frag_Register extends Fragment {
             }
             else
             {
-                /*try
-                {
-                    Toast.makeText(getActivity(),"InTO Servlet",Toast.LENGTH_SHORT).show();
+                try {
                     servlet_Add_New_Account();
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }*/
-                add_New_Account();
+                }
+                //add_New_Account();
             }
         }
     };
-
-
-    private void servlet_Add_New_Account() throws IOException, JSONException {
-
-        new Thread(new Runnable(){
-            public void run(){
-                try {
-                    URL url = new URL("http://192.168.0.101:8080/HelloKitchen0606/AndroidAddAccountServlet");
-                   // URLConnection connection = url.openConnection();
-                    //用來包覆JSONArray的JSON物件
-                    JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
-
-                    jsonObject.put("member_id", email.getText().toString().trim());
-                    jsonObject.put("member_name", name.getText().toString().trim());
-                    jsonObject.put("member_password",password.getText().toString().trim());
-                    jsonObject.put("member_tel",tel.getText().toString().trim());
-                    jsonObject.put("member_email",email.getText().toString().trim());
-                    jsonObject.put("member_fb_id",email.getText().toString().trim());
-
-
-                    HttpClient httpClient = new DefaultHttpClient();
-                    HttpPost post = new HttpPost(String.valueOf(url)) ;
-
-                    //JSON物件放到POST Request
-                    StringEntity stringEntity = new StringEntity(jsonObject.toString());
-                    stringEntity.setContentType("application/json");
-                    post.setEntity(stringEntity);
-                    //執行POST Request
-                    HttpResponse httpResponse = httpClient.execute(post);
-
-                    //取得回傳的內容
-                    HttpEntity httpEntity = httpResponse.getEntity();
-                    String responseString = EntityUtils.toString(httpEntity, "UTF-8");
-                    //回傳的內容轉存為JSON物件
-                    JSONObject responseJSON = new JSONObject(responseString);
-                    //取得Message的屬性
-                    String Message = responseJSON.getString("message");
-                    Log.d("Message", responseString);
-                    Toast.makeText(getActivity(),responseString,Toast.LENGTH_LONG).show();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-        Toast.makeText(getActivity(),"InTO Servlet Finish",Toast.LENGTH_SHORT).show();
-    }
 
     private void add_New_Account()
     {
@@ -223,6 +167,75 @@ public class Frag_Register extends Fragment {
         {
             Toast.makeText(getActivity(),"已有該帳號",Toast.LENGTH_LONG).show();
         }
+    }
+
+    /*將註冊資料打包JSON上傳至伺服器servlet*/
+    private void servlet_Add_New_Account() throws IOException, JSONException {
+
+        final ProgressDialog message = new ProgressDialog(getActivity());
+        message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        message.setTitle("註冊中");
+        message.setCancelable(false);
+        message.show();
+
+        new Thread(new Runnable(){
+            public void run(){
+                try {
+                    URL url = new URL(TheDefined.Web_Server_URL + "/AndroidAddAccountServlet");
+                    //URLConnection connection = url.openConnection();
+                    //用來包覆JSONArray的JSON物件
+                    JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
+
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, email.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Name, name.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, password.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Tel, tel.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Email, email.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_FB_Id, email.getText().toString().trim());
+
+                    HttpClient httpClient = new DefaultHttpClient();
+
+                    httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 6000);
+                    httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
+
+                    HttpPost post = new HttpPost(String.valueOf(url));
+
+                    //JSON物件放到POST Request
+                    StringEntity stringEntity = new StringEntity(jsonObject.toString(), "UTF-8");
+                    stringEntity.setContentType("application/json;charset=UTF-8");
+                    post.setEntity(stringEntity);
+                    //執行POST Request
+                    HttpResponse httpResponse = httpClient.execute(post);
+
+                    //取得回傳的內容
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    String responseString = EntityUtils.toString(httpEntity, "UTF-8");
+                    //回傳的內容轉存為JSON物件
+                    JSONObject responseJSON = new JSONObject(responseString);
+                    //取得Message的屬性
+                    String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                    Log.d("info", responseString);
+
+                    //在Thread中執行toast
+                    if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                        getFragmentManager().popBackStack();
+                        TheDefined.showToastByRunnable(getActivity(), "註冊成功", Toast.LENGTH_LONG);
+                        message.cancel();
+                    } else if (info.equals(TheDefined.Android_JSON_Value_Fail)){
+                        TheDefined.showToastByRunnable(getActivity(), "已有該帳號", Toast.LENGTH_LONG);
+                        message.cancel();
+                    }
+
+                } catch (JSONException e) {
+                    TheDefined.showToastByRunnable(getActivity(), "json", Toast.LENGTH_LONG);
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
+                    message.cancel();
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     EditText email;
