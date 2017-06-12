@@ -4,19 +4,53 @@ package tw.org.iii.hellokitchen.Frag_LoginPage;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import tw.org.iii.hellokitchen.Activity.ActRealMain;
 import tw.org.iii.hellokitchen.R;
@@ -40,8 +74,8 @@ public class Frag_Login extends Fragment {
     private String mParam2;
     private SharedPreferences table ;
 
-
-
+    CallbackManager callbackManager;
+    private AccessToken accessToken;
 
 
     public Frag_Login()
@@ -72,6 +106,7 @@ public class Frag_Login extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null)
         {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -83,6 +118,9 @@ public class Frag_Login extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
+        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+
         //初始化介面
         View v =inflater.inflate(R.layout.frag__login, container, false);
         btn_login =  (Button)v.findViewById(R.id.btn_login);
@@ -91,6 +129,14 @@ public class Frag_Login extends Fragment {
         btn_register.setOnClickListener(btn_register_click);
         email = (EditText)v.findViewById(R.id.editText_login_email);
         password = (EditText)v.findViewById(R.id.editText_login_password);
+
+        btn_facebook_login = (LoginButton) v.findViewById(R.id.btn_facebook_login);
+        btn_facebook_login.setFragment(this);
+        btn_facebook_login.setReadPermissions(Arrays.asList("email"));  //取得email權限
+        //btn_facebook_login.setReadPermissions(Arrays.asList("user_status"));
+
+        processFacebookLogin();   //facebook按鈕監聽事件方法
+
         return v;
     }
 
@@ -111,9 +157,15 @@ public class Frag_Login extends Fragment {
             startActivity(intent);
             getActivity().finish();
         }
-
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /*App 註冊登入監聽事件*/
     View.OnClickListener btn_login_click = new View.OnClickListener()
     {
         @Override
@@ -130,11 +182,29 @@ public class Frag_Login extends Fragment {
             }
             else
             {
-                find_the_Account();
+                servlet_Find_The_Account();
+                //find_the_Account();
             }
         }
     };
 
+    /*註冊會員按鈕監聽事件*/
+    View.OnClickListener btn_register_click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v)
+        {
+            //進入註冊頁面
+            Frag_Register frag_register = new Frag_Register();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.replace(R.id.frag_container,frag_register);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+    };
+
+    /*SQLite 登入方法*/
     private void find_the_Account()
     {
         //找尋是否有該會員
@@ -172,27 +242,171 @@ public class Frag_Login extends Fragment {
         {
             Toast.makeText(getActivity(),ex.getMessage(),Toast.LENGTH_LONG).show();
         }
-
-
     }
 
-    View.OnClickListener btn_register_click = new View.OnClickListener() {
-        @Override
-        public void onClick(View v)
-        {
-            //進入註冊頁面
-            Frag_Register frag_register = new Frag_Register();
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            fragmentTransaction.replace(R.id.frag_container,frag_register);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }
-    };
+    /*facebook 註冊登入監聽事件*/
+    private void processFacebookLogin() {
+        btn_facebook_login.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            //登入成功
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                //accessToken之後或許還會用到 先存起來
+
+                accessToken = loginResult.getAccessToken();
+
+                Log.d("FB","access token got.");
+
+                //send request and call graph api
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        accessToken,
+                        new GraphRequest.GraphJSONObjectCallback() {
+
+                            //當RESPONSE回來的時候
+
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                //讀出姓名 ID FB個人頁面連結
+                                /*取的資料後可直接存入servlet*/
+                                Log.d("FB","complete");
+                                Log.d("FB",object.optString("name"));
+                                Log.d("FB",object.optString("link"));
+                                Log.d("FB",object.optString("id"));
+                                Log.d("FB",object.optString("email"));
+                            }
+                        });
+
+                //包入你想要得到的資料 送出request
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,link,email");
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            //登入取消
+
+            @Override
+            public void onCancel() {
+                // App code
+
+                Log.d("FB","CANCEL");
+            }
+
+            //登入失敗
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+
+                Log.d("FB",exception.toString());
+            }
+        });
+    }
+
+    /*將登入資料打包JSON上傳至伺服器servlet驗證*/   /* 需要改一下帶三個參數 帳號, 密碼, 是否為facebook使用者 */
+    private void servlet_Find_The_Account() {
+
+        final ProgressDialog message = new ProgressDialog(getActivity());
+        message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        message.setTitle("登入中");
+        message.setCancelable(false);
+        message.show();
+
+        new Thread(new Runnable(){
+            public void run(){
+                try {
+                    URL url = new URL(TheDefined.Web_Server_URL + "/AndroidLoginAccountServlet");
+                    //URLConnection connection = url.openConnection();
+                    //用來包覆JSONArray的JSON物件
+                    JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
+
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, email.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, password.getText().toString().trim());
+
+                    HttpClient httpClient = new DefaultHttpClient();
+
+                    httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 6000);
+                    httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
+
+                    HttpPost post = new HttpPost(String.valueOf(url));
+
+                    //JSON物件放到POST Request
+                    StringEntity stringEntity = new StringEntity(jsonObject.toString(), "UTF-8");
+                    stringEntity.setContentType("application/json;charset=UTF-8");
+                    post.setEntity(stringEntity);
+                    //執行POST Request
+                    HttpResponse httpResponse = httpClient.execute(post);
+
+                    //取得回傳的內容
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    String responseString = EntityUtils.toString(httpEntity, "UTF-8");
+                    //回傳的內容轉存為JSON物件
+                    JSONObject responseJSON = new JSONObject(responseString);
+                    //取得Message的屬性
+                    String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                    String memberName = responseJSON.getString(TheDefined.Android_JSON_Key_Member_Name);
+                    Log.d("info", responseString);
+                    Log.d("member_name", responseString);
+
+                    if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(),ActRealMain.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(TheDefined.LOGIN_USER_NAME, memberName);
+                        bundle.putString(TheDefined.LOGIN_USER_MAIL , email.getText().toString());
+
+                        table = getActivity().getSharedPreferences("LoginUser",0);
+                        SharedPreferences.Editor row = table.edit();
+                        row.putString("UserEmail", email.getText().toString()).commit();
+                        row.putString("UserName", memberName).commit();
+
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+                        getActivity().finish();
+
+                    } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
+                        TheDefined.showToastByRunnable(getActivity(),"帳號密碼有誤",Toast.LENGTH_LONG); //在Thread中執行toast
+                        message.cancel();
+                    }
+                } catch (JSONException e) {
+                    TheDefined.showToastByRunnable(getActivity(), "json", Toast.LENGTH_LONG);
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
+                    message.cancel();
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    /*取得facebook api Hash Key (不同PC)*/
+    private void getHashKey() {
+        PackageInfo info;
+        try{
+            info = getActivity().getPackageManager().getPackageInfo("com.you.name", PackageManager.GET_SIGNATURES);
+            for(Signature signature : info.signatures)
+            {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String KeyResult =new String(Base64.encode(md.digest(),0));//String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("hash key", KeyResult);
+                Toast.makeText(getActivity(), "My FB Key is \n"+ KeyResult, Toast.LENGTH_LONG ).show();
+            }
+        }catch(PackageManager.NameNotFoundException e1){Log.e("name not found", e1.toString());
+        }catch(NoSuchAlgorithmException e){Log.e("no such an algorithm", e.toString());
+        }catch(Exception e){Log.e("exception", e.toString());}
+    }
 
     Button btn_login ;
     Button btn_register;
     EditText email;
     EditText password;
+
+    LoginButton btn_facebook_login;
 }
