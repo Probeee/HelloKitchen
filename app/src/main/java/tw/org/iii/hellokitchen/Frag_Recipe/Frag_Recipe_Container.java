@@ -1,34 +1,27 @@
 package tw.org.iii.hellokitchen.Frag_Recipe;
 
 
-import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
-import tw.org.iii.hellokitchen.Activity.ActRealMain;
+
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
-import tw.org.iii.hellokitchen.Utility.RecipeGalleryAdapter;
-import tw.org.iii.hellokitchen.Utility.RecipePhotoGalleryAdapter;
+import tw.org.iii.hellokitchen.Utility.RecipeGalleryAdapterPicasso;
 
 
 /**
@@ -55,8 +48,8 @@ public class Frag_Recipe_Container extends Fragment {
     /**
      * GridView所使用的Adapter
      */
-    private RecipeGalleryAdapter adapter;
 
+    private RecipeGalleryAdapterPicasso adapter;
 
     private List<Recipes> newRecipesList ;
 
@@ -102,7 +95,7 @@ public class Frag_Recipe_Container extends Fragment {
 
         getAllRecipe();
 
-        this.adapter = new RecipeGalleryAdapter(getActivity(), recipesList, photoGallery,true);
+        this.adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery);
         this.photoGallery.setAdapter( adapter );
         editText_search = (EditText) v.findViewById(R.id.editText_Search_Recipe);
 
@@ -122,7 +115,7 @@ public class Frag_Recipe_Container extends Fragment {
             recipesList.clear();
         }
 
-        for(int i = 0;i<50;i++)
+        for(int i = 0;i<100;i++)
         {
 
             if( i % 5 == 0)
@@ -132,6 +125,7 @@ public class Frag_Recipe_Container extends Fragment {
                 Recipes r2 = new Recipes("" + String.valueOf(i + 2), "第" + (i + 2) + "份食譜", "第" + (i + 2) + "份作者", "20170603", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-04.jpg");
                 Recipes r3 = new Recipes("" + String.valueOf(i + 3), "第" + (i + 3) + "份食譜", "第" + (i + 3) + "份作者", "20170604", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-06.jpg");
                 Recipes r4 = new Recipes("" + String.valueOf(i + 4), "第" + (i + 4) + "份食譜", "第" + (i + 4) + "份作者", "20170604", true, "1", "10", "http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-02.jpg");
+
                 recipesList.add(r0);
                 recipesList.add(r1);
                 recipesList.add(r2);
@@ -162,8 +156,7 @@ public class Frag_Recipe_Container extends Fragment {
 
                 photoGallery.setAdapter(null);
                 adapter.notifyDataSetChanged();
-                adapter.cancelAllTasks();
-                adapter = new RecipeGalleryAdapter(getActivity(), newRecipesList, photoGallery,false);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(), newRecipesList, photoGallery);
                 photoGallery.setAdapter(adapter);
             }
             else
@@ -171,8 +164,7 @@ public class Frag_Recipe_Container extends Fragment {
                 //沒有搜尋條件時候
                 photoGallery.setAdapter(null);
                 adapter.notifyDataSetChanged();
-                adapter.cancelAllTasks();
-                adapter = new RecipeGalleryAdapter(getActivity(), recipesList, photoGallery,false);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery);
                 photoGallery.setAdapter(adapter);
 
             }
@@ -184,14 +176,13 @@ public class Frag_Recipe_Container extends Fragment {
     public void onDestroyView()
     {
         super.onDestroyView();
-        this.adapter.cancelAllTasks();
     }
 
     @Override
     public void onDestroy()
     {
         super.onDestroy();
-        this.adapter.cancelAllTasks();
+
     }
 
     List<Recipes> recipesList;
