@@ -14,6 +14,7 @@ public class Recipes
     private String recipe_amount;
     private String recipe_cooktime;
     private String recipe_picture;
+    private String recipe_detail;
 
     public Recipes()
     {
@@ -25,9 +26,10 @@ public class Recipes
         this.recipe_amount = "";
         this.recipe_cooktime = "";
         this.recipe_picture = "";
+        this.recipe_detail = "";
     }
 
-    public Recipes(String recipe_id, String recipe_name, String member_id, String upload_date, Boolean recipe_status, String recipe_amount, String recipe_cooktime, String recipe_picture)
+    public Recipes(String recipe_id, String recipe_name, String member_id, String upload_date, Boolean recipe_status, String recipe_amount, String recipe_cooktime, String recipe_picture,String recipe_detail)
     {
         this.recipe_id = recipe_id;
         this.recipe_name = recipe_name;
@@ -37,6 +39,7 @@ public class Recipes
         this.recipe_amount = recipe_amount;
         this.recipe_cooktime = recipe_cooktime;
         this.recipe_picture = recipe_picture;
+        this.recipe_detail = recipe_detail;
     }
 
 
@@ -104,5 +107,11 @@ public class Recipes
         this.recipe_picture = recipe_picture;
     }
 
+    public String getRecipe_detail() {
+        return recipe_detail;
+    }
 
+    public void setRecipe_detail(String recipe_detail) {
+        this.recipe_detail = recipe_detail;
+    }
 }

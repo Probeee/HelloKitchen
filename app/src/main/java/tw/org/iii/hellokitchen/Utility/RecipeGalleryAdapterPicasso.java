@@ -1,9 +1,13 @@
 package tw.org.iii.hellokitchen.Utility;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -14,8 +18,10 @@ import android.widget.Toast;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import tw.org.iii.hellokitchen.Activity.ActRecipeDetail;
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
 
@@ -24,7 +30,7 @@ import tw.org.iii.hellokitchen.R;
  */
 
 
-public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
+public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implements AbsListView.OnScrollListener
 {
 
     private Context context;
@@ -34,6 +40,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
     /**Gallery View**/
     private GridView gridViewPhoto;
 
+
     public RecipeGalleryAdapterPicasso(Context context, List<Recipes> objects, GridView photoGridView)
     {
         super(context, 0, objects );
@@ -41,8 +48,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
         this.recipeObjects = objects;
         this.gridViewPhoto = photoGridView;
         inflater = LayoutInflater.from(context);
-        okhttp3.OkHttpClient okHttp3Client = new okhttp3.OkHttpClient();
-        OkHttp3Downloader okHttp3Downloader = new OkHttp3Downloader(okHttp3Client);
+
         try
         {
             Picasso picasso = new Picasso.Builder(context)
@@ -59,14 +65,12 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
 
     /**從List裡面的物件產生畫面**/
     @Override
-    public View getView(int position, View convertView, ViewGroup parent )
+    public View getView(final int position, View convertView, ViewGroup parent )
     {
         //根據view上的position當作index,來抓取該物件的資料
         final String recipe_id = this.getItem(position).getRecipe_id();
         final String recipe_name = this.getItem(position).getRecipe_name();
         final String recipe_producer_id = this.getItem(position).getMember_id();
-        final Boolean recipe_status = this.getItem(position).getRecipe_status();
-
 
         if (convertView == null)
         {
@@ -81,34 +85,82 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
         textView_ProducerId.setTag(recipe_id);
         imageView.setTag(recipe_id);
 
+
         //將網址跟imageView物件傳至setImageView這個Class做事情
         Picasso
                 .with(context)
                 .load(recipeObjects.get(position).getRecipe_picture())
                 .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 75 / 100)
+                .tag(recipe_id)
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(imageView);
+
         //設定每個區塊上的資訊
         textView_RecipeName.setText(recipe_name);
         textView_ProducerId.setText(recipe_producer_id);
 
 
         //三個View元件共用一個事件
-        imageView.setOnClickListener(itemClick);
-        textView_RecipeName.setOnClickListener(itemClick);
-        textView_ProducerId.setOnClickListener(itemClick);
+        imageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                itemClick(position,v);
+            }
+        });
+        textView_RecipeName.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                itemClick(position,v);
+            }
+        });
+        textView_ProducerId.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                itemClick(position,v);
+            }
+        });
 
-    return convertView;
+        return convertView;
     }
-    View.OnClickListener itemClick = new View.OnClickListener()
+
+    private void itemClick(int position,View v)
     {
         //給GridView上的每個區塊做觸發
-        @Override
-        public void onClick(View v)
-        {
-            Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(getContext(), ActRecipeDetail.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("recipeTitle",recipeObjects.get(position).getRecipe_name());
+        bundle.putString("recipeImageURL",recipeObjects.get(position).getRecipe_picture());
+        Log.d("recipeTitle",recipeObjects.get(position).getRecipe_name());
+        Log.d("recipeImageURL",recipeObjects.get(position).getRecipe_picture());
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
+        Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState)
+    {
+        final Picasso picasso = Picasso.with(context);
+        if (scrollState == SCROLL_STATE_IDLE || scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+            picasso.resumeTag(context);
+        } else {
+            picasso.pauseTag(context);
         }
-    };
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+    {
+
+    }
 }
 

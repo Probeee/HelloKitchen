@@ -228,6 +228,7 @@ public class Frag_Register extends Fragment {
 
                 } catch (JSONException e) {
                     TheDefined.showToastByRunnable(getActivity(), "json", Toast.LENGTH_LONG);
+                    message.cancel();
                     e.printStackTrace();
                 } catch (IOException e) {
                     TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
