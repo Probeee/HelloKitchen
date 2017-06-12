@@ -230,7 +230,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
-        am.setRepeating(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis() + 1000, (24 * 60 * 60 * 1000),pendingIntent);//am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 1000, (24 * 60 * 60 * 1000),pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), (24 * 60 * 60 * 1000),pendingIntent);//am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 1000, (24 * 60 * 60 * 1000),pendingIntent);
     }
 
     private Notification getNotification()

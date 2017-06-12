@@ -19,24 +19,20 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
+
 import java.util.ArrayList;
 
 import java.util.List;
 
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.RecipeGalleryAdapterPicasso;
@@ -70,7 +66,11 @@ public class Frag_Recipe_Container extends Fragment {
 
     private RecipeGalleryAdapterPicasso adapter;
 
+    private List<Recipes> recipesList;
     private List<Recipes> newRecipesList ;
+    private List<Recipes> recipesList_status;
+    private EditText editText_search;
+    private Button button;
 
     public Frag_Recipe_Container() {
         // Required empty public constructor
@@ -126,6 +126,14 @@ public class Frag_Recipe_Container extends Fragment {
         {
             newRecipesList.clear();
         }
+        if(recipesList_status == null)
+        {
+            recipesList_status = new ArrayList<>();
+        }
+        else
+        {
+            recipesList_status.clear();
+        }
 
         this.photoGallery = (GridView)v.findViewById(R.id.gridRecipePhoto );
         //getAllRecipe();
@@ -164,11 +172,11 @@ public class Frag_Recipe_Container extends Fragment {
             if(condition != null)
             {
                 //有搜尋條件時候
-                for(int count = 0; count<recipesList.size();count++)
+                for(int count = 0; count<recipesList_status.size();count++)
                 {
-                    if(recipesList.get(count).getRecipe_name().contains(condition))
+                    if(recipesList_status.get(count).getRecipe_name().contains(condition))
                     {
-                        newRecipesList.add(recipesList.get(count));
+                        newRecipesList.add(recipesList_status.get(count));
                     }
                 }
 
@@ -182,8 +190,22 @@ public class Frag_Recipe_Container extends Fragment {
                 //沒有搜尋條件時候
                 photoGallery.setAdapter(null);
                 adapter.notifyDataSetChanged();
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery);
-                photoGallery.setAdapter(adapter);
+                recipesList_status.clear();
+                recipesList.clear();
+                try
+                {
+                    servlet_Recipe_Data();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                //adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList_status, photoGallery);
+               // photoGallery.setAdapter(adapter);
 
             }
         }
@@ -194,19 +216,23 @@ public class Frag_Recipe_Container extends Fragment {
     public void onDestroyView()
     {
         super.onDestroyView();
+        recipesList.clear();
+        recipesList_status.clear();
+        newRecipesList.clear();
     }
 
     @Override
     public void onDestroy()
     {
         super.onDestroy();
-
+        recipesList.clear();
+        recipesList_status.clear();
+        newRecipesList.clear();
     }
 
     /*從servlet將食譜抓下來*/
     private void servlet_Recipe_Data() throws IOException, JSONException
     {
-
         final ProgressDialog message = new ProgressDialog(getActivity());
         message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         message.setTitle("正在讀取資料");
@@ -215,46 +241,40 @@ public class Frag_Recipe_Container extends Fragment {
 
         new AsyncTask<Object, Object, List<Recipes>>()
         {
-
             @Override
             protected List<Recipes> doInBackground(Object... params)
             {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url(TheDefined.Web_Server_URL + "/AndroidRecipeServlet")
+                        .build();
                 try {
-                    URL url = new URL(TheDefined.Web_Server_URL + "/AndroidRecipeServlet");
-                    //URLConnection connection = url.openConnection();
-
-                    HttpClient httpClient = new DefaultHttpClient();
-
-                   // httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
-                    //httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
-
-                    HttpPost post = new HttpPost(String.valueOf(url));
-
-                    //執行POST Request
-                    HttpResponse httpResponse = httpClient.execute(post);
-
-                    //取得回傳的內容
-                    HttpEntity httpEntity = httpResponse.getEntity();
-                    String responseString = EntityUtils.toString(httpEntity, "UTF-8");
-                    //回傳的內容轉存為JSON物件
-                    JSONArray responseJSON = new JSONArray(responseString);
-
-                    for (int i = 0; i < responseJSON.length(); i++) {
-                        JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
-                        Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
-                                jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
-                                jsonObject.getString(TheDefined.Android_JSON_Key_Member_id),
-                                jsonObject.getString(TheDefined.Android_JSON_Key_Upload_date),
-                                Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
-                                jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
-                                jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
-                                TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture));
-
-                        recipesList.add(myRecipes);
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful()) {
+                        String responseString = response.body().string();
+                        try {
+                            JSONArray responseJSON = new JSONArray(responseString);
+                            for (int i = 0; i < responseJSON.length(); i++) {
+                                JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
+                                Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Member_id),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Upload_date),
+                                        Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
+                                        TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture));
+                                if(Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)))
+                                {
+                                    recipesList_status.add(myRecipes);
+                                }
+                                recipesList.add(myRecipes);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
                     e.printStackTrace();
@@ -267,7 +287,7 @@ public class Frag_Recipe_Container extends Fragment {
             protected void onPostExecute(List<Recipes> objects)
             {
                 super.onPostExecute(objects);
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList_status, photoGallery);
                 photoGallery.setAdapter( adapter );
                 message.cancel();
             }
@@ -275,7 +295,5 @@ public class Frag_Recipe_Container extends Fragment {
     }
 
 
-    List<Recipes> recipesList;
-    EditText editText_search;
-    Button button;
+
 }
