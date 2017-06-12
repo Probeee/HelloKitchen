@@ -65,17 +65,18 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
         final String recipe_id = this.getItem(position).getRecipe_id();
         final String recipe_name = this.getItem(position).getRecipe_name();
         final String recipe_producer_id = this.getItem(position).getMember_id();
+        final Boolean recipe_status = this.getItem(position).getRecipe_status();
 
 
         if (convertView == null)
         {
             convertView = inflater.inflate(R.layout.recipe_photo_view,parent,false);
         }
+
         ImageView imageView = (ImageView) convertView.findViewById(R.id.photo_Recipe);
         TextView textView_RecipeName = (TextView)convertView.findViewById(R.id.textView_RecipeName);
         TextView textView_ProducerId = (TextView) convertView.findViewById(R.id.textView_RecipeProducer);
         // 給圖片設置一個tag
-
         textView_RecipeName.setTag(recipe_id);
         textView_ProducerId.setTag(recipe_id);
         imageView.setTag(recipe_id);
@@ -84,19 +85,21 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes>
         Picasso
                 .with(context)
                 .load(recipeObjects.get(position).getRecipe_picture())
-                .resize(gridViewPhoto.getColumnWidth(),gridViewPhoto.getColumnWidth()*75/100)
+                .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 75 / 100)
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(imageView);
-
         //設定每個區塊上的資訊
         textView_RecipeName.setText(recipe_name);
         textView_ProducerId.setText(recipe_producer_id);
+
+
         //三個View元件共用一個事件
         imageView.setOnClickListener(itemClick);
         textView_RecipeName.setOnClickListener(itemClick);
         textView_ProducerId.setOnClickListener(itemClick);
-        return convertView;
+
+    return convertView;
     }
     View.OnClickListener itemClick = new View.OnClickListener()
     {
