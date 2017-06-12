@@ -154,7 +154,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_time)
         {
-            //產生TimepickerDialog 物件 初始顯示時間為現在
+            //產生TimePickerDialog 物件 初始顯示時間為現在
             TimePickerDialog message = new TimePickerDialog(this, myTimeSetListener, java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY),
                     java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE),true);
             message.setButton(BUTTON_NEGATIVE, "關閉提醒", new DialogInterface.OnClickListener()
@@ -229,7 +229,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         notificationIntent.putExtra("notification", notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
+        am.set(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
         am.setRepeating(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), (24 * 60 * 60 * 1000),pendingIntent);//am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 1000, (24 * 60 * 60 * 1000),pendingIntent);
     }
 

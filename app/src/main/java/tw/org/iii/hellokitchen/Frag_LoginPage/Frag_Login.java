@@ -329,7 +329,7 @@ public class Frag_Login extends Fragment {
 
                     HttpClient httpClient = new DefaultHttpClient();
 
-                    httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 6000);
+                    httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
                     httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
 
                     HttpPost post = new HttpPost(String.valueOf(url));
@@ -366,7 +366,7 @@ public class Frag_Login extends Fragment {
 
                         intent.putExtras(bundle);
                         startActivity(intent);
-
+                        message.cancel();
                         getActivity().finish();
 
                     } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
@@ -375,6 +375,7 @@ public class Frag_Login extends Fragment {
                     }
                 } catch (JSONException e) {
                     TheDefined.showToastByRunnable(getActivity(), "json", Toast.LENGTH_LONG);
+                    message.cancel();
                     e.printStackTrace();
                 } catch (IOException e) {
                     TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);

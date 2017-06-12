@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tw.org.iii.hellokitchen">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -10,22 +9,22 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="true">
-
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -33,8 +32,8 @@
         <activity
             android:name=".Activity.ActMain"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@style/NoTitle"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,26 +44,23 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ActRealMain"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCUQswIVonpnGupn5qZM1PlniXQfh8S2Z4"/>
-        <receiver
-            android:name=".Utility.AlarmBroadCastReceiver" >
-        </receiver>
-    </application>
+            android:value="AIzaSyCUQswIVonpnGupn5qZM1PlniXQfh8S2Z4" />
 
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true"
-        />
+        <receiver android:name=".Utility.AlarmBroadCastReceiver"></receiver>
+
+        <activity
+            android:name=".Activity.ActRecipeDetail"
+            android:label="@string/title_activity_act_recipe_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
 
 </manifest>

@@ -263,7 +263,8 @@ public class Frag_Recipe_Container extends Fragment {
                                         Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
-                                        TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture));
+                                        TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_detail));
                                 if(Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)))
                                 {
                                     recipesList_status.add(myRecipes);
