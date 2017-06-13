@@ -1,9 +1,6 @@
 package tw.org.iii.hellokitchen.Activity;
 
-import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.Notification;
@@ -13,14 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.icu.util.Calendar;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.Settings;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -36,21 +26,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import tw.org.iii.hellokitchen.Entity.Ingredients;
 import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Container;
 import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Container;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.AlarmBroadCastReceiver;
-import tw.org.iii.hellokitchen.Utility.MyDBHelper;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
-import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class ActRealMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {

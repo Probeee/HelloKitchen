@@ -13,7 +13,6 @@ import android.content.pm.Signature;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Base64;
@@ -35,23 +34,18 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import tw.org.iii.hellokitchen.Activity.ActRealMain;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.MyDBHelper;
@@ -271,11 +265,134 @@ public class Frag_Login extends Fragment {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 //讀出姓名 ID FB個人頁面連結
                                 /*取的資料後可直接存入servlet*/
+                                /*
                                 Log.d("FB","complete");
                                 Log.d("FB",object.optString("name"));
                                 Log.d("FB",object.optString("link"));
                                 Log.d("FB",object.optString("id"));
                                 Log.d("FB",object.optString("email"));
+                                */
+
+                                final String fbEmail = object.optString("email").toString();
+                                final String fbId = object.optString("id").toString();
+                                final String fbName = object.optString("name").toString();
+
+
+                                final ProgressDialog message = new ProgressDialog(getActivity());
+                                message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                message.setTitle("登入中");
+                                message.setCancelable(false);
+                                message.show();
+
+                                new Thread(new Runnable(){
+                                    public void run(){
+                                        OkHttpClient client = new OkHttpClient();
+                                        JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
+                                        try {
+                                            jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, fbEmail);
+                                            jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, fbId);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                                        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+                                        Request request = new Request.Builder()
+                                                .url(TheDefined.Web_Server_URL + "/AndroidLoginAccountServlet")
+                                                .post(body)
+                                                .build();
+                                        try {
+                                            Response response = client.newCall(request).execute();
+                                            if (response.isSuccessful()) {
+                                                String responseString = response.body().string();
+                                                //回傳的內容轉存為JSON物件
+                                                JSONObject responseJSON = new JSONObject(responseString);
+                                                //取得Message的屬性
+                                                String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                                                Log.d("info", responseString);
+                                                Log.d("member_name", responseString);
+
+                                                if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                                                    Intent intent = new Intent();
+                                                    intent.setClass(getActivity(),ActRealMain.class);
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString(TheDefined.LOGIN_USER_NAME, fbName);
+                                                    bundle.putString(TheDefined.LOGIN_USER_MAIL , fbEmail);
+
+                                                    table = getActivity().getSharedPreferences("LoginUser",0);
+                                                    SharedPreferences.Editor row = table.edit();
+                                                    row.putString("UserEmail", fbEmail).commit();
+                                                    row.putString("UserName", fbName).commit();
+
+                                                    intent.putExtras(bundle);
+                                                    startActivity(intent);
+                                                    message.cancel();
+                                                    getActivity().finish();
+
+                                                } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
+                                                    /*mysql沒有facebook帳號需要將資料輸入至mysql*/
+                                                    jsonObject = new JSONObject();
+                                                    try {
+                                                        jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, fbEmail);
+                                                        jsonObject.put(TheDefined.Android_JSON_Key_Member_Name, fbName);
+                                                        jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, fbId);
+                                                        jsonObject.put(TheDefined.Android_JSON_Key_Member_Tel, "noData");
+                                                        jsonObject.put(TheDefined.Android_JSON_Key_Member_Email, fbEmail);
+                                                        jsonObject.put(TheDefined.Android_JSON_Key_Member_FB_Id, fbId);
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+                                                    JSON = MediaType.parse("application/json; charset=utf-8");
+                                                    body = RequestBody.create(JSON, jsonObject.toString());
+
+                                                    request = new Request.Builder()
+                                                            .url(TheDefined.Web_Server_URL + "/AndroidAddAccountServlet")
+                                                            .post(body)
+                                                            .build();
+                                                    try {
+                                                        response = client.newCall(request).execute();
+                                                        if (response.isSuccessful()) {
+                                                            responseString = response.body().string();
+                                                            //回傳的內容轉存為JSON物件
+                                                            responseJSON = new JSONObject(responseString);
+                                                            //取得Message的屬性
+                                                            info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                                                            Log.d("info", responseString);
+
+                                                            //在Thread中執行toast
+                                                            if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                                                                Intent intent = new Intent();
+                                                                intent.setClass(getActivity(),ActRealMain.class);
+                                                                Bundle bundle = new Bundle();
+                                                                bundle.putString(TheDefined.LOGIN_USER_NAME, fbName);
+                                                                bundle.putString(TheDefined.LOGIN_USER_MAIL , fbEmail);
+
+                                                                table = getActivity().getSharedPreferences("LoginUser",0);
+                                                                SharedPreferences.Editor row = table.edit();
+                                                                row.putString("UserEmail", fbEmail).commit();
+                                                                row.putString("UserName", fbName).commit();
+
+                                                                intent.putExtras(bundle);
+                                                                startActivity(intent);
+                                                                message.cancel();
+                                                                getActivity().finish();
+                                                            }
+                                                        }
+                                                    } catch (Exception e) {
+                                                        TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+                                        } catch (Exception e) {
+                                            TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
+                                            message.cancel();
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }).start();
                             }
                         });
 
@@ -318,66 +435,58 @@ public class Frag_Login extends Fragment {
 
         new Thread(new Runnable(){
             public void run(){
+                OkHttpClient client = new OkHttpClient();
+                JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
                 try {
-                    URL url = new URL(TheDefined.Web_Server_URL + "/AndroidLoginAccountServlet");
-                    //URLConnection connection = url.openConnection();
-                    //用來包覆JSONArray的JSON物件
-                    JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
-
                     jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, email.getText().toString().trim());
                     jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, password.getText().toString().trim());
-
-                    HttpClient httpClient = new DefaultHttpClient();
-
-                    httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
-                    httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
-
-                    HttpPost post = new HttpPost(String.valueOf(url));
-
-                    //JSON物件放到POST Request
-                    StringEntity stringEntity = new StringEntity(jsonObject.toString(), "UTF-8");
-                    stringEntity.setContentType("application/json;charset=UTF-8");
-                    post.setEntity(stringEntity);
-                    //執行POST Request
-                    HttpResponse httpResponse = httpClient.execute(post);
-
-                    //取得回傳的內容
-                    HttpEntity httpEntity = httpResponse.getEntity();
-                    String responseString = EntityUtils.toString(httpEntity, "UTF-8");
-                    //回傳的內容轉存為JSON物件
-                    JSONObject responseJSON = new JSONObject(responseString);
-                    //取得Message的屬性
-                    String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
-                    String memberName = responseJSON.getString(TheDefined.Android_JSON_Key_Member_Name);
-                    Log.d("info", responseString);
-                    Log.d("member_name", responseString);
-
-                    if (info.equals(TheDefined.Android_JSON_Value_Success)) {
-                        Intent intent = new Intent();
-                        intent.setClass(getActivity(),ActRealMain.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString(TheDefined.LOGIN_USER_NAME, memberName);
-                        bundle.putString(TheDefined.LOGIN_USER_MAIL , email.getText().toString());
-
-                        table = getActivity().getSharedPreferences("LoginUser",0);
-                        SharedPreferences.Editor row = table.edit();
-                        row.putString("UserEmail", email.getText().toString()).commit();
-                        row.putString("UserName", memberName).commit();
-
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        message.cancel();
-                        getActivity().finish();
-
-                    } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
-                        TheDefined.showToastByRunnable(getActivity(),"帳號密碼有誤",Toast.LENGTH_LONG); //在Thread中執行toast
-                        message.cancel();
-                    }
                 } catch (JSONException e) {
-                    TheDefined.showToastByRunnable(getActivity(), "json", Toast.LENGTH_LONG);
-                    message.cancel();
                     e.printStackTrace();
-                } catch (IOException e) {
+                }
+
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+                Request request = new Request.Builder()
+                        .url(TheDefined.Web_Server_URL + "/AndroidLoginAccountServlet")
+                        .post(body)
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful()) {
+                        String responseString = response.body().string();
+                        //回傳的內容轉存為JSON物件
+                        JSONObject responseJSON = new JSONObject(responseString);
+                        //取得Message的屬性
+                        String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                        String memberName = responseJSON.getString(TheDefined.Android_JSON_Key_Member_Name);
+                        Log.d("info", responseString);
+                        Log.d("member_name", responseString);
+
+                        if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(),ActRealMain.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString(TheDefined.LOGIN_USER_NAME, memberName);
+                            bundle.putString(TheDefined.LOGIN_USER_MAIL , email.getText().toString());
+
+                            table = getActivity().getSharedPreferences("LoginUser",0);
+                            SharedPreferences.Editor row = table.edit();
+                            row.putString("UserEmail", email.getText().toString()).commit();
+                            row.putString("UserName", memberName).commit();
+
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
+                            message.cancel();
+                            getActivity().finish();
+
+                        } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
+                            TheDefined.showToastByRunnable(getActivity(),"帳號密碼有誤",Toast.LENGTH_LONG); //在Thread中執行toast
+                            message.cancel();
+                        }
+                    }
+                } catch (Exception e) {
                     TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
                     e.printStackTrace();

@@ -2,6 +2,7 @@ package tw.org.iii.hellokitchen.Utility;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,6 +91,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         Picasso
                 .with(context)
                 .load(recipeObjects.get(position).getRecipe_picture())
+                .config(Bitmap.Config.ALPHA_8)
                 .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 75 / 100)
                 .tag(recipe_id)
                 .placeholder(R.drawable.photo)   // optional
@@ -107,7 +109,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
             @Override
             public void onClick(View v)
             {
-                itemClick(position,v);
+                itemClick(position);
             }
         });
         textView_RecipeName.setOnClickListener(new View.OnClickListener()
@@ -115,7 +117,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
             @Override
             public void onClick(View v)
             {
-                itemClick(position,v);
+                itemClick(position);
             }
         });
         textView_ProducerId.setOnClickListener(new View.OnClickListener()
@@ -123,32 +125,32 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
             @Override
             public void onClick(View v)
             {
-                itemClick(position,v);
+                itemClick(position);
             }
         });
 
         return convertView;
     }
 
-    private void itemClick(int position,View v)
+    private void itemClick(int position)
     {
         //給GridView上的每個區塊做觸發
         Intent intent = new Intent();
         intent.setClass(getContext(), ActRecipeDetail.class);
         Bundle bundle = new Bundle();
+        bundle.putString("recipeId",recipeObjects.get(position).getRecipe_id());
         bundle.putString("recipeTitle",recipeObjects.get(position).getRecipe_name());
         bundle.putString("recipeImageURL",recipeObjects.get(position).getRecipe_picture());
-        Log.d("recipeTitle",recipeObjects.get(position).getRecipe_name());
-        Log.d("recipeImageURL",recipeObjects.get(position).getRecipe_picture());
         intent.putExtras(bundle);
         getContext().startActivity(intent);
-        Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState)
     {
+        //當卷軸停止捲動才做
         final Picasso picasso = Picasso.with(context);
         if (scrollState == SCROLL_STATE_IDLE || scrollState == SCROLL_STATE_TOUCH_SCROLL) {
             picasso.resumeTag(context);

@@ -17,8 +17,23 @@ import android.view.View;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import tw.org.iii.hellokitchen.Entity.Recipes_Material;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.CustomOkHttp3Downloader;
+import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 public class ActRecipeDetail extends AppCompatActivity
 {
@@ -46,6 +61,7 @@ public class ActRecipeDetail extends AppCompatActivity
         Log.d("recipeImageURL",recipeImageURL);
         try
         {
+            //用Picasso載入標題圖片
             Picasso picasso = new Picasso.Builder(this)
                     .downloader(new CustomOkHttp3Downloader(this))
                     .build();
@@ -92,6 +108,7 @@ public class ActRecipeDetail extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        //左上角的返回鍵
         switch (item.getItemId())
         {
             case android.R.id.home:
@@ -100,4 +117,51 @@ public class ActRecipeDetail extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*暫時*/
+    public void servlet_RecipeDetail_Data(final String recipeId)
+    {
+        recipesMaterialList = new ArrayList<>();
+        new Thread(new Runnable(){
+            public void run(){
+                OkHttpClient client = new OkHttpClient();
+                JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
+                try {
+                    jsonObject.put(TheDefined.Android_JSON_Key_Recipe_id, recipeId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+                Request request = new Request.Builder()
+                        .url(TheDefined.Web_Server_URL + "/AndroidLoginAccountServlet")
+                        .post(body)
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful()) {
+                        String responseString = response.body().string();
+                        try {
+                            JSONArray responseJSON = new JSONArray(responseString);
+                            for (int i = 0; i < responseJSON.length(); i++) {
+                                jsonObject = new JSONObject(responseJSON.get(i).toString());
+                                //Recipe_Material myRecipeMaterial = new Recipe_Material();
+                                //recipesMaterialList.add(myRecipeMaterial);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    List<Recipes_Material> recipesMaterialList;
+
 }
