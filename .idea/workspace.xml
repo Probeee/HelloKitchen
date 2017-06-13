@@ -11,106 +11,21 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9eb3d9d-0cbe-4206-8210-d9dcc576bb70" name="Default" comment="Use Scrolling Activity">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_android_25.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HelloKitchen0608.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/HelloKitchen0607.iml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Method.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipes_Method.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipe_Material.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipes_Material.java" />
+    <list default="true" id="d9eb3d9d-0cbe-4206-8210-d9dcc576bb70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/cardview_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/customtabs_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/customtabs_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/facebook_android_sdk_4_23_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/facebook_android_sdk_4_23_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_impl_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_impl_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_appindexing_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_appindexing_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_auth_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_auth_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_common_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_common_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_config_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_config_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_crash_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_crash_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_database_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_database_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_database_connection_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_database_connection_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_iid_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_iid_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_messaging_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_messaging_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_storage_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_storage_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_storage_common_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_storage_common_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/mediarouter_v7_25_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/mediarouter_v7_25_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/palette_v7_25_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/palette_v7_25_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_ads_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_ads_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_ads_lite_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_ads_lite_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_impl_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_impl_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_appinvite_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appinvite_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_auth_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_auth_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_auth_base_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_auth_base_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_awareness_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_awareness_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_base_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_base_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_basement_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_basement_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_cast_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_cast_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_cast_framework_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_cast_framework_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_clearcut_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_clearcut_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_drive_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_drive_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_fitness_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_fitness_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_games_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_games_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_gass_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_gass_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_gcm_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_gcm_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_identity_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_identity_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_iid_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_iid_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_instantapps_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_instantapps_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_location_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_location_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_maps_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_maps_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_nearby_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_nearby_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_panorama_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_panorama_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_places_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_places_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_plus_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_plus_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_safetynet_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_safetynet_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_api_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_api_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_v4_impl_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_v4_impl_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_vision_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_vision_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_wallet_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_wallet_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_wearable_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_wearable_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRealMain.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRealMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Login.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Login.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Register.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Register.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
     </list>
     <ignored path="HelloKitchen.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -170,25 +85,69 @@
       <file leaf-file-name="RecipeGalleryAdapterPicasso.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="97" selection-end-column="77" />
+            <state relative-caret-position="445">
+              <caret line="152" column="56" selection-start-line="152" selection-start-column="56" selection-end-line="152" selection-end-column="56" />
               <folding>
-                <element signature="e#3553#3726#0" expanded="true" />
-                <element signature="e#3725#3726#0" expanded="true" />
-                <element signature="e#3776#3949#0" expanded="true" />
-                <element signature="e#3948#3949#0" expanded="true" />
-                <element signature="e#3999#4172#0" expanded="true" />
-                <element signature="e#4171#4172#0" expanded="true" />
+                <element signature="e#3610#3783#0" expanded="true" />
+                <element signature="e#3782#3783#0" expanded="true" />
+                <element signature="e#3833#4006#0" expanded="true" />
+                <element signature="e#4005#4006#0" expanded="true" />
+                <element signature="e#4056#4229#0" expanded="true" />
+                <element signature="e#4228#4229#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="content_act_recipe_detail.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml">
+      <file leaf-file-name="Frag_Recipe_Container.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="445">
+              <caret line="272" column="35" selection-start-line="272" selection-start-column="35" selection-end-line="272" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActRecipeDetail.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="212" column="26" selection-start-line="212" selection-start-column="26" selection-end-line="212" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4651#4669#0" expanded="true" />
+                <element signature="e#4733#4749#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2468">
+              <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TheDefined.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="319">
+              <caret line="46" column="92" selection-start-line="46" selection-start-column="92" selection-end-line="46" selection-end-column="92" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="act_recipe_detail.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_recipe_detail.xml">
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+            <state relative-caret-position="577">
+              <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -197,16 +156,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActRecipeDetail.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="991">
-              <caret line="160" column="13" selection-start-line="160" selection-start-column="13" selection-end-line="160" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4026#5784#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="content_act_recipe_detail.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="665">
+              <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+              <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -2674,22 +2633,22 @@
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRealMain.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Login.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Register.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipes_Material.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipes_Method.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/TheDefined.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="2" />
+    <option name="y" value="4" />
+    <option name="width" value="1932" />
+    <option name="height" value="966" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -2744,6 +2703,42 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HelloKitchen0608" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HelloKitchen0608" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3319,7 +3314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497251421950</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="GGGGG">
+      <created>1497336760236</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1497336760236</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3332,24 +3334,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="2" y="4" width="1932" height="966" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12165178" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7630273" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5025707" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19977678" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23507462" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06823821" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23504274" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5870536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55927473" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55831265" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23773988" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23824786" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3384,7 +3386,8 @@
     <MESSAGE value="Rewrite Gallery by using picasso api" />
     <MESSAGE value="Add JsonData From MySQL" />
     <MESSAGE value="Use Scrolling Activity" />
-    <option name="LAST_COMMIT_MESSAGE" value="Use Scrolling Activity" />
+    <MESSAGE value="GGGGG" />
+    <option name="LAST_COMMIT_MESSAGE" value="GGGGG" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -3481,14 +3484,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/captures/tw.org.iii.hellokitchen_2017.06.11_03.25.hprof" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/graphics/BitmapFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -3660,34 +3655,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="41" column="43" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="43" />
-          <folding>
-            <element signature="e#2788#2789#0" expanded="true" />
-            <element signature="e#2824#2825#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRealMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="973">
           <caret line="241" column="54" selection-start-line="241" selection-start-column="54" selection-end-line="241" selection-end-column="54" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="281" column="17" selection-start-line="281" selection-start-column="17" selection-end-line="281" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4427#6091#0" expanded="true" />
-            <element signature="e#6090#6091#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3712,10 +3684,10 @@
         <state relative-caret-position="3933">
           <caret line="246" column="1" selection-start-line="246" selection-start-column="1" selection-end-line="246" selection-end-column="1" />
           <folding>
-            <element signature="e#3146#4688#0" expanded="true" />
-            <element signature="e#4687#4688#0" expanded="true" />
-            <element signature="e#6066#8855#0" expanded="true" />
-            <element signature="e#8854#8855#0" expanded="true" />
+            <element signature="e#3146#4688#0" expanded="false" />
+            <element signature="e#4687#4688#0" expanded="false" />
+            <element signature="e#6066#8855#0" expanded="false" />
+            <element signature="e#8854#8855#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3725,16 +3697,14 @@
         <state relative-caret-position="369">
           <caret line="497" column="5" selection-start-line="497" selection-start-column="5" selection-end-line="497" selection-end-column="5" />
           <folding>
-            <element signature="e#5647#6202#0" expanded="true" />
-            <element signature="e#6201#6202#0" expanded="true" />
-            <element signature="e#6270#6882#0" expanded="true" />
-            <element signature="e#6881#6882#0" expanded="true" />
-            <element signature="e#9270#19305#0" expanded="true" />
-            <element signature="e#10678#19239#0" expanded="true" />
-            <element signature="e#19238#19239#0" expanded="true" />
-            <element signature="e#19304#19305#0" expanded="true" />
-            <element signature="e#20330#23528#0" expanded="true" />
-            <element signature="e#23527#23528#0" expanded="true" />
+            <element signature="e#5647#6202#0" expanded="false" />
+            <element signature="e#6201#6202#0" expanded="false" />
+            <element signature="e#6270#6882#0" expanded="false" />
+            <element signature="e#6881#6882#0" expanded="false" />
+            <element signature="e#10678#19239#0" expanded="false" />
+            <element signature="e#19238#19239#0" expanded="false" />
+            <element signature="e#19304#19305#0" expanded="false" />
+            <element signature="e#23527#23528#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3761,29 +3731,41 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Entity/Recipes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="319">
+          <caret line="46" column="92" selection-start-line="46" selection-start-column="92" selection-end-line="46" selection-end-column="92" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="152" column="56" selection-start-line="152" selection-start-column="56" selection-end-line="152" selection-end-column="56" />
+          <folding>
+            <element signature="e#3610#3783#0" expanded="true" />
+            <element signature="e#3782#3783#0" expanded="true" />
+            <element signature="e#3833#4006#0" expanded="true" />
+            <element signature="e#4005#4006#0" expanded="true" />
+            <element signature="e#4056#4229#0" expanded="true" />
+            <element signature="e#4228#4229#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_recipe_detail.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        <state relative-caret-position="577">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -3791,29 +3773,42 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="96" column="16" selection-start-line="96" selection-start-column="16" selection-end-line="97" selection-end-column="77" />
-          <folding>
-            <element signature="e#3553#3726#0" expanded="true" />
-            <element signature="e#3725#3726#0" expanded="true" />
-            <element signature="e#3776#3949#0" expanded="true" />
-            <element signature="e#3948#3949#0" expanded="true" />
-            <element signature="e#3999#4172#0" expanded="true" />
-            <element signature="e#4171#4172#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="445">
+          <caret line="272" column="35" selection-start-line="272" selection-start-column="35" selection-end-line="272" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="991">
-          <caret line="160" column="13" selection-start-line="160" selection-start-column="13" selection-end-line="160" selection-end-column="13" />
+        <state relative-caret-position="419">
+          <caret line="212" column="26" selection-start-line="212" selection-start-column="26" selection-end-line="212" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4026#5784#0" expanded="true" />
+            <element signature="e#4651#4669#0" expanded="true" />
+            <element signature="e#4733#4749#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2468">
+          <caret line="155" column="12" selection-start-line="155" selection-start-column="12" selection-end-line="155" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>

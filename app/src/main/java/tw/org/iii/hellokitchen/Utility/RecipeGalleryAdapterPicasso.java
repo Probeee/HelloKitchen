@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import tw.org.iii.hellokitchen.Activity.ActRecipeDetail;
 import tw.org.iii.hellokitchen.Entity.Recipes;
@@ -49,6 +51,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         this.recipeObjects = objects;
         this.gridViewPhoto = photoGridView;
         inflater = LayoutInflater.from(context);
+
 
         try
         {
@@ -138,11 +141,20 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         Intent intent = new Intent();
         intent.setClass(getContext(), ActRecipeDetail.class);
         Bundle bundle = new Bundle();
-        bundle.putString("recipeId",recipeObjects.get(position).getRecipe_id());
-        bundle.putString("recipeTitle",recipeObjects.get(position).getRecipe_name());
-        bundle.putString("recipeImageURL",recipeObjects.get(position).getRecipe_picture());
+
+        bundle.putString("recipeId", recipeObjects.get(position).getRecipe_id());
+        bundle.putString("recipeName", recipeObjects.get(position).getRecipe_name());
+        bundle.putString("recipeAmount", recipeObjects.get(position).getRecipe_amount());
+        bundle.putBoolean("recipeStatus", recipeObjects.get(position).getRecipe_status());
+        bundle.putString("recipeCooktime", recipeObjects.get(position).getRecipe_cooktime());
+        bundle.putString("recipePicture", recipeObjects.get(position).getRecipe_picture());
+        bundle.putString("MemberID", recipeObjects.get(position).getMember_id());
+        bundle.putString("recipeDetail", recipeObjects.get(position).getRecipe_detail());
+        bundle.putString("recipeUploadDate", recipeObjects.get(position).getUpload_date());
+
         intent.putExtras(bundle);
         getContext().startActivity(intent);
+
         //Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
     }
 
