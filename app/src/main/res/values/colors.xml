@@ -133,7 +133,7 @@
     <color name="lightseagreen">#20B2AA</color><!--亮海藍色 -->
     <color name="dodgerblue">#1E90FF</color><!--閃藍色 -->
     <color name="midnightblue">#191970</color><!--中灰藍色 -->
-    <color name="aqua">#00FFFF</color><!--淺綠色 -->
+    <color name="aqua">#00ffff</color><!--淺綠色 -->
     <color name="cyan">#00FFFF</color><!--青色 -->
     <color name="springgreen">#00FF7F</color><!--春綠色 -->
     <color name="lime">#00FF00</color><!--酸橙色 -->

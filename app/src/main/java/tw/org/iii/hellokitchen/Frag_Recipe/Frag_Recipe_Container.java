@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class Frag_Recipe_Container extends Fragment {
 
     private List<Recipes> recipesList;
     private List<Recipes> newRecipesList ;
-    private List<Recipes> recipesList_status;
+
     private EditText editText_search;
     private Button button;
 
@@ -125,14 +126,14 @@ public class Frag_Recipe_Container extends Fragment {
         {
             newRecipesList.clear();
         }
-        if(recipesList_status == null)
+       /* if(recipesList_status == null)
         {
             recipesList_status = new ArrayList<>();
         }
         else
         {
             recipesList_status.clear();
-        }
+        }*/
 
         this.photoGallery = (GridView)v.findViewById(R.id.gridRecipePhoto );
         //getAllRecipe();
@@ -171,11 +172,11 @@ public class Frag_Recipe_Container extends Fragment {
             if(condition != null)
             {
                 //有搜尋條件時候
-                for(int count = 0; count<recipesList_status.size();count++)
+                for(int count = 0; count< recipesList.size();count++)
                 {
-                    if(recipesList_status.get(count).getRecipe_name().contains(condition))
+                    if( recipesList.get(count).getRecipe_name().contains(condition))
                     {
-                        newRecipesList.add(recipesList_status.get(count));
+                        newRecipesList.add( recipesList.get(count));
                     }
                 }
 
@@ -189,7 +190,7 @@ public class Frag_Recipe_Container extends Fragment {
                 //沒有搜尋條件時候
                 photoGallery.setAdapter(null);
                 adapter.notifyDataSetChanged();
-                recipesList_status.clear();
+                //recipesList_status.clear();
                 recipesList.clear();
                 try
                 {
@@ -216,7 +217,7 @@ public class Frag_Recipe_Container extends Fragment {
     {
         super.onDestroyView();
         recipesList.clear();
-        recipesList_status.clear();
+        //recipesList_status.clear();
         newRecipesList.clear();
     }
 
@@ -225,7 +226,7 @@ public class Frag_Recipe_Container extends Fragment {
     {
         super.onDestroy();
         recipesList.clear();
-        recipesList_status.clear();
+       // recipesList_status.clear();
         newRecipesList.clear();
     }
 
@@ -253,7 +254,8 @@ public class Frag_Recipe_Container extends Fragment {
                         String responseString = response.body().string();
                         try {
                             JSONArray responseJSON = new JSONArray(responseString);
-                            for (int i = 0; i < responseJSON.length(); i++) {
+                            for (int i = 0; i < responseJSON.length(); i++)
+                            {
                                 JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
                                 Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
@@ -264,11 +266,13 @@ public class Frag_Recipe_Container extends Fragment {
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
                                         TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture),
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_detail));
-                                if(Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)))
+
+                               /* if(Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)))
                                 {
                                     recipesList_status.add(myRecipes);
-                                }
+                                }*/
                                 recipesList.add(myRecipes);
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -287,7 +291,7 @@ public class Frag_Recipe_Container extends Fragment {
             protected void onPostExecute(List<Recipes> objects)
             {
                 super.onPostExecute(objects);
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList_status, photoGallery);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(),  recipesList, photoGallery);
                 photoGallery.setAdapter( adapter );
                 message.cancel();
             }

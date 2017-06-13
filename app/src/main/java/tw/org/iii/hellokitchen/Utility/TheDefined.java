@@ -44,10 +44,10 @@ public class TheDefined
     }
 
     /*server URL*/
-    public static final String Web_Server_URL = "http://192.168.1.97:8080/HelloKitchen0607_(mix)";
+    public static final String Web_Server_URL = "http://192.168.1.97:8080/HelloKitchen0611";
    // public static final String Web_Server_URL = "http://192.168.0.100:8080/HelloKitchen0607-mix";
     /*JSON Key & Value*/
-    public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
+   public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
     public static final String Android_JSON_Key_Member_Name = "Android_JSON_Key_Member_Name";
     public static final String Android_JSON_Key_Member_Password = "Android_JSON_Key_Member_Password";
     public static final String Android_JSON_Key_Member_Tel = "Android_JSON_Key_Member_Tel";
@@ -63,7 +63,19 @@ public class TheDefined
     public static final String Android_JSON_Key_Recipe_cooktime = "Android_JSON_Key_Recipe_cooktime";
     public static final String Android_JSON_Key_Recipe_picture = "Android_JSON_Key_Recipe_picture";
     public static final String Android_JSON_Key_Recipe_detail = "Android_JSON_Key_Recipe_detail";
-
+    //--------------------------------------------------------------
+    public static final String Android_JSON_Key_Recipe_Material_id="Android_JSON_Key_Recipe_Material_id";
+    public static final String Android_JSON_Key_Recipe_Material_name="Android_JSON_Key_Recipe_Material_name";
+    public static final String Android_JSON_Key_Recipe_Material_amount="Android_JSON_Key_Recipe_Material_amount";
+    public static final String Android_JSON_Key_Recipe_Material_picture="Android_JSON_Key_Recipe_Material_picture";
+    //----------------------------------------------------------------------------------
+    public static final String Android_JSON_Key_Recipe_Method_id="Android_JSON_Key_Recipe_Method_id";
+    public static final String Android_JSON_Key_Recipe_Method_detail="Android_JSON_Key_Recipe_Method_detail";
+    public static final String Android_JSON_Key_Recipe_Method_picture="Android_JSON_Key_Recipe_Method_picture";
+    //---------------------------------------------------------------------------------------------------
+    public static final String Android_JSONArray_Key_Recipe_Material="Android_JSONArray_Key_Recipe_Material";
+    public static final String Android_JSONArray_Key_Recipe_Method = "Android_JSONArray_Key_Recipe_Method";
+    //------------------------------------------------------------------------------------------------
     public static final String Android_JSON_Key_Information = "Android_JSON_Key_Information";  //JSON 回傳訊息Key
     public static final String Android_JSON_Value_Success = "Android_JSON_Value_Success";      //JSON 回傳訊息Value
     public static final String Android_JSON_Value_Fail = "Android_JSON_Value_Fail";            //JSON 回傳訊息Value
