@@ -42,6 +42,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
     private List<Recipes> recipeObjects;
     /**Gallery View**/
     private GridView gridViewPhoto;
+    private TextView textViewForList;
 
 
     public RecipeGalleryAdapterPicasso(Context context, List<Recipes> objects, GridView photoGridView)
@@ -84,6 +85,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         ImageView imageView = (ImageView) convertView.findViewById(R.id.photo_Recipe);
         TextView textView_RecipeName = (TextView)convertView.findViewById(R.id.textView_RecipeName);
         TextView textView_ProducerId = (TextView) convertView.findViewById(R.id.textView_RecipeProducer);
+
         // 給圖片設置一個tag
         textView_RecipeName.setTag(recipe_id);
         textView_ProducerId.setTag(recipe_id);
@@ -140,6 +142,8 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         //給GridView上的每個區塊做觸發
         Intent intent = new Intent();
         intent.setClass(getContext(), ActRecipeDetail.class);
+
+
         Bundle bundle = new Bundle();
 
         bundle.putString("recipeId", recipeObjects.get(position).getRecipe_id());

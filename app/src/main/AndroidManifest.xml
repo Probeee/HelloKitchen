@@ -49,17 +49,21 @@
             android:name=".Activity.ActRealMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCUQswIVonpnGupn5qZM1PlniXQfh8S2Z4" />
 
-        <receiver android:name=".Utility.AlarmBroadCastReceiver"></receiver>
+        <receiver android:name=".Utility.AlarmBroadCastReceiver" />
 
         <activity
             android:name=".Activity.ActRecipeDetail"
             android:label="@string/title_activity_act_recipe_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

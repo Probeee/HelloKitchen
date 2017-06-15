@@ -11,7 +11,7 @@
         android:id="@+id/detail_app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:background="@color/cadetblue"
+        android:background="@color/burlywood"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/cadetblue"
+            app:contentScrim="@color/burlywood"
             app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways|enterAlwaysCollapsed|snap">
 
@@ -36,6 +36,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <include
+        layout="@layout/content_act_recipe_detail"
+        />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/detail_fab"
         android:layout_width="wrap_content"
@@ -44,7 +48,5 @@
         app:layout_anchor="@id/detail_app_bar"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <include layout="@layout/content_act_recipe_detail" />
 
 </android.support.design.widget.CoordinatorLayout>

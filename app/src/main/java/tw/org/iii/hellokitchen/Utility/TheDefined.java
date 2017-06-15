@@ -44,8 +44,8 @@ public class TheDefined
     }
 
     /*server URL*/
-    public static final String Web_Server_URL = "http://192.168.1.97:8080/HelloKitchen0611";
-   // public static final String Web_Server_URL = "http://192.168.0.100:8080/HelloKitchen0607-mix";
+    //public static final String Web_Server_URL = "http://192.168.1.97:8080/HelloKitchen0611";
+   public static final String Web_Server_URL = "http://192.168.0.103:8080/HelloKitchen0611";
     /*JSON Key & Value*/
    public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
     public static final String Android_JSON_Key_Member_Name = "Android_JSON_Key_Member_Name";
@@ -80,5 +80,7 @@ public class TheDefined
     public static final String Android_JSON_Value_Success = "Android_JSON_Value_Success";      //JSON 回傳訊息Value
     public static final String Android_JSON_Value_Fail = "Android_JSON_Value_Fail";            //JSON 回傳訊息Value
     public static final String Android_JSON_Value_Null = "Android_JSON_Value_Null";            //JSON 回傳訊息Value
+    //------------------------------------------------------------------------------------------------
+
 
 }
