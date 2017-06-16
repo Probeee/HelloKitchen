@@ -4,8 +4,9 @@ package tw.org.iii.hellokitchen.Frag_Company;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,7 @@ public class Frag_Company_Container extends Fragment {
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.frag__company, container, false);
+        View v = inflater.inflate(R.layout.frag_company_container, container, false);
         if(companyList == null)
         {
             companyList = new ArrayList<>();
@@ -176,7 +177,7 @@ public class Frag_Company_Container extends Fragment {
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Company_email),
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Company_owner),
                                         jsonObject.getString(TheDefined.Android_JSON_Key_Company_password),
-                                        Boolean.valueOf(jsonObject.get(TheDefined.Android_JSON_Key_Company__status).toString()));
+                                        Boolean.valueOf(jsonObject.get(TheDefined.Android_JSON_Key_Company_status).toString()));
 
 
                                 companyList.add(myCompanies);
