@@ -54,6 +54,7 @@ public class TheDefined
     public static final String Android_JSON_Key_Member_Email = "Android_JSON_Key_Member_Email";
     public static final String Android_JSON_Key_Member_FB_Id = "Android_JSON_Key_Member_FB_Id";
     //---- JSON KEY For Recipe
+    public static final String Android_JSON_Key_Recipe = "Android_JSON_Key_Recipe";
     public static final String Android_JSON_Key_Recipe_id = "Android_JSON_Key_Recipe_id";
     public static final String Android_JSON_Key_Recipe_name = "Android_JSON_Key_Recipe_name";
     public static final String Android_JSON_Key_Member_id = "Android_JSON_Key_Member_id";
@@ -64,11 +65,13 @@ public class TheDefined
     public static final String Android_JSON_Key_Recipe_picture = "Android_JSON_Key_Recipe_picture";
     public static final String Android_JSON_Key_Recipe_detail = "Android_JSON_Key_Recipe_detail";
     //--------------------------------------------------------------
+    public static final String Android_JSON_Key_Recipe_Material = "Android_JSON_Key_Recipe_Material";
     public static final String Android_JSON_Key_Recipe_Material_id="Android_JSON_Key_Recipe_Material_id";
     public static final String Android_JSON_Key_Recipe_Material_name="Android_JSON_Key_Recipe_Material_name";
     public static final String Android_JSON_Key_Recipe_Material_amount="Android_JSON_Key_Recipe_Material_amount";
     public static final String Android_JSON_Key_Recipe_Material_picture="Android_JSON_Key_Recipe_Material_picture";
     //----------------------------------------------------------------------------------
+    public static final String Android_JSON_Key_Recipe_Method = "Android_JSON_Key_Recipe_Method";
     public static final String Android_JSON_Key_Recipe_Method_id="Android_JSON_Key_Recipe_Method_id";
     public static final String Android_JSON_Key_Recipe_Method_detail="Android_JSON_Key_Recipe_Method_detail";
     public static final String Android_JSON_Key_Recipe_Method_picture="Android_JSON_Key_Recipe_Method_picture";
@@ -93,5 +96,10 @@ public class TheDefined
     public static final String Android_JSON_Key_Company_owner = "Android_JSON_Key_Company_owner";
     public static final String Android_JSON_Key_Company_password = "Android_JSON_Key_Company_password";
     public static final String Android_JSON_Key_Company_status ="Android_JSON_Key_Company_status";
+    //-------JSON KEY For CompanyPicture
+    public static final String Android_JSON_Key_Company_Picture_id ="Android_JSON_Key_Company_Picture_id";
+    public static final String Android_JSON_Key_Company_Picture_description ="Android_JSON_Key_Company_Picture_description";
+    public static final String Android_JSON_Key_Company_Picture_name ="Android_JSON_Key_Company_Picture_name";
+    public static final String Android_JSON_Key_Company_Picture_path ="Android_JSON_Key_Company_Picture_path";
 
 }

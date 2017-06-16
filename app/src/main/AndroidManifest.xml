@@ -61,6 +61,7 @@
             android:name=".Activity.ActRecipeDetail"
             android:label="@string/title_activity_act_recipe_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.ActRecipeUpload"></activity>
         <activity
             android:name=".Activity.ActCompanyDetail"
             android:label="@string/title_activity_act_company_detail"
