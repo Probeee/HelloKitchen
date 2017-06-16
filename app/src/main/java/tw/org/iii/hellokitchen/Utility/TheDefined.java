@@ -81,6 +81,17 @@ public class TheDefined
     public static final String Android_JSON_Value_Fail = "Android_JSON_Value_Fail";            //JSON 回傳訊息Value
     public static final String Android_JSON_Value_Null = "Android_JSON_Value_Null";            //JSON 回傳訊息Value
     //------------------------------------------------------------------------------------------------
-
+    //---- JSON KEY For Company
+    public static final String Android_JSON_Key_Company_id = "Android_JSON_Key_Company_id";
+    public static final String Android_JSON_Key_Company_name = "Android_JSON_Key_Company_name";
+    public static final String Android_JSON_Key_Company_logo= "Android_JSON_Key_Company_logo";
+    public static final String Android_JSON_Key_Company_cover = "Android_JSON_Key_Company_cover";
+    public static final String Android_JSON_Key_Cover_intro = "Android_JSON_Key_Cover_intro";
+    public static final String Android_JSON_Key_Company_address = "Android_JSON_Key_Company_address";
+    public static final String Android_JSON_Key_Company_tel = "Android_JSON_Key_Company_tel";
+    public static final String Android_JSON_Key_Company_email = "Android_JSON_Key_Company_email";
+    public static final String Android_JSON_Key_Company_owner = "Android_JSON_Key_Company_owner";
+    public static final String Android_JSON_Key_Company_password = "Android_JSON_Key_Company_password";
+    public static final String Android_JSON_Key_Company__status ="Android_JSON_Key_Company_status";
 
 }
