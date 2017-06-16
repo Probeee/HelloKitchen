@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!--在此使用ScrollView 因為如果過多筆則可以讓使用者往下拉-->
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:gravity="center">
+        <!-- ScrollView 中 只可已有一個Layout 所以我們將要新增的元件都新增到此 Layout中-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="餐點名稱"
+                        android:textSize="20dp"/>
+                    <EditText
+                        android:id="@+id/txtRecipeName"
+                        android:layout_weight="7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="餐點圖片"
+                        android:textSize="20dp"/>
+                    <Button
+                        android:id="@+id/btnRecipeImgCamera"
+                        android:layout_weight="3.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="相機"
+                        android:textSize="20dp"/>
+                    <Button
+                        android:id="@+id/btnRecipeImg"
+                        android:layout_weight="3.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="相簿"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="餐點數量"
+                        android:textSize="20dp"/>
+                    <Button
+                        android:id="@+id/btnMinusRecipeAmount"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/minus"/>
+                    <EditText
+                        android:id="@+id/txtRecipeAmount"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textSize="20dp"/>
+                    <Button
+                        android:id="@+id/btnAddRecipeAmount"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/add"/>
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="人份"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="製作時間"
+                        android:textSize="20dp"/>
+                    <EditText
+                        android:id="@+id/txtRecipeCookTime"
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:textSize="20dp"/>
+                    <TextView
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="分鐘"
+                        android:gravity="center"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="餐點介紹"
+                        android:textSize="20dp"/>
+                    <EditText
+                        android:id="@+id/txtRecipeDetail"
+                        android:layout_weight="7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:textSize="20dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000000"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:id="@+id/ll_in_sv_Material"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#000000"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:id="@+id/ll_in_sv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <!-- ScrollView 中 只可已有一個Layout 所以我們將要新增的元件都新增到此 Layout中-->
+
+    </ScrollView>
+
+    <!-- 此Layout是主頁面上所要固定的的元件 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btnRecipeCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回" />
+
+        <Button
+            android:id="@+id/btnRecipeInsert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="確認" />
+    </LinearLayout>
+</RelativeLayout>
