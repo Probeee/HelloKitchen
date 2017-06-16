@@ -1,35 +1,20 @@
 package tw.org.iii.hellokitchen.Activity;
 
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.util.Log;
-
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-
-import android.view.ViewGroup;
-
-import android.widget.BaseAdapter;
-
-
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -47,49 +32,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-
+import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.Entity.Recipes_Material;
 import tw.org.iii.hellokitchen.Entity.Recipes_Method;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.CustomOkHttp3Downloader;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
 
-
-
-
 public class ActRecipeDetail extends AppCompatActivity
 {
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
-    private final List<Recipes_Material>  myRMList  = new ArrayList<>();
-    private final List<Recipes_Method> myRMdList = new ArrayList<>();
-
-    String recipeId;
-    String recipeName;
-    String recipeAmount;
-    Boolean recipeStatus ;
-    String recipeCooktime ;
-    String recipePicture ;
-    String memberID ;
-    String recipeDetail ;
-    String recipeUploadDate ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_recipe_detail);
-
-        Bundle bundle = getIntent().getExtras();
-        recipeId = bundle.getString("recipeId");
-        recipeName = bundle.getString("recipeName");
-        recipeAmount = bundle.getString("recipeAmount");
-        recipeStatus =  bundle.getBoolean("recipeStatus");
-        recipeCooktime = bundle.getString("recipeCooktime");
-        recipePicture =bundle.getString("recipePicture");
-        memberID =bundle.getString("MemberID");
-        recipeDetail = bundle.getString("recipeDetail");
-        recipeUploadDate = bundle.getString("recipeUploadDate");
-
         InitialComponent();
     }
 
@@ -101,38 +58,19 @@ public class ActRecipeDetail extends AppCompatActivity
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.detail_toolbar_layout);
+        Bundle bundle = getIntent().getExtras();
 
-        lv_material = (ListView)findViewById(R.id.detail_material_listView);
-
-        lv_method = (ListView)findViewById(R.id.detail_method_listView);
-
-        textViewIntro = (TextView)findViewById(R.id.textViewIntro);
-        textViewCookTime = (TextView)findViewById(R.id.textViewCookTime);
-
-        textViewCookTime.setText(recipeCooktime);
-        textViewIntro.setText( recipeDetail );
-
-        loadtheDetail();
-        servlet_RecipeDetail_Data(recipeId);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.detail_fab);
-        fab.setVisibility(View.INVISIBLE);
+        String recipeId = bundle.getString("recipeId");
+        String recipeName = bundle.getString("recipeName");
+        String recipeAmount = bundle.getString("recipeAmount");
+        Boolean recipeStatus =  bundle.getBoolean("recipeStatus");
+        String recipeCooktime = bundle.getString("recipeCooktime");
+        String recipePicture =bundle.getString("recipePicture");
+        String memberID =bundle.getString("MemberID");
+        String recipeDetail = bundle.getString("recipeDetail");
+        String recipeUploadDate = bundle.getString("recipeUploadDate");
 
 
-
-         /*
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-    }
-
-    private void loadtheDetail()
-    {
         try
         {
             //用Picasso載入標題圖片
@@ -144,8 +82,8 @@ public class ActRecipeDetail extends AppCompatActivity
         {
 
         }
+
         collapsingToolbarLayout.setTitle(recipeName);
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.ivory));
         Picasso.with(this).load(recipePicture).config(Bitmap.Config.ALPHA_8).into(new Target()
         {
             @Override
@@ -168,8 +106,22 @@ public class ActRecipeDetail extends AppCompatActivity
 
             }
         });
-    }
 
+        servlet_RecipeDetail_Data(recipeId);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.detail_fab);
+        fab.setVisibility(View.INVISIBLE);
+         /*
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -186,8 +138,8 @@ public class ActRecipeDetail extends AppCompatActivity
     /*暫時*/
     public void servlet_RecipeDetail_Data(final String recipeId)
     {
-
-
+        final List<Recipes_Material> myRMList = new ArrayList<Recipes_Material>();
+        final List<Recipes_Method> myRMdList = new ArrayList<Recipes_Method>();
 
         new AsyncTask<Void, Object, Void>()
         {
@@ -230,8 +182,7 @@ public class ActRecipeDetail extends AppCompatActivity
                                 myRMList.add(myRM);
                             }
                             JSONArray jsonRecipeMethod = new JSONArray(jsonObject.get(TheDefined.Android_JSONArray_Key_Recipe_Method).toString());
-                            for (int i = 0; i < jsonRecipeMethod.length(); i++)
-                            {
+                            for (int i = 0; i < jsonRecipeMethod.length(); i++) {
                                 JSONObject jsonRM = new JSONObject(jsonRecipeMethod.get(i).toString());
                                 Recipes_Method myRMd = new Recipes_Method(jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_id),
                                         jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Method_id),
@@ -239,9 +190,7 @@ public class ActRecipeDetail extends AppCompatActivity
                                         "noData");
                                 myRMdList.add(myRMd);
                             }
-                        }
-                        catch (JSONException e)
-                        {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
@@ -255,205 +204,24 @@ public class ActRecipeDetail extends AppCompatActivity
             }
 
             @Override
-            protected void onPostExecute(Void aVoid)
-            {
+            protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-               /* String strMsg = "";
-
-
-                for (int i = 0; i < myRMList.size(); i++)
-                {
-                    strMsg += myRMList.get(i).getMaterial_name()+"\n";
+                String strMsg = "";
+                for (int i = 0; i < myRMList.size(); i++) {
+                    strMsg += myRMList.get(i).getMaterial_name() + "\n";
                 }
-
+                strMsg +=  "\n";
                 for (int i = 0; i < myRMdList.size(); i++) {
                     strMsg += myRMdList.get(i).getMethod_detail() + "\n";
                 }
 
-                //lblText.setText(strMsg);*/
+                //lblText.setText(strMsg);
 
-
-
-
-                CustomAdapter_materials adapter = new CustomAdapter_materials(getBaseContext());
-                lv_material.setAdapter(adapter);
-
-                ViewGroup.LayoutParams params = lv_material.getLayoutParams();
-                params.height = getItemHeightofListView(lv_material);
-                lv_material.setLayoutParams(params);
-                lv_material.requestLayout();
-
-
-                CustomAdapter_methods adapter_method = new CustomAdapter_methods(getBaseContext());
-                lv_method.setAdapter(adapter_method);
-                ViewGroup.LayoutParams params2=  lv_method.getLayoutParams();
-
-                params2.height =  getItemHeightofListView(lv_method);
-                lv_method.setLayoutParams(params2);
-                lv_method.requestLayout();
 
             }
         }.execute();
-
     }
 
 
-
-    public class CustomAdapter_materials extends BaseAdapter
-    {
-        private Context context;
-        private LayoutInflater inflater;
-
-        public CustomAdapter_materials(Context context)
-        {
-            this.context = context;
-            inflater = LayoutInflater.from(context);
-        }
-
-
-        @Override
-        public int getCount()
-        {
-
-            return myRMList.size();
-        }
-
-        @Override
-        public Object getItem(int position)
-        {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position)
-        {
-            return 0;
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            ViewHolder holder = null;
-            String s = myRMList.get(position).getMaterial_name();
-            if (convertView == null)
-            {
-                convertView = inflater.inflate(R.layout.layout_list_of_details,null);
-                // inflate custom layout called row
-                holder = new ViewHolder();
-                holder.tv =(TextView) convertView.findViewById(R.id.listview_item);
-
-                // initialize textview
-                convertView.setTag(holder);
-            }
-            else
-            {
-                holder = (ViewHolder)convertView.getTag();
-            }
-
-
-            holder.tv.setText((position+1)+"."+s);
-
-            // set the name to the text;
-            return convertView;
-        }
-
-    }
-    static class ViewHolder
-    {
-        TextView tv;
-    }
-
-    public class CustomAdapter_methods extends BaseAdapter
-    {
-        private Context context;
-        private LayoutInflater inflater;
-
-
-        public CustomAdapter_methods(Context context)
-        {
-
-            this.context = context;
-            inflater = LayoutInflater.from(context);
-
-        }
-
-
-        @Override
-        public int getCount()
-        {
-            return myRMdList.size();
-        }
-
-        @Override
-        public Object getItem(int position)
-        {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position)
-        {
-            return 0;
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent)
-        {
-            ViewHolder2 holder2 ;
-            String s = myRMdList.get(position).getMethod_detail();
-            if (convertView == null)
-            {
-                convertView = inflater.inflate(R.layout.layout_list_of_details,null);
-                // inflate custom layout called row
-                holder2 = new ViewHolder2();
-                holder2.tv2 =(TextView) convertView.findViewById(R.id.listview_item);
-
-                // initialize textview
-                convertView.setTag(holder2);
-            }
-            else
-            {
-                holder2 = (ViewHolder2)convertView.getTag();
-            }
-
-            holder2.tv2.setText((position+1)+".\n"+s);
-
-            // set the name to the text;
-            return convertView;
-        }
-
-    }
-    static class ViewHolder2
-    {
-        TextView tv2;
-    }
-
-
-
-    public static int getItemHeightofListView(ListView listView)
-    {
-        ListAdapter adapter = listView.getAdapter();
-
-        int grossElementHeight = 0;
-        int listWidth = listView.getMeasuredWidth();
-        for (int i = 0; i < adapter.getCount(); i++)
-        {
-            View childView = adapter.getView(i, null, listView);
-            childView .measure(
-                    View.MeasureSpec.makeMeasureSpec(listWidth, View.MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-            grossElementHeight += childView.getMeasuredHeight();
-        }
-        grossElementHeight += (listView.getDividerHeight() * (adapter.getCount() - 1));
-        return grossElementHeight;
-    }
-
-
-    ListView lv_material;
-    ListView lv_method;
-    TextView textViewIntro;
-    TextView textViewCookTime;
 
 }

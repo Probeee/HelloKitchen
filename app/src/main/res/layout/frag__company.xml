@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tw.org.iii.hellokitchen.Frag_Company.Frag_Company_Container">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:id="@+id/container_company_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/azure"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/gridCompanyPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:numColumns="1"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp">
+
+        </GridView>
+    </LinearLayout>
+</FrameLayout>
