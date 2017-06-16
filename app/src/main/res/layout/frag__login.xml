@@ -277,22 +277,37 @@
                                 android:orientation="horizontal">
 
                                 <LinearLayout
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_gravity="center_vertical|center_horizontal"
                                     android:layout_weight="5"
-                                    android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal"
-                                    android:weightSum="1">
+                                    android:orientation="horizontal">
 
-                                    <com.facebook.login.widget.LoginButton
-                                        android:id="@+id/btn_facebook_login"
-                                        android:layout_width="wrap_content"
+                                    <LinearLayout
+                                        android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:layout_gravity="center_vertical|center_horizontal"
-                                        android:layout_weight="0.96"
-                                        android:layout_marginLeft="45dp"
-                                        android:layout_marginRight="45dp"/>
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"></LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5"
+                                        android:orientation="horizontal">
+
+                                        <com.facebook.login.widget.LoginButton
+                                            android:id="@+id/btn_facebook_login"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center_vertical|center_horizontal"
+                                            android:layout_weight="1" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"></LinearLayout>
 
                                 </LinearLayout>
 

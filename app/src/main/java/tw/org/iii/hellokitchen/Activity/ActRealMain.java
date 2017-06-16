@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
+import tw.org.iii.hellokitchen.Frag_Company.Frag_Company_Container;
 import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Container;
 import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Container;
 import tw.org.iii.hellokitchen.R;
@@ -53,6 +55,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         //初始化三個主頁面
         frag_foods_container = new Frag_Foods_Container();
         frag_recipe_container = new Frag_Recipe_Container();
+        frag_company_container = new Frag_Company_Container();
         //一開始先顯示食材頁面
         fragMgr = getFragmentManager();
         fragmentTransaction = fragMgr.beginTransaction();
@@ -253,7 +256,10 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         }
         else if (id == R.id.nav_repair)
         {
-
+            fragMgr = getFragmentManager();
+            fragmentTransaction = fragMgr.beginTransaction();
+            // fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_company_container).commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -262,6 +268,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
 
     Frag_Foods_Container frag_foods_container;
     Frag_Recipe_Container frag_recipe_container;
+    Frag_Company_Container frag_company_container;
     FragmentManager fragMgr ;
     FragmentTransaction fragmentTransaction;
 

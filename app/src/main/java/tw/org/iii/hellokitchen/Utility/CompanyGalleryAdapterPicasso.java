@@ -92,7 +92,7 @@ public class CompanyGalleryAdapterPicasso extends ArrayAdapter<Company> implemen
                 .with(context)
                 .load(companyObjects.get(position).getCompany_cover())
                 .config(Bitmap.Config.ALPHA_8)
-                .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 75 / 100)
+                .resize(gridViewPhoto.getColumnWidth()*75/100, gridViewPhoto.getColumnWidth()*50/100)
                 .tag(company_id)
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
