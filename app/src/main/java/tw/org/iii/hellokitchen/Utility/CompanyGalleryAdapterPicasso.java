@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+
+import tw.org.iii.hellokitchen.Activity.ActCompanyDetail;
 import tw.org.iii.hellokitchen.Activity.ActRecipeDetail;
 import tw.org.iii.hellokitchen.Entity.Company;
 import tw.org.iii.hellokitchen.Entity.Recipes;
@@ -92,7 +94,7 @@ public class CompanyGalleryAdapterPicasso extends ArrayAdapter<Company> implemen
                 .with(context)
                 .load(companyObjects.get(position).getCompany_cover())
                 .config(Bitmap.Config.ALPHA_8)
-                .resize(gridViewPhoto.getColumnWidth()*75/100, gridViewPhoto.getColumnWidth()*50/100)
+                .resize(gridViewPhoto.getColumnWidth()*90/100, gridViewPhoto.getColumnWidth()*50/100)
                 .tag(company_id)
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
@@ -128,7 +130,7 @@ public class CompanyGalleryAdapterPicasso extends ArrayAdapter<Company> implemen
     {
         //給GridView上的每個區塊做觸發
         Intent intent = new Intent();
-        intent.setClass(getContext(), ActRecipeDetail.class);
+       intent.setClass(getContext(), ActCompanyDetail.class);
 
 
         Bundle bundle = new Bundle();
@@ -143,12 +145,12 @@ public class CompanyGalleryAdapterPicasso extends ArrayAdapter<Company> implemen
         bundle.putString("company_tel", companyObjects.get(position).getCompany_tel());
         bundle.putString("company_email", companyObjects.get(position).getCompany_email());
         bundle.putString("company_owner", companyObjects.get(position).getCompany_owner());
-        bundle.putString("company_password", companyObjects.get(position).getCompany_password());
+       // bundle.putString("company_password", companyObjects.get(position).getCompany_password());
         bundle.putBoolean("company_status", companyObjects.get(position).isCompany_status());
 
 
         intent.putExtras(bundle);
-       // getContext().startActivity(intent);
+        getContext().startActivity(intent);
 
         //Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
     }
