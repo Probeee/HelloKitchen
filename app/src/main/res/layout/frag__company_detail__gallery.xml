@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:background="@color/ghostwhite"
         android:orientation="vertical"
         android:padding="3dp">
 
@@ -24,7 +24,7 @@
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView_CompanyLogo"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"
@@ -36,8 +36,8 @@
                 android:id="@+id/textView_Company_Name_detail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="廠商名稱"
+                android:layout_weight="2"
+                android:textAlignment="center"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -46,17 +46,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:background="@color/beige"
+            android:background="@color/transparent"
             android:elevation="0dp"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
             <GridView
                 android:id="@+id/gridCompanyAlbum"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:background="@color/blanchedalmond"
                 android:isScrollContainer="false"
-                android:numColumns="auto_fit" />
+                android:numColumns="3" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
