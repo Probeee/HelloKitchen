@@ -102,7 +102,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(imageView);
-
+        Log.d("RecipePath",recipeObjects.get(position).getRecipe_picture()+"");
         //設定每個區塊上的資訊
         textView_RecipeName.setText(recipe_name);
         textView_ProducerId.setText(recipe_producer_id);

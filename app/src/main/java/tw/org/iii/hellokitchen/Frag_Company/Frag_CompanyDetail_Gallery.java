@@ -4,8 +4,10 @@ package tw.org.iii.hellokitchen.Frag_Company;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +15,44 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import tw.org.iii.hellokitchen.Entity.Company_Pictures;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.CustomOkHttp3Downloader;
+import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static tw.org.iii.hellokitchen.Utility.TheDefined.Web_Server_URL;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Frag_CompanyDetail_Gallery#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag_CompanyDetail_Gallery extends Fragment {
+public class Frag_CompanyDetail_Gallery extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,11 +62,20 @@ public class Frag_CompanyDetail_Gallery extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     String companyId;
     String companyName;
     String companyLogo;
     String companyCover;
-    public Frag_CompanyDetail_Gallery() {
+
+    private List<Company_Pictures> myRMList  ;
+
+    private SliderLayout mDemoSlider;
+    HashMap<String,String> Hash_file_maps ;
+
+
+    public Frag_CompanyDetail_Gallery()
+    {
         // Required empty public constructor
     }
 
@@ -84,9 +118,41 @@ public class Frag_CompanyDetail_Gallery extends Fragment {
         LoadCover(linearCover);
         imageView = (ImageView)v.findViewById(R.id.imageView_CompanyLogo);
         LoadLogo(imageView);
+        mDemoSlider = (SliderLayout)v.findViewById(R.id.slider);
+        myRMList= new ArrayList<>();
+        LoadPicList();
+
         return v;
     }
 
+
+
+
+    @Override
+    public void onStop()
+    {
+        mDemoSlider.stopAutoCycle();
+        super.onStop();
+    }
+    @Override
+    public void onSliderClick(BaseSliderView slider) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 
 
     private void GetInfo()
@@ -134,6 +200,7 @@ public class Frag_CompanyDetail_Gallery extends Fragment {
             }
         });
     }
+
     private void LoadLogo(ImageView im)
     {
         Picasso
@@ -144,8 +211,128 @@ public class Frag_CompanyDetail_Gallery extends Fragment {
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(im);
     }
+
+    private void LoadPicList()
+    {
+        new AsyncTask<Void, Object, Void>()
+        {
+            @Override
+            protected Void doInBackground(Void... params)
+            {
+
+                OkHttpClient client = new OkHttpClient();
+                JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
+                try {
+                    jsonObject.put(TheDefined.Android_JSON_Key_Company_id, companyId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+                Request request = new Request.Builder()
+                        .url(Web_Server_URL + "/AndroidCompanyPicturesServlet")
+                        .post(body)
+                        .build();
+                try
+                {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful()) {
+                        String responseString = response.body().string();
+                        try {
+                            JSONArray jsonCompanyPicture = new JSONArray(responseString);
+                            for (int i = 0; i < jsonCompanyPicture.length(); i++) {
+                                JSONObject jsonObject2 = new JSONObject(jsonCompanyPicture.get(i).toString());
+                                Company_Pictures myCP = new Company_Pictures(jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_id),
+                                        jsonObject2.getString(TheDefined.Android_JSON_Key_Company_id),
+                                        jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_path),
+                                        "noData",
+                                        "noData");
+                                Log.d("GetPID", jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_id));
+                                Log.d("GetCID", jsonObject2.getString(TheDefined.Android_JSON_Key_Company_id));
+                                Log.d("GetPATH", jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_path));
+                                myRMList.add(myCP);
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid)
+            {
+                super.onPostExecute(aVoid);
+                AddtoSlider();
+            }
+        }.execute();
+    }
+
+    private void AddtoSlider()
+    {
+        Hash_file_maps = new HashMap<>();
+
+        for(int i=0;i<myRMList.size();i++)
+        {
+            Log.d("Name",myRMList.get(i).getPicture_id());
+            Log.d("Path",TheDefined.Web_Server_URL + "/"+myRMList.get(i).getPicture_path());
+            Hash_file_maps.put(myRMList.get(i).getPicture_id(), TheDefined.Web_Server_URL + "/"+myRMList.get(i).getPicture_path());
+        }
+
+        for(String name : Hash_file_maps.keySet())
+        {
+            TextSliderView textSliderView = new TextSliderView(getActivity());
+            textSliderView
+                    .description(name)
+                    .image(Hash_file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(this);
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("extra",name);
+            mDemoSlider.addSlider(textSliderView);
+        }
+        int effect =  (int)(Math.random()* 5)-1;
+        switch (effect)
+        {
+            case 0:
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+                break;
+            case 1:
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+                break;
+            case 2:
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Background2Foreground);
+                break;
+            case 3:
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.CubeIn);
+                break;
+            case 4:
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+                break;
+            default:
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Default);
+                break;
+        }
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(3000);
+        mDemoSlider.addOnPageChangeListener(this);
+    }
+
     ImageView imageView;
     TextView textView_companyName ;
     LinearLayout linearCover;
-    GridView gridView;
+
+
 }
