@@ -112,7 +112,7 @@ public class Frag_CompanyDetail_Info extends Fragment {
 
     private void GetInfo()
     {
-        companyIntro = getArguments().getString("company_intro",companyIntro);
+        companyIntro = getArguments().getString("company_intro");
         companyOwner = getArguments().getString("company_owner");
         companyTel = getArguments().getString("company_tel");
         companyEmail = getArguments().getString("company_email");
