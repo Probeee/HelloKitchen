@@ -44,10 +44,10 @@ public class TheDefined
     }
 
     /*server URL*/
-    //public static final String Web_Server_URL = "http://192.168.1.110:8080/HelloKitchen0613";
-    public static final String Web_Server_URL = "http://192.168.0.101:8080/HelloKitchen0613";
+    public static final String Web_Server_URL = "http://192.168.1.110:8080/HelloKitchen0613";
+    //public static final String Web_Server_URL = "http://192.168.0.101:8080/HelloKitchen0613";
     /*JSON Key & Value*/
-   public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
+    public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
     public static final String Android_JSON_Key_Member_Name = "Android_JSON_Key_Member_Name";
     public static final String Android_JSON_Key_Member_Password = "Android_JSON_Key_Member_Password";
     public static final String Android_JSON_Key_Member_Tel = "Android_JSON_Key_Member_Tel";
@@ -64,6 +64,7 @@ public class TheDefined
     public static final String Android_JSON_Key_Recipe_cooktime = "Android_JSON_Key_Recipe_cooktime";
     public static final String Android_JSON_Key_Recipe_picture = "Android_JSON_Key_Recipe_picture";
     public static final String Android_JSON_Key_Recipe_detail = "Android_JSON_Key_Recipe_detail";
+    public static final String Android_JSON_Key_Recipe_picture_file = "Android_JSON_Key_Recipe_picture_file";
     //--------------------------------------------------------------
     public static final String Android_JSON_Key_Recipe_Material = "Android_JSON_Key_Recipe_Material";
     public static final String Android_JSON_Key_Recipe_Material_id="Android_JSON_Key_Recipe_Material_id";

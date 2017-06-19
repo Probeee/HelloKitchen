@@ -17,42 +17,37 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button_Up"
-                android:layout_width="0dp"
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_recipe"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="搜尋食譜" />
+                android:background="@android:color/holo_green_light">
 
-            <EditText
-                android:id="@+id/editText_Search_Recipe"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="食譜搜尋" />
 
-                android:hint="請輸入關鍵字" />
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="食譜管理" />
 
+            </android.support.design.widget.TabLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/container_recipe_gallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blanchedalmond"
-            android:clickable="true"
+            android:background="@drawable/customborder"
             android:orientation="vertical">
 
-            <GridView
-                android:id="@+id/gridRecipePhoto"
+            <FrameLayout
+                android:id="@+id/frag_recipe_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:numColumns="2"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="3dp">
+                android:layout_height="match_parent">
 
-            </GridView>
+            </FrameLayout>
         </LinearLayout>
 
     </LinearLayout>
