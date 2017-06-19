@@ -41,7 +41,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     private SharedPreferences table_time;
     private AlarmManager am;
     private java.util.Calendar calendar;
-
+    public String user_name;
+    public String user_mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,8 +77,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         try
         {
             Bundle bundle = getIntent().getExtras();
-            String user_name = bundle.getString(TheDefined.LOGIN_USER_NAME);
-            String user_mail = bundle.getString(TheDefined.LOGIN_USER_MAIL);
+            user_name = bundle.getString(TheDefined.LOGIN_USER_NAME);
+            user_mail = bundle.getString(TheDefined.LOGIN_USER_MAIL);
 
             TextView nav_user_name = (TextView)hview.findViewById(R.id.textView_nav_header_name);
             TextView nav_user_mail = (TextView)hview.findViewById(R.id.textView_nav_header_email);

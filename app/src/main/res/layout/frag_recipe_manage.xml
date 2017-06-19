@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,9 +7,31 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView87" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/container_recipe_manage_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blanchedalmond"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gridRecipeManagePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp">
+
+            </GridView>
+        </LinearLayout>
+
+    </LinearLayout>
 </FrameLayout>
