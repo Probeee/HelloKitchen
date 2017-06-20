@@ -31,7 +31,7 @@
                         android:id="@+id/sv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.65">
+                        android:layout_weight="1.12">
                         <!-- ScrollView 中 只可已有一個Layout 所以我們將要新增的元件都新增到此 Layout中-->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                                 android:layout_height="0dp"
                                 android:layout_marginLeft="3dp"
                                 android:layout_marginRight="3dp"
-                                android:layout_weight="8"
+                                android:layout_weight="18"
                                 android:background="@drawable/customborder"
                                 android:orientation="vertical">
 
@@ -143,13 +143,13 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_weight="3"
+                                    android:layout_weight="6"
                                     android:orientation="horizontal">
 
                                     <EditText
                                         android:id="@+id/txtRecipeDetail"
                                         android:layout_width="0dp"
-                                        android:layout_height="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:layout_weight="10"
                                         android:hint="寫下這道菜的創作來源、訣竅及食後感想..."
                                         android:inputType="textMultiLine"
@@ -318,6 +318,22 @@
 
                             </LinearLayout>
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_weight="2"
+                                android:gravity="right">
+
+                                <Button
+                                    android:id="@+id/btnRecipeInsert"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="發布" />
+
+                            </LinearLayout>
+
                         </LinearLayout>
                         <!-- ScrollView 中 只可已有一個Layout 所以我們將要新增的元件都新增到此 Layout中-->
 
@@ -327,27 +343,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btnRecipeCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="返回" />
-
-                <Button
-                    android:id="@+id/btnRecipeInsert"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="發布" />
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

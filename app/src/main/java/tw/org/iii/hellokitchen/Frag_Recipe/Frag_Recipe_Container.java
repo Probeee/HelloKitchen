@@ -104,7 +104,6 @@ public class Frag_Recipe_Container extends Fragment {
         fragmentTransaction = fragMgr.beginTransaction();
         fragmentTransaction.add(R.id.frag_recipe_container,frag_recipe_gallery).commit();
 
-
         //設置TabLayout
         TabLayout mTabs = (TabLayout) v.findViewById(R.id.tab_recipe);
         mTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
@@ -117,6 +116,7 @@ public class Frag_Recipe_Container extends Fragment {
                 fragmentTransaction = fragMgr.beginTransaction();
                 if(position==0)
                 {
+
                     //進入食譜搜尋頁面
                     fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     fragmentTransaction.replace(R.id.frag_recipe_container,frag_recipe_gallery);
@@ -124,6 +124,7 @@ public class Frag_Recipe_Container extends Fragment {
                 }
                 if(position==1)
                 {
+
                     fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     fragmentTransaction.replace(R.id.frag_recipe_container,frag_recipe_manage);
                     fragmentTransaction.commit();
