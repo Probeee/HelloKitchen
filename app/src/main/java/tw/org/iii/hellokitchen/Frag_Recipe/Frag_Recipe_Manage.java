@@ -221,7 +221,7 @@ public class Frag_Recipe_Manage extends Fragment {
             protected void onPostExecute(List<Recipes> objects)
             {
                 super.onPostExecute(objects);
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(),  recipesList, photoGallery);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(),  recipesList, photoGallery,1);
                 photoGallery.setAdapter( adapter );
                 message.cancel();
             }

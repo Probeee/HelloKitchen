@@ -191,12 +191,12 @@ public class ActRecipeUpload extends AppCompatActivity
     };
 
     /*返回(Cancel)*/
-    private View.OnClickListener btnRecipeCancel_Click = new View.OnClickListener() {
+    /*private View.OnClickListener btnRecipeCancel_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             finish();
         }
-    };
+    };*/
     private RadioGroup.OnCheckedChangeListener radioStatus_Checked = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -222,10 +222,11 @@ public class ActRecipeUpload extends AppCompatActivity
             Uri uri = data.getData();
             ContentResolver cr = ActRecipeUpload.this.getContentResolver();
 
-            try {
+            try
+            {
                 //讀取照片，型態為Bitmap
                 recipeBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                //recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 800);
+                recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 800);
                 BitmapDrawable background = new BitmapDrawable(recipeBitmap);
                 llImageView.setBackground(background);
                 //llImageView.getBackground().setAlpha(100);
@@ -301,9 +302,11 @@ public class ActRecipeUpload extends AppCompatActivity
         message.setCancelable(false);
         message.show();
 
-        new Thread(new Runnable() {
+        new Thread(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 OkHttpClient client = new OkHttpClient();
 
                 MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -312,25 +315,28 @@ public class ActRecipeUpload extends AppCompatActivity
                         .url(TheDefined.Web_Server_URL + "/AndroidRecipeUploadServlet")
                         .post(body)
                         .build();
-
-
-                try {
+                try
+                {
                     Response response = client.newCall(request).execute();
-                    String responseString = response.body().string();
-                    //回傳的內容轉存為JSON物件
-                    JSONObject responseJSON = new JSONObject(responseString);
-                    //取得Message的屬性
-                    String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
-                    if (response.isSuccessful()) {
-                        if (info.equals(TheDefined.Android_JSON_Value_Success)) {
-                            TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳成功", Toast.LENGTH_LONG);
-                        } else if (info.equals(TheDefined.Android_JSON_Value_Fail)){
+                    if (response.isSuccessful())
+                    {
+                        String responseString = response.body().string();
+                        //回傳的內容轉存為JSON物件
+                        JSONObject responseJSON = new JSONObject(responseString);
+                        Log.d("responseString",responseString);
+                        //取得Message的屬性
+                        String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                        if (response.isSuccessful()) {
+                            if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                                TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳成功", Toast.LENGTH_LONG);
+                            } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
+                                TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
+                            }
+                        } else {
                             TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
                         }
-                    } else {
-                        TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
+                        message.cancel();
                     }
-                    message.cancel();
                 } catch (Exception e) {
                     TheDefined.showToastByRunnable(ActRecipeUpload.this, "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
@@ -529,14 +535,14 @@ public class ActRecipeUpload extends AppCompatActivity
 
         btnRecipeInsert = (Button) findViewById(R.id.btnRecipeInsert);
         btnRecipeInsert.setOnClickListener(btnRecipeInsert_Click);
-        btnRecipeCancel = (Button) findViewById(R.id.btnRecipeCancel);
-        btnRecipeCancel.setOnClickListener(btnRecipeCancel_Click);
+        //btnRecipeCancel = (Button) findViewById(R.id.btnRecipeCancel);
+        //btnRecipeCancel.setOnClickListener(btnRecipeCancel_Click);
 
         radioStatus = (RadioGroup) findViewById(R.id.radioStatus);
         radioStatus.setOnCheckedChangeListener(radioStatus_Checked);
         recipeStatus = true;
 
-                ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
@@ -549,6 +555,6 @@ public class ActRecipeUpload extends AppCompatActivity
     private View buttonView, buttonViewMaterial;
     private LinearLayout llImageView;
     private RadioGroup radioStatus;
-    private Toolbar toolbar;
+
 
 }

@@ -63,6 +63,7 @@ public class Frag_Recipe_Gallery extends Fragment {
 
     private EditText editText_search;
     private Button button;
+    private int tabNum;
 
     public Frag_Recipe_Gallery() {
         // Required empty public constructor
@@ -131,6 +132,7 @@ public class Frag_Recipe_Gallery extends Fragment {
         editText_search = (EditText) v.findViewById(R.id.editText_Search_Recipe);
         button = (Button)v.findViewById(R.id.button_Up);
         button.setOnClickListener(button__Click);
+
         return v;
     }
     @Override
@@ -172,7 +174,7 @@ public class Frag_Recipe_Gallery extends Fragment {
 
                 photoGallery.setAdapter(null);
                 adapter.notifyDataSetChanged();
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(), newRecipesList, photoGallery);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(), newRecipesList, photoGallery,0);
                 photoGallery.setAdapter(adapter);
             }
             else
@@ -276,7 +278,7 @@ public class Frag_Recipe_Gallery extends Fragment {
             protected void onPostExecute(List<Recipes> objects)
             {
                 super.onPostExecute(objects);
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(),  recipesList, photoGallery);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(),  recipesList, photoGallery,0);
                 photoGallery.setAdapter( adapter );
                 message.cancel();
             }

@@ -43,14 +43,16 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
     /**Gallery View**/
     private GridView gridViewPhoto;
     private TextView textViewForList;
+    private int tabNum ;
 
 
-    public RecipeGalleryAdapterPicasso(Context context, List<Recipes> objects, GridView photoGridView)
+    public RecipeGalleryAdapterPicasso(Context context, List<Recipes> objects, GridView photoGridView,int tabNum)
     {
         super(context, 0, objects );
         this.context = context;
         this.recipeObjects = objects;
         this.gridViewPhoto = photoGridView;
+        this.tabNum = tabNum;
         inflater = LayoutInflater.from(context);
 
 
@@ -139,27 +141,28 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
 
     private void itemClick(int position)
     {
-        //給GridView上的每個區塊做觸發
-        Intent intent = new Intent();
-        intent.setClass(getContext(), ActRecipeDetail.class);
+        if(tabNum ==0)
+        {
+            //給GridView上的每個區塊做觸發
+            Intent intent = new Intent();
+            intent.setClass(getContext(), ActRecipeDetail.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("recipeId", recipeObjects.get(position).getRecipe_id());
+            bundle.putString("recipeName", recipeObjects.get(position).getRecipe_name());
+            bundle.putString("recipeAmount", recipeObjects.get(position).getRecipe_amount());
+            bundle.putBoolean("recipeStatus", recipeObjects.get(position).getRecipe_status());
+            bundle.putString("recipeCooktime", recipeObjects.get(position).getRecipe_cooktime());
+            bundle.putString("recipePicture", recipeObjects.get(position).getRecipe_picture());
+            bundle.putString("MemberID", recipeObjects.get(position).getMember_id());
+            bundle.putString("recipeDetail", recipeObjects.get(position).getRecipe_detail());
+            bundle.putString("recipeUploadDate", recipeObjects.get(position).getUpload_date());
 
+            intent.putExtras(bundle);
+            getContext().startActivity(intent);
+        }
 
-        Bundle bundle = new Bundle();
-
-        bundle.putString("recipeId", recipeObjects.get(position).getRecipe_id());
-        bundle.putString("recipeName", recipeObjects.get(position).getRecipe_name());
-        bundle.putString("recipeAmount", recipeObjects.get(position).getRecipe_amount());
-        bundle.putBoolean("recipeStatus", recipeObjects.get(position).getRecipe_status());
-        bundle.putString("recipeCooktime", recipeObjects.get(position).getRecipe_cooktime());
-        bundle.putString("recipePicture", recipeObjects.get(position).getRecipe_picture());
-        bundle.putString("MemberID", recipeObjects.get(position).getMember_id());
-        bundle.putString("recipeDetail", recipeObjects.get(position).getRecipe_detail());
-        bundle.putString("recipeUploadDate", recipeObjects.get(position).getUpload_date());
-
-        intent.putExtras(bundle);
-        getContext().startActivity(intent);
-
-        //Toast.makeText(getContext(),""+v.getTag(),Toast.LENGTH_SHORT).show();
+        if(tabNum ==1)
+            Toast.makeText(getContext(),"123",Toast.LENGTH_SHORT).show();
     }
 
 
