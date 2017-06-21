@@ -22,7 +22,7 @@ public class ActMain extends Activity {
         InitialComponent();
 
 
-        GetStetho();
+      //  GetStetho();
     }
 
     private void InitialComponent()
