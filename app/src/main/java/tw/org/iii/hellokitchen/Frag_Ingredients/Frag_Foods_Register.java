@@ -3,7 +3,6 @@ package tw.org.iii.hellokitchen.Frag_Ingredients;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -30,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -45,8 +45,14 @@ import com.google.api.services.vision.v1.model.EntityAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -94,6 +100,8 @@ public class Frag_Foods_Register extends Fragment {
     private Ingredients myIngredients;
     private int index =0;
     Calendar buyDate = Calendar.getInstance();
+    private List<String> items;
+    private List<String> itemsAfterTranslate;
 
     /*購買日期PickerDialog*/
     private DatePickerDialog.OnDateSetListener buyDate_setting = new DatePickerDialog.OnDateSetListener() {
@@ -342,7 +350,8 @@ public class Frag_Foods_Register extends Fragment {
     }
 
     /**Google Vision影像辨識**/
-    private void callCloudVision(final Bitmap bitmap) throws IOException {
+    private void callCloudVision(final Bitmap bitmap) throws IOException
+    {
         // Switch text to loading
         lblDetails.setText(R.string.loading_message);
         final ProgressDialog message = new ProgressDialog(getActivity());
@@ -434,15 +443,21 @@ public class Frag_Foods_Register extends Fragment {
             protected void onPostExecute(String result)
             {
                 final String strMsg[] = result.split(",");
-                final List<String> items = new ArrayList<String>();
+                items = new ArrayList<>();
+                itemsAfterTranslate = new ArrayList<>();
 
                 for(int i=0;i<strMsg.length;i++)
                 {
+                    Log.d("123",strMsg[i]);
                     items.add(strMsg[i]);
                 }
+
+
+
+
                 //將解析結果變成List給使用者選擇
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                AlertDialog dialog = builder.setTitle("Choose Your Ingredient").setSingleChoiceItems(items.toArray(new String[items.size()]),0, new DialogInterface.OnClickListener()
+                AlertDialog dialog = builder.setTitle("選擇您的食材").setSingleChoiceItems(itemsAfterTranslate.toArray(new String[itemsAfterTranslate.size()]),0, new DialogInterface.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog, int which)
                     {
@@ -473,6 +488,7 @@ public class Frag_Foods_Register extends Fragment {
                 dialog.show();
                 // txtIngredient.setText(strMsg[0]);
                 //myIngredients.setName(strMsg[0]);
+
                 lblDetails.setText(result);
                 message.dismiss();
             }
@@ -499,6 +515,14 @@ public class Frag_Foods_Register extends Fragment {
         return message;
     }
 
+
+
+
+
+
+
+
+
     /*照片縮小處理*/
     public Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
 
@@ -519,6 +543,11 @@ public class Frag_Foods_Register extends Fragment {
         }
         return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
     }
+
+
+
+
+
 
     /*初始化UI物件*/
     private void InitialComponet(View v) {

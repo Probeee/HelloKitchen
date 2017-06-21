@@ -1,8 +1,12 @@
 package tw.org.iii.hellokitchen.Utility;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -20,13 +24,24 @@ import android.widget.Toast;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import tw.org.iii.hellokitchen.Activity.ActRecipeDetail;
 import tw.org.iii.hellokitchen.Activity.ActRecipeModify;
 import tw.org.iii.hellokitchen.Entity.Recipes;
+import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Deadline;
 import tw.org.iii.hellokitchen.R;
 
 /**
@@ -43,9 +58,8 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
     private List<Recipes> recipeObjects;
     /**Gallery View**/
     private GridView gridViewPhoto;
-    private TextView textViewForList;
     private int tabNum ;
-
+    private RecipeGalleryAdapterPicasso adapter;
 
     public RecipeGalleryAdapterPicasso(Context context, List<Recipes> objects, GridView photoGridView,int tabNum)
     {
@@ -60,10 +74,11 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         try
         {
             Picasso picasso = new Picasso.Builder(context)
-                .downloader(new CustomOkHttp3Downloader(context))
-                .build();
+                    .downloader(new CustomOkHttp3Downloader(context))
+                    .build();
             Picasso.setSingletonInstance(picasso);
-        } catch (IllegalStateException ignored)
+        }
+        catch (IllegalStateException ignored)
         {
             // Picasso instance was already set
             // cannot set it after Picasso.with(Context) was already in use
@@ -120,6 +135,19 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
                 itemClick(position);
             }
         });
+
+        imageView.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                itemLongClick(position);
+                return true;
+            }
+        });
+
+
+
         textView_RecipeName.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -128,6 +156,17 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
                 itemClick(position);
             }
         });
+
+        textView_RecipeName.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                itemLongClick(position);
+                return true;
+            }
+        });
+
         textView_ProducerId.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -137,7 +176,52 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
             }
         });
 
+        textView_ProducerId.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                itemLongClick(position);
+                return true;
+            }
+        });
+
         return convertView;
+    }
+
+    private void itemLongClick(final int position)
+    {
+        if(tabNum ==0)
+        {
+            return ;
+        }
+
+        if(tabNum == 1)
+        //tab為1時候的情況
+        {
+            Log.d("LongClick","Long");
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("確定刪除此菜單?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            String deleteRecipeId = recipeObjects.get(position).getRecipe_id();
+                            String deleteMemberId = recipeObjects.get(position).getMember_id();
+                            //刪除動作至servlet
+                            Toast.makeText(getContext(),deleteRecipeId,Toast.LENGTH_SHORT).show();
+                            recipesDeleteUpdate(deleteRecipeId,deleteMemberId);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            // 取消
+                        }
+                    });
+            AlertDialog about_dialog = builder.create();
+            about_dialog.show();
+        }
     }
 
     private void itemClick(int position)
@@ -164,7 +248,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         }
 
         if(tabNum ==1)
-            //tab為1時候的情況
+        //tab為1時候的情況
         {
             //  Toast.makeText(getContext(),"123",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
@@ -192,5 +276,87 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
     {
 
     }
+
+    /*上傳資料方法*/
+    private void recipesDeleteUpdate(final String recipeId,final String memberId)
+    {
+
+        final ProgressDialog message = new ProgressDialog(getContext());
+        message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        message.setTitle("更新中");
+        message.setCancelable(false);
+        message.show();
+
+        new AsyncTask<Object, Object, List<Recipes>>()
+        {
+            @Override
+            protected List<Recipes> doInBackground(Object... params)
+            {
+                OkHttpClient client = new OkHttpClient();
+                FormBody body = new FormBody.Builder()
+                        .add(TheDefined.Android_JSON_Key_Recipe_id, recipeId)
+                        .add(TheDefined.Android_JSON_Key_Member_id, memberId)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(TheDefined.Web_Server_URL + "/AndroidRecipeDeleteServlet")
+                        .post(body)
+                        .build();
+                try
+                {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful())
+                    {
+                        String responseString = response.body().string();
+                        try
+                        {
+                            JSONArray responseJSON = new JSONArray(responseString);
+                            recipeObjects.clear();
+                            for (int i = 0; i < responseJSON.length(); i++)
+                            {
+                                JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
+                                Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Member_id),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Upload_date),
+                                        Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
+                                        TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture),
+                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_detail));
+
+                                Log.d("myRecipes", myRecipes.toString());
+                                recipeObjects.add(myRecipes);
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    TheDefined.showToastByRunnable(context, "伺服器無法取得回應", Toast.LENGTH_SHORT);
+                    message.cancel();
+                    e.printStackTrace();
+                }
+
+                return recipeObjects;
+            }
+
+            @Override
+            protected void onPostExecute(List<Recipes> objects)
+            {
+                super.onPostExecute(objects);
+                adapter = (RecipeGalleryAdapterPicasso) gridViewPhoto.getAdapter();
+                gridViewPhoto.setAdapter(null);
+                adapter.notifyDataSetChanged();
+                adapter =  new RecipeGalleryAdapterPicasso(context,recipeObjects,gridViewPhoto,1);
+                gridViewPhoto.setAdapter(adapter);
+                message.cancel();
+            }
+        }.execute();
+    }
+
 }
 
