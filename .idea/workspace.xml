@@ -12,104 +12,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9eb3d9d-0cbe-4206-8210-d9dcc576bb70" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_android_25.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HelloKitchen0608.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/HelloKitchen0617.iml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeModify.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/cardview_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/customtabs_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/customtabs_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/facebook_android_sdk_4_23_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/facebook_android_sdk_4_23_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_impl_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_analytics_impl_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_appindexing_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_appindexing_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_auth_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_auth_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_common_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_common_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_config_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_config_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_crash_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_crash_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_database_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_database_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_database_connection_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_database_connection_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_iid_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_iid_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_messaging_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_messaging_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_storage_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_storage_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/firebase_storage_common_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/firebase_storage_common_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_1_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_1_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/mediarouter_v7_25_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/mediarouter_v7_25_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/palette_v7_25_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/palette_v7_25_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_ads_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_ads_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_ads_lite_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_ads_lite_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_impl_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_analytics_impl_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_appinvite_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_appinvite_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_auth_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_auth_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_auth_base_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_auth_base_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_awareness_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_awareness_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_base_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_base_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_basement_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_basement_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_cast_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_cast_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_cast_framework_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_cast_framework_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_clearcut_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_clearcut_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_drive_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_drive_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_fitness_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_fitness_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_games_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_games_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_gass_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_gass_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_gcm_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_gcm_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_identity_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_identity_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_iid_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_iid_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_instantapps_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_instantapps_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_location_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_location_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_maps_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_maps_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_nearby_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_nearby_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_panorama_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_panorama_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_places_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_places_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_plus_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_plus_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_safetynet_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_safetynet_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_api_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_api_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_v4_impl_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tagmanager_v4_impl_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_tasks_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_vision_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_vision_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_wallet_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_wallet_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/play_services_wearable_10_2_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/play_services_wearable_10_2_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/transition_25_3_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Gallery.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Gallery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Manage.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Manage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java" afterPath="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/company_photo_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/company_photo_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
     </list>
     <ignored path="HelloKitchen.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -166,24 +83,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="activity_act_recipe_upload.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_act_recipe_upload.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
           <provider selected="true" editor-type-id="android-designer2">
             <state />
           </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="608">
+              <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
         </entry>
       </file>
-      <file leaf-file-name="TheDefined.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java">
+      <file leaf-file-name="Frag_Login.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Login.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
+            <state relative-caret-position="-5947">
+              <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -192,22 +109,35 @@
       <file leaf-file-name="ActRecipeUpload.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="225" column="12" selection-start-line="225" selection-start-column="12" selection-end-line="225" selection-end-column="12" />
-              <folding>
-                <element signature="e#12352#14451#0" expanded="true" />
-                <element signature="e#14450#14451#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-367">
+              <caret line="516" column="7" selection-start-line="516" selection-start-column="7" selection-end-line="516" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActRecipeDetail.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java">
+      <file leaf-file-name="ActRecipeModify.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeModify.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="215" column="48" selection-start-line="215" selection-start-column="20" selection-end-line="215" selection-end-column="48" />
-              <folding />
+            <state relative-caret-position="523">
+              <caret line="233" column="38" selection-start-line="233" selection-start-column="38" selection-end-line="233" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2571#3269#0" expanded="true" />
+                <element signature="e#3268#3269#0" expanded="true" />
+                <element signature="e#3348#3784#0" expanded="true" />
+                <element signature="e#3783#3784#0" expanded="true" />
+                <element signature="e#6137#6689#0" expanded="true" />
+                <element signature="e#6688#6689#0" expanded="true" />
+                <element signature="e#6779#7016#0" expanded="true" />
+                <element signature="e#7015#7016#0" expanded="true" />
+                <element signature="e#7088#7716#0" expanded="true" />
+                <element signature="e#7715#7716#0" expanded="true" />
+                <element signature="e#7810#7991#0" expanded="true" />
+                <element signature="e#7990#7991#0" expanded="true" />
+                <element signature="e#8073#8700#0" expanded="true" />
+                <element signature="e#8699#8700#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2645,7 +2575,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_of_materials.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_of_details.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Company/Frag_Company.java" />
@@ -2657,7 +2586,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/company_album_view.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/frag__login.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Company/Frag_Company_Container.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/frag_act_company_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRealMain.java" />
@@ -2688,14 +2616,16 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_button_material.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_material.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Manage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Container.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/company_photo_view.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Gallery.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeModify.java" />
       </list>
     </option>
   </component>
@@ -2730,8 +2660,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2748,6 +2684,46 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HelloKitchen0608" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HelloKitchen0608" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2822,7 +2798,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Activity" />
+              <option name="myItemId" value="Frag_LoginPage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2836,17 +2812,29 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hellokitchen" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HelloKitchen0608" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
-      <pane id="ProjectPane">
-        <subPane />
       </pane>
     </panes>
   </component>
@@ -3304,7 +3292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497862684565</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Modifiy Upload Page">
+      <created>1497948489269</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1497948489269</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3321,12 +3316,12 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.546875" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55803573" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17110874" sideWeight="0.50985223" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32914925" sideWeight="0.5025707" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09151786" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.03683036" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20694087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.59553695" sideWeight="0.4974293" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.71875" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -3384,19 +3379,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_act_company_detail.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Company/ActCompanyDetailFragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_act_company_detail.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Company/Frag_CompanyDetail.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_act_company_detail.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/CompanyGalleryAdapterPicasso.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3406,13 +3388,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_of_details.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Ingredients/Frag_Foods_ShopSearch.java">
@@ -3445,13 +3427,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__company_detail__map.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Company/Frag_CompanyDetail_Map.java">
@@ -3483,13 +3465,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/company_album_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRealMain.java">
@@ -3521,33 +3503,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act__foods.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_act__foods.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_act__foods.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="516">
           <caret line="50" column="49" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Ingredients/Frag_Foods_Container.java">
@@ -3558,13 +3540,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__foods__container.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/recipe_step_border.xml">
@@ -3575,73 +3557,73 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="21" column="60" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="60" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_button.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_button.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_button_material.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_material.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload_object_material.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__recipe__container.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="498">
           <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag_recipe_gallery.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag_recipe_gallery.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1045">
           <caret line="55" column="23" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag_recipe_manage.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag_recipe_manage.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
@@ -3656,97 +3638,62 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_act_recipe_detail.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1653">
           <caret line="87" column="57" selection-start-line="87" selection-start-column="57" selection-end-line="87" selection-end-column="57" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__company_detail__gallery.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_recipe_detail.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__company_detail__gallery.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1444">
           <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__company_detail_info.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag__company_detail_info.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="2983">
           <caret line="157" column="64" selection-start-line="157" selection-start-column="64" selection-end-line="157" selection-end-column="64" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_company_detail.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_company_detail.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1216">
           <caret line="64" column="8" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag_company_container.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/frag_company_container.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/company_photo_view.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Manage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1600">
-          <caret line="223" column="100" selection-start-line="223" selection-start-column="100" selection-end-line="223" selection-end-column="100" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/company_photo_view.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="84" column="31" selection-start-line="84" selection-start-column="31" selection-end-line="84" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="163" column="20" selection-start-line="163" selection-start-column="20" selection-end-line="163" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -3767,34 +3714,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_Recipe/Frag_Recipe_Manage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="215" column="48" selection-start-line="215" selection-start-column="20" selection-end-line="215" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="225" column="12" selection-start-line="225" selection-start-column="12" selection-end-line="225" selection-end-column="12" />
+        <state relative-caret-position="2777">
+          <caret line="223" column="100" selection-start-line="223" selection-start-column="100" selection-end-line="223" selection-end-column="100" />
           <folding>
-            <element signature="e#12352#14451#0" expanded="true" />
-            <element signature="e#14450#14451#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_recipe_modify.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/act__foods.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/TheDefined.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="47" column="68" selection-start-line="47" selection-start-column="68" selection-end-line="47" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/act_recipe_detail.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Utility/RecipeGalleryAdapterPicasso.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="170" column="65" selection-start-line="170" selection-start-column="65" selection-end-line="170" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="90" column="64" selection-start-line="81" selection-start-column="8" selection-end-line="90" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_act_recipe_upload.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="80" column="57" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Frag_LoginPage/Frag_Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5947">
+          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-367">
+          <caret line="516" column="7" selection-start-line="516" selection-start-column="7" selection-end-line="516" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/tw/org/iii/hellokitchen/Activity/ActRecipeModify.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="233" column="38" selection-start-line="233" selection-start-column="38" selection-end-line="233" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2571#3269#0" expanded="true" />
+            <element signature="e#3268#3269#0" expanded="true" />
+            <element signature="e#3348#3784#0" expanded="true" />
+            <element signature="e#3783#3784#0" expanded="true" />
+            <element signature="e#6137#6689#0" expanded="true" />
+            <element signature="e#6688#6689#0" expanded="true" />
+            <element signature="e#6779#7016#0" expanded="true" />
+            <element signature="e#7015#7016#0" expanded="true" />
+            <element signature="e#7088#7716#0" expanded="true" />
+            <element signature="e#7715#7716#0" expanded="true" />
+            <element signature="e#7810#7991#0" expanded="true" />
+            <element signature="e#7990#7991#0" expanded="true" />
+            <element signature="e#8073#8700#0" expanded="true" />
+            <element signature="e#8699#8700#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

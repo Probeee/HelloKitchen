@@ -75,9 +75,13 @@
                                     android:layout_height="match_parent"
                                     android:layout_margin="5dp"
                                     android:layout_weight="5"
-                                    android:background="@drawable/recipe_photo_upload_icon"
                                     android:orientation="vertical">
 
+                                    <ImageView
+                                        android:id="@+id/llimageView_recipe"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:srcCompat="@drawable/recipe_photo_upload_icon" />
                                 </LinearLayout>
 
                                 <LinearLayout
