@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 import tw.org.iii.hellokitchen.Activity.ActRecipeDetail;
+import tw.org.iii.hellokitchen.Activity.ActRecipeModify;
 import tw.org.iii.hellokitchen.Entity.Recipes;
 import tw.org.iii.hellokitchen.R;
 
@@ -141,28 +142,36 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
 
     private void itemClick(int position)
     {
+        Bundle bundle = new Bundle();
+        bundle.putString("recipeId", recipeObjects.get(position).getRecipe_id());
+        bundle.putString("recipeName", recipeObjects.get(position).getRecipe_name());
+        bundle.putString("recipeAmount", recipeObjects.get(position).getRecipe_amount());
+        bundle.putBoolean("recipeStatus", recipeObjects.get(position).getRecipe_status());
+        bundle.putString("recipeCooktime", recipeObjects.get(position).getRecipe_cooktime());
+        bundle.putString("recipePicture", recipeObjects.get(position).getRecipe_picture());
+        bundle.putString("MemberID", recipeObjects.get(position).getMember_id());
+        bundle.putString("recipeDetail", recipeObjects.get(position).getRecipe_detail());
+        bundle.putString("recipeUploadDate", recipeObjects.get(position).getUpload_date());
+
         if(tabNum ==0)
         {
+            //tab為0時候的情況
             //給GridView上的每個區塊做觸發
             Intent intent = new Intent();
             intent.setClass(getContext(), ActRecipeDetail.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("recipeId", recipeObjects.get(position).getRecipe_id());
-            bundle.putString("recipeName", recipeObjects.get(position).getRecipe_name());
-            bundle.putString("recipeAmount", recipeObjects.get(position).getRecipe_amount());
-            bundle.putBoolean("recipeStatus", recipeObjects.get(position).getRecipe_status());
-            bundle.putString("recipeCooktime", recipeObjects.get(position).getRecipe_cooktime());
-            bundle.putString("recipePicture", recipeObjects.get(position).getRecipe_picture());
-            bundle.putString("MemberID", recipeObjects.get(position).getMember_id());
-            bundle.putString("recipeDetail", recipeObjects.get(position).getRecipe_detail());
-            bundle.putString("recipeUploadDate", recipeObjects.get(position).getUpload_date());
-
             intent.putExtras(bundle);
             getContext().startActivity(intent);
         }
 
         if(tabNum ==1)
-            Toast.makeText(getContext(),"123",Toast.LENGTH_SHORT).show();
+            //tab為1時候的情況
+        {
+            //  Toast.makeText(getContext(),"123",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setClass(getContext(), ActRecipeModify.class);
+            intent.putExtras(bundle);
+            getContext().startActivity(intent);
+        }
     }
 
 

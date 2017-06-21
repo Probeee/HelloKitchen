@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -228,7 +229,8 @@ public class ActRecipeUpload extends AppCompatActivity
                 recipeBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                 recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 800);
                 BitmapDrawable background = new BitmapDrawable(recipeBitmap);
-                llImageView.setBackground(background);
+
+                 llImageView.setBackground(background);
                 //llImageView.getBackground().setAlpha(100);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -402,7 +404,8 @@ public class ActRecipeUpload extends AppCompatActivity
         }
 
         /*每次view更新將txtMaterial上的文字記錄下來*/
-        for (int i = 0; i < txtMaterialList.size(); i++) {
+        for (int i = 0; i < txtMaterialList.size(); i++)
+        {
             MyRecipeMaterialTextWatcher(txtMaterialList.get(i));
         }
 
@@ -515,7 +518,8 @@ public class ActRecipeUpload extends AppCompatActivity
 
         ll_in_sv = (LinearLayout) findViewById(R.id.ll_in_sv);
         ll_in_sv_Material = (LinearLayout) findViewById(R.id.ll_in_sv_Material);
-        llImageView = (LinearLayout) findViewById(R.id.llImageView);
+        llImageView = (ImageView)findViewById(R.id.llimageView_recipe);
+      //  llImageView = (LinearLayout) findViewById(R.id.llImageView);
 
         btnAddMethodTxtList = (Button) buttonView.findViewById(R.id.btnAddMethodTxtList);
         btnAddMethodTxtList.setOnClickListener(btnAddMethodTxtList_Click);
@@ -553,7 +557,8 @@ public class ActRecipeUpload extends AppCompatActivity
             btnDelete, btnAddMaterialTxtList, btnDeleteMaterial, btnRecipeImgCamera, btnRecipeImg;
     private LinearLayout ll_in_sv, ll_in_sv_Material;
     private View buttonView, buttonViewMaterial;
-    private LinearLayout llImageView;
+    private ImageView llImageView;
+   // private LinearLayout llImageView;
     private RadioGroup radioStatus;
 
 

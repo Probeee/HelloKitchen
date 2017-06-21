@@ -186,9 +186,6 @@ public class ActRecipeDetail extends AppCompatActivity
     /*暫時*/
     public void servlet_RecipeDetail_Data(final String recipeId)
     {
-
-
-
         new AsyncTask<Void, Object, Void>()
         {
             @Override
