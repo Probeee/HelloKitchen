@@ -290,7 +290,8 @@ public class ActRecipeUpload extends AppCompatActivity
 
             recipesUpLoad(myRecipesJsonObject);
 
-        } catch (JSONException e) {
+        } catch (JSONException e)
+        {
             e.printStackTrace();
         }
     }
@@ -328,18 +329,25 @@ public class ActRecipeUpload extends AppCompatActivity
                         Log.d("responseString",responseString);
                         //取得Message的屬性
                         String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
-                        if (response.isSuccessful()) {
-                            if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                        if (response.isSuccessful())
+                        {
+                            if (info.equals(TheDefined.Android_JSON_Value_Success))
+                            {
                                 TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳成功", Toast.LENGTH_LONG);
-                            } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
+                            } else if (info.equals(TheDefined.Android_JSON_Value_Fail))
+                            {
                                 TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
                             }
-                        } else {
+                        }
+                        else
+                        {
                             TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
                         }
                         message.cancel();
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     TheDefined.showToastByRunnable(ActRecipeUpload.this, "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
                     e.printStackTrace();
