@@ -18,6 +18,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,6 +93,7 @@ public class Frag_Foods_Register extends Fragment {
 
     private Ingredients myIngredients;
     private int index =0;
+    Calendar buyDate = Calendar.getInstance();
 
     /*購買日期PickerDialog*/
     private DatePickerDialog.OnDateSetListener buyDate_setting = new DatePickerDialog.OnDateSetListener() {
@@ -100,6 +103,7 @@ public class Frag_Foods_Register extends Fragment {
                     String.valueOf(month + 1) + "/" +
                     String.valueOf(dayOfMonth));
             myIngredients.setBuyDate(txtBuyDate.getText().toString());
+            buyDate.set(year, month , dayOfMonth);
         }
     };
 
@@ -119,7 +123,7 @@ public class Frag_Foods_Register extends Fragment {
         @Override
         public void onClick(View v) {
             Calendar today = Calendar.getInstance();
-            Dialog message = new DatePickerDialog(getActivity(), buyDate_setting, today.get(Calendar.YEAR),
+            DatePickerDialog message = new DatePickerDialog(getActivity(), buyDate_setting, today.get(Calendar.YEAR),
                     today.get(Calendar.MONTH), today.get(Calendar.DATE));
             message.show();
         }
@@ -129,10 +133,17 @@ public class Frag_Foods_Register extends Fragment {
     private View.OnClickListener btnDeadDatePicker_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Calendar today = Calendar.getInstance();
-            Dialog message = new DatePickerDialog(getActivity(), buyDead_setting, today.get(Calendar.YEAR),
-                    today.get(Calendar.MONTH), today.get(Calendar.DATE));
-            message.show();
+            if (myIngredients.getBuyDate().equals("")) {
+                Toast.makeText(getActivity(), "請先選擇購買日期", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                Calendar today = Calendar.getInstance();
+                DatePickerDialog message = new DatePickerDialog(getActivity(), buyDead_setting, today.get(Calendar.YEAR),
+                        today.get(Calendar.MONTH), today.get(Calendar.DATE));
+                message.getDatePicker().setMinDate(buyDate.getTimeInMillis());
+                message.show();
+            }
+
         }
     };
 
@@ -140,10 +151,7 @@ public class Frag_Foods_Register extends Fragment {
     private View.OnClickListener btnClear_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            txtIngredient.setText("");
-            txtAmount.setText("");
-            txtBuyDate.setText("");
-            txtDeadDate.setText("");
+            clear();
         }
     };
 
@@ -211,11 +219,34 @@ public class Frag_Foods_Register extends Fragment {
             } else {
                 insertIngredients();
                 myIngredients = new Ingredients();
-
-
             }
         }
     };
+
+    private TextWatcher txtAmount_TextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (!txtAmount.getText().toString().equals("")) {
+                myIngredients.setAmount(Integer.parseInt(txtAmount.getText().toString()));
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
+
+    private void clear() {
+        txtIngredient.setText("");
+        txtAmount.setText("");
+        txtBuyDate.setText("");
+        txtDeadDate.setText("");
+        myIngredients = new Ingredients();
+    }
 
     /*新增食材資料進SQLITE方法*/
     private void insertIngredients() {
@@ -237,6 +268,7 @@ public class Frag_Foods_Register extends Fragment {
             sdb.insertOrThrow("tingredients", null, values);
             getFragmentManager().popBackStack();
             Toast.makeText(getActivity(),"食材登錄成功",Toast.LENGTH_LONG).show();
+            clear();
         }
         catch (SQLiteConstraintException e)
         {
@@ -439,7 +471,7 @@ public class Frag_Foods_Register extends Fragment {
                 }).create();
 
                 dialog.show();
-               // txtIngredient.setText(strMsg[0]);
+                // txtIngredient.setText(strMsg[0]);
                 //myIngredients.setName(strMsg[0]);
                 lblDetails.setText(result);
                 message.dismiss();
@@ -494,6 +526,7 @@ public class Frag_Foods_Register extends Fragment {
         lblDetails = (TextView) v.findViewById(R.id.lblDetails);
         txtIngredient = (EditText) v.findViewById(R.id.txtIngredient);
         txtAmount = (EditText) v.findViewById(R.id.txtAmount);
+        txtAmount.addTextChangedListener(txtAmount_TextWatcher);
         txtBuyDate = (EditText) v.findViewById(R.id.txtBuyDate);
         txtBuyDate.setCursorVisible(false);
         txtBuyDate.setFocusable(false);

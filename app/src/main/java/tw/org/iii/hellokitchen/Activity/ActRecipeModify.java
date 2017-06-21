@@ -1,5 +1,6 @@
 package tw.org.iii.hellokitchen.Activity;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -58,9 +59,13 @@ public class ActRecipeModify extends AppCompatActivity
     private ArrayList<EditText> txtMethodList;    //EditText 食譜製作方式 List
     private ArrayList<EditText> txtMaterialList;  //EditText 食譜食材 List
     private ArrayList<String> myRecipeMethodList;   //存放食譜製作方式 List
+    private ArrayList<String> myRecipeMethodIdList; //存放食譜製作方式Id List
     private ArrayList<String> myRecipeMaterialList; //存放食譜食材 List
+    private ArrayList<String> myRecipeMaterialIdList; //存放食譜食材 List
+
     private final List<Recipes_Material> myRMList  = new ArrayList<>();
     private final List<Recipes_Method> myRMdList = new ArrayList<>();
+
     Bitmap recipeBitmap;
     byte recipeImgBytes[];
     String recipeImgBytesBase64 = "";
@@ -76,11 +81,15 @@ public class ActRecipeModify extends AppCompatActivity
     String recipeDetail ;
     String recipeUploadDate ;
 
+    int lastIndexOfRecipes_Method = 0;
+    int lastIndexOfRecipes_Material = 0;
+
 
     /*加入食譜照片事件(開啟相機)*/
     private View.OnClickListener btnRecipeImgCamera_Click = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             /*開啟相機功能，並將拍照後的圖片存入SD卡相片集內，須由startActivityForResult且
                 帶入requestCode進行呼叫，原因為拍照完畢後返回程式後則呼叫onActivityResult*/
             ContentValues value = new ContentValues();
@@ -176,11 +185,15 @@ public class ActRecipeModify extends AppCompatActivity
     };
 
     /*動態新增 txtMethod 事件*/
-    private View.OnClickListener btnAddMethodTxtList_Click = new View.OnClickListener() {
+    private View.OnClickListener btnAddMethodTxtList_Click = new View.OnClickListener()
+    {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             //在view中新增一筆新的list 你可以直接在 personal list 直接增加一筆然後再創立一次view
             myRecipeMethodList.add("");
+            myRecipeMethodIdList.add(String.format("m%03d", (lastIndexOfRecipes_Method+ 1)));
+            lastIndexOfRecipes_Method +=1;
             addListView();
         }
     };
@@ -201,7 +214,9 @@ public class ActRecipeModify extends AppCompatActivity
             Log.i("id", String.valueOf(id));
             txtMethodList.get(id); //從 objectList得到此比資料
             txtMethodList.remove(id);
-            myRecipeMethodList.remove(id);
+            myRecipeMethodList.set(id,"delete");
+            //myRecipeMethodIdList.remove(id);
+            //lastIndexOfRecipes_Method -=1;
             addListView(); //重新整理 view
         }
     };
@@ -213,6 +228,8 @@ public class ActRecipeModify extends AppCompatActivity
         public void onClick(View v)
         {
             myRecipeMaterialList.add("");
+            myRecipeMaterialIdList.add(String.format("m%03d", (lastIndexOfRecipes_Material+ 1)));
+            lastIndexOfRecipes_Material +=1;
             addListView();
         }
     };
@@ -230,7 +247,8 @@ public class ActRecipeModify extends AppCompatActivity
             Log.i("id", String.valueOf(id));
             txtMaterialList.get(id); //從 objectList得到此比資料
             txtMaterialList.remove(id);
-            myRecipeMaterialList.remove(id);
+            myRecipeMaterialList.set(id,"delete");
+           // myRecipeMaterialList.remove(id);
             addListView(); //重新整理 view
         }
     };
@@ -268,9 +286,12 @@ public class ActRecipeModify extends AppCompatActivity
         txtMaterialList = new ArrayList<>();
 
         myRecipeMaterialList = new ArrayList<>();
+        myRecipeMaterialIdList = new ArrayList<>();
+
        // myRecipeMaterialList.add("");
         myRecipeMethodList = new ArrayList<>();
         //myRecipeMethodList.add("");
+        myRecipeMethodIdList = new ArrayList<>();
 
         ll_in_sv = (LinearLayout) findViewById(R.id.ll_in_sv);
         ll_in_sv_Material = (LinearLayout) findViewById(R.id.ll_in_sv_Material);
@@ -295,7 +316,7 @@ public class ActRecipeModify extends AppCompatActivity
 
         btnRecipeInsert = (Button) findViewById(R.id.btnRecipeInsert);
         btnRecipeInsert.setText("更新");
-       // btnRecipeInsert.setOnClickListener(btnRecipeInsert_Click);
+        btnRecipeInsert.setOnClickListener(btnRecipeInsert_Click);
         //btnRecipeCancel = (Button) findViewById(R.id.btnRecipeCancel);
         //btnRecipeCancel.setOnClickListener(btnRecipeCancel_Click);
 
@@ -309,6 +330,7 @@ public class ActRecipeModify extends AppCompatActivity
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -418,6 +440,11 @@ public class ActRecipeModify extends AppCompatActivity
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(llImageView);
 
+        recipeBitmap = ((BitmapDrawable)llImageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
+        recipeImgBytes = stream.toByteArray();
+        recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
         txtRecipeName.setText(recipeName);
         txtRecipeDetail.setText(recipeDetail);
         txtRecipeAmount.setText(recipeAmount);
@@ -432,11 +459,23 @@ public class ActRecipeModify extends AppCompatActivity
         for(int i=0;i<myRMList.size();i++)
         {
             myRecipeMaterialList.add(myRMList.get(i).getMaterial_name());
+            myRecipeMaterialIdList.add(myRMList.get(i).getMaterial_id());
+
         }
+        //取得最後一個index
+        String lastmaterialId = myRMList.get(myRMList.size()-1).getMaterial_id();
+        lastIndexOfRecipes_Material = Integer.valueOf(lastmaterialId.replace("m",""));
+
         for(int i=0;i<myRMdList.size();i++)
         {
             myRecipeMethodList.add(myRMdList.get(i).getMethod_detail());
+            myRecipeMethodIdList.add(myRMdList.get(i).getMethod_id());
         }
+        //取得最後一個index
+        String lastmethodId = myRMdList.get(myRMdList.size()-1).getMethod_id();
+        lastIndexOfRecipes_Method = Integer.valueOf(lastmethodId.replace("m",""));
+
+
     }
 
     /*動態新增 txtMethod 和 txtMaterial 方法*/
@@ -449,22 +488,24 @@ public class ActRecipeModify extends AppCompatActivity
         {
             View view = LayoutInflater.from(ActRecipeModify.this).inflate(R.layout.activity_act_recipe_upload_object_material, null); //物件來源
             LinearLayout llMaterial = (LinearLayout) view.findViewById(R.id.llMaterial); //取得recipe_upload_object中LinearLayout
+            if(!myRecipeMaterialList.get(i).contains("delete"))
+            {
+                lblMaterial = (TextView) llMaterial.findViewById(R.id.lblMaterial);
+                lblMaterial.setText(String.valueOf(i + 1));
 
-            lblMaterial = (TextView) llMaterial.findViewById(R.id.lblMaterial);
-            lblMaterial.setText(String.valueOf(i + 1));
+                txtMaterial = (EditText) llMaterial.findViewById(R.id.txtMaterial); //獲取LinearLayout中各元件
+                txtMaterial.setText(myRecipeMaterialList.get(i)); //放入recipeMaterial相關資料來源
+                txtMaterial.setId(i);  //將txtMaterial帶入id 以供監聽時辨識使用
 
-            txtMaterial = (EditText) llMaterial.findViewById(R.id.txtMaterial); //獲取LinearLayout中各元件
-            txtMaterial.setText(myRecipeMaterialList.get(i)); //放入recipeMaterial相關資料來源
-            txtMaterial.setId(i);  //將txtMaterial帶入id 以供監聽時辨識使用
+                btnDeleteMaterial = (Button) llMaterial.findViewById(R.id.btnDeleteMaterial);
+                btnDeleteMaterial.setId(i);  //將btnDeleteMaterial帶入id 以供監聽時辨識使用
+                btnDeleteMaterial.setOnClickListener(btnDeleteMaterial_Click); //設定監聽method
 
-            btnDeleteMaterial = (Button) llMaterial.findViewById(R.id.btnDeleteMaterial);
-            btnDeleteMaterial.setId(i);  //將btnDeleteMaterial帶入id 以供監聽時辨識使用
-            btnDeleteMaterial.setOnClickListener(btnDeleteMaterial_Click); //設定監聽method
+                txtMaterialList.add(txtMaterial); //將txtMaterial的元件放入map並存入list中
 
-            txtMaterialList.add(txtMaterial); //將txtMaterial的元件放入map並存入list中
-
-            //將上面新建的例元件新增到主頁面的ll_in_sv中
-            ll_in_sv_Material.addView(view);
+                //將上面新建的例元件新增到主頁面的ll_in_sv中
+                ll_in_sv_Material.addView(view);
+            }
         }
 
         /*每次view更新將txtMaterial上的文字記錄下來*/
@@ -477,26 +518,28 @@ public class ActRecipeModify extends AppCompatActivity
         ll_in_sv_Material.addView(buttonViewMaterial);
 
         //recipeMethod資料來源
-        for (int i = 0; i <myRecipeMethodList.size(); i++) {
-
+        for (int i = 0; i <myRecipeMethodList.size(); i++)
+        {
             View view = LayoutInflater.from(ActRecipeModify.this).inflate(R.layout.activity_act_recipe_upload_object, null); //物件來源
             LinearLayout llMethod = (LinearLayout) view.findViewById(R.id.llMethod); //取得recipe_upload_object中LinearLayout
+            if(!myRecipeMethodList.get(i).contains("delete"))
+            {
+                lblMethod = (TextView) llMethod.findViewById(R.id.lblMethod);
+                lblMethod.setText(String.valueOf(i + 1));
 
-            lblMethod = (TextView) llMethod.findViewById(R.id.lblMethod);
-            lblMethod.setText(String.valueOf(i + 1));
+                txtMethod = (EditText) llMethod.findViewById(R.id.txtMethod); //獲取LinearLayout中各元件
+                txtMethod.setText(myRecipeMethodList.get(i)); //放入recipeMethod相關資料來源
+                txtMethod.setId(i);  //將txtMethod帶入id 以供監聽時辨識使用
 
-            txtMethod = (EditText) llMethod.findViewById(R.id.txtMethod); //獲取LinearLayout中各元件
-            txtMethod.setText(myRecipeMethodList.get(i)); //放入recipeMethod相關資料來源
-            txtMethod.setId(i);  //將txtMethod帶入id 以供監聽時辨識使用
+                btnDelete = (Button) llMethod.findViewById(R.id.btnDelete);
+                btnDelete.setId(i);  //將btnDelete帶入id 以供監聽時辨識使用
+                btnDelete.setOnClickListener(btnDelete_Click); //設定監聽method
 
-            btnDelete = (Button) llMethod.findViewById(R.id.btnDelete);
-            btnDelete.setId(i);  //將btnDelete帶入id 以供監聽時辨識使用
-            btnDelete.setOnClickListener(btnDelete_Click); //設定監聽method
+                txtMethodList.add(txtMethod); //將txtMethod的元件放入map並存入list中
 
-            txtMethodList.add(txtMethod); //將txtMethod的元件放入map並存入list中
-
-            //將上面新建的例元件新增到主頁面的ll_in_sv中
-            ll_in_sv.addView(view);
+                //將上面新建的例元件新增到主頁面的ll_in_sv中
+                ll_in_sv.addView(view);
+            }
         }
         /*每次view更新將txtMethod上的文字記錄下來*/
         for (int i = 0; i < txtMethodList.size(); i++)
@@ -549,6 +592,110 @@ public class ActRecipeModify extends AppCompatActivity
             }
         });
     }
+
+
+    /*上傳食譜所有資訊*/
+    private View.OnClickListener btnRecipeInsert_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (recipeImgBytesBase64.equals("") || recipeImgBytesBase64 == null)
+            {
+                Toast.makeText(ActRecipeModify.this, "請加入食譜代表圖片", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (txtRecipeName.getText().toString().trim().equalsIgnoreCase("")) {
+                txtRecipeName.setError("食譜標題不能為空白");
+                return;
+            }
+            if (txtRecipeDetail.getText().toString().trim().equalsIgnoreCase("")) {
+                txtRecipeDetail.setError("食譜介紹不能為空白");
+                return;
+            }
+            if (txtRecipeAmount.getText().toString().trim().equalsIgnoreCase("")) {
+                txtRecipeAmount.setError("餐點份量不能為空白");
+                return;
+            }
+            if (txtRecipeCookTime.getText().toString().trim().equalsIgnoreCase("")) {
+                txtRecipeCookTime.setError("製作時間不能為空白");
+                return;
+            }
+            /* 修改
+            for (int i = 0; i < txtMaterialList.size(); i++) {
+                if (txtMaterialList.get(i).getText().toString().trim().equalsIgnoreCase("")) {
+                    txtMaterialList.get(i).setError("預備食材必須填寫，不填寫請刪除欄位");
+                    return;
+                }
+            }
+            for (int i = 0; i < txtMethodList.size(); i++) {
+                if (txtMethodList.get(i).getText().toString().trim().equalsIgnoreCase("")) {
+                    txtMethodList.get(i).setError("步驟必須填寫，不填寫請刪除欄位");
+                    return;
+                }
+            }*/
+
+
+            recipeJsonBundle();
+        }
+    };
+
+    /*打包json*/
+    private void recipeJsonBundle()
+    {
+        JSONObject myRecipeJsonObject = new JSONObject();            //食譜總表的JSONObject
+        JSONArray myRecipeMaterialJsonArray = new JSONArray();       //食譜食材的JSONArray
+        JSONArray myRecipeMethodJsonArray = new JSONArray();         //食譜方法的JSONArray
+        JSONObject myRecipesJsonObject = new JSONObject();           //打包三個JSONFile
+
+        try
+        {
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_name, txtRecipeName.getText());
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Member_id, userEmail);
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_status, recipeStatus);
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_amount, txtRecipeAmount.getText() + "人份");
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_cooktime, txtRecipeCookTime.getText() + "分鐘");
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_picture, "imgPath");
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_detail, txtRecipeDetail.getText());
+
+            for (int i = 0; i < myRecipeMaterialList.size(); i++)
+            {
+                JSONObject myJsonObject = new JSONObject();
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_id, myRecipeMaterialIdList.get(i));
+                //myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_id, String.format("m%03d", (i + 1)));
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_name,
+                        myRecipeMaterialList.get(i).toString());
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_amount,
+                        myRecipeMaterialList.get(i).toString());
+                Log.d("test",myRecipeMaterialIdList.get(i)+"\t"+myRecipeMaterialList.get(i));
+                myRecipeMaterialJsonArray.put(i, myJsonObject.toString());
+            }
+
+            for (int i = 0; i < myRecipeMethodList.size(); i++)
+            {
+                JSONObject myJsonObject = new JSONObject();
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_id, myRecipeMethodIdList.get(i) );
+               // myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_id, String.format("m%03d", (lastIndexOfRecipes_Method + 1)));
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_detail,myRecipeMethodList.get(i).toString());
+                Log.d("test",myRecipeMethodIdList.get(i)+"\t"+myRecipeMethodList.get(i));
+                myRecipeMethodJsonArray.put(i, myJsonObject.toString());
+            }
+
+                /*把食譜總表和食材總表和製作方法總表打包成JSONObject*/
+
+            myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe, myRecipeJsonObject);
+            myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material, myRecipeMaterialJsonArray);
+            myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method, myRecipeMethodJsonArray);
+            myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_picture_file, recipeImgBytesBase64);
+
+           // recipesUpLoad(myRecipesJsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     private TextView lblMethod, lblMaterial;
