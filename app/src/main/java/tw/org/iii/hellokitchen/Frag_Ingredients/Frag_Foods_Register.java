@@ -14,9 +14,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -45,16 +49,16 @@ import com.google.api.services.vision.v1.model.EntityAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.api.services.translate.Translate;
+import com.google.api.services.translate.model.TranslationsListResponse;
+import com.google.api.services.translate.model.TranslationsResource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -341,6 +345,7 @@ public class Frag_Foods_Register extends Fragment {
 
                 callCloudVision(bitmap);
 
+
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -348,6 +353,7 @@ public class Frag_Foods_Register extends Fragment {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
     /**Google Vision影像辨識**/
     private void callCloudVision(final Bitmap bitmap) throws IOException
@@ -442,53 +448,7 @@ public class Frag_Foods_Register extends Fragment {
 
             protected void onPostExecute(String result)
             {
-                final String strMsg[] = result.split(",");
-                items = new ArrayList<>();
-                itemsAfterTranslate = new ArrayList<>();
-
-                for(int i=0;i<strMsg.length;i++)
-                {
-                    Log.d("123",strMsg[i]);
-                    items.add(strMsg[i]);
-                }
-
-
-
-
-                //將解析結果變成List給使用者選擇
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                AlertDialog dialog = builder.setTitle("選擇您的食材").setSingleChoiceItems(itemsAfterTranslate.toArray(new String[itemsAfterTranslate.size()]),0, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        index = which;
-                        //String[] city = getResources().getStringArray(R.array.city);
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener()
-                {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-
-                    }
-                }).setPositiveButton("確定", new DialogInterface.OnClickListener()
-                {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        Log.d("測試用",String.valueOf(which));
-
-                        txtIngredient.setText(strMsg[index]);
-                        myIngredients.setName(strMsg[index]);
-                    }
-                }).create();
-
-                dialog.show();
-                // txtIngredient.setText(strMsg[0]);
-                //myIngredients.setName(strMsg[0]);
-
+                callTrans(result);
                 lblDetails.setText(result);
                 message.dismiss();
             }
@@ -518,11 +478,6 @@ public class Frag_Foods_Register extends Fragment {
 
 
 
-
-
-
-
-
     /*照片縮小處理*/
     public Bitmap scaleBitmapDown(Bitmap bitmap, int maxDimension) {
 
@@ -545,6 +500,92 @@ public class Frag_Foods_Register extends Fragment {
     }
 
 
+    /**Google 翻譯**/
+    private void callTrans(String result)
+    {
+        final String strMsg[] = result.split(",");
+        items = new ArrayList<>();
+        itemsAfterTranslate = new ArrayList<>();
+        for(int i=0;i<strMsg.length;i++)
+        {
+            Log.d("test",strMsg[i]);
+            items.add(strMsg[i]);
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Translate t = new Translate.Builder(
+                        AndroidHttp.newCompatibleTransport()
+                        , GsonFactory.getDefaultInstance(), null)
+                        //Need to update this to your App-Name
+                        .setApplicationName("HelloKitchen")
+                        .build();
+                Translate.Translations.List list = null;
+                try
+                {
+                    list = t.new Translations().list(items, "zh-TW");
+                } catch (IOException e)
+                {
+                    Log.d("test",e.getMessage().toString());
+                }
+                //Set your API-Key from https://console.developers.google.com/
+                Log.d("test","BeforeExcuted");
+                list.setKey("AIzaSyAWwN_1aKCGPkR7oPrXBGzzvJGiY12wVFo");
+                TranslationsListResponse response = null;
+                try
+                {
+                    response = list.execute();
+                }
+                catch (IOException e)
+                {
+                    Log.d("test",e.getMessage().toString());
+                }
+                Log.d("test","Excuted");
+                for(TranslationsResource tr : response.getTranslations())
+                {
+                    Log.d("test",tr.getTranslatedText());
+                    itemsAfterTranslate.add(tr.getTranslatedText().toString());
+                }
+
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        //這邊是呼叫main thread handler幫我們處理UI部分
+                        //將解析結果變成List給使用者選擇
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        AlertDialog dialog = builder.setTitle("選擇您的食材").setSingleChoiceItems(itemsAfterTranslate.toArray(new String[itemsAfterTranslate.size()]),0, new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                index = which;
+                                //String[] city = getResources().getStringArray(R.array.city);
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener()
+                        {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+
+                            }
+                        }).setPositiveButton("確定", new DialogInterface.OnClickListener()
+                        {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                Log.d("測試用",String.valueOf(which));
+
+                                txtIngredient.setText(itemsAfterTranslate.get(index));
+                                myIngredients.setName(itemsAfterTranslate.get(index));
+                            }
+                        }).create();
+
+                        dialog.show();
+                    }
+                });
+            }
+        }).start();
+    }
 
 
 
