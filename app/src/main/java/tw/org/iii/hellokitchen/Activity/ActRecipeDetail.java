@@ -109,8 +109,6 @@ public class ActRecipeDetail extends AppCompatActivity
         textViewIntro = (TextView)findViewById(R.id.textViewIntro);
         textViewCookTime = (TextView)findViewById(R.id.textViewCookTime);
 
-        textViewCookTime.setText(recipeCooktime);
-        textViewIntro.setText( recipeDetail );
 
         loadtheDetail();
         servlet_RecipeDetail_Data(recipeId);
@@ -255,18 +253,9 @@ public class ActRecipeDetail extends AppCompatActivity
             protected void onPostExecute(Void aVoid)
             {
                 super.onPostExecute(aVoid);
-               /* String strMsg = "";
-                for (int i = 0; i < myRMList.size(); i++)
-                {
-                    strMsg += myRMList.get(i).getMaterial_name()+"\n";
-                }
-                for (int i = 0; i < myRMdList.size(); i++) {
-                    strMsg += myRMdList.get(i).getMethod_detail() + "\n";
-                }
-                //lblText.setText(strMsg);*/
-
-
-
+              
+                textViewCookTime.setText(recipeCooktime);
+                textViewIntro.setText( recipeDetail );
 
                 CustomAdapter_materials adapter = new CustomAdapter_materials(getBaseContext());
                 lv_material.setAdapter(adapter);

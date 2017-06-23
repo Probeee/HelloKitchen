@@ -91,7 +91,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
 
         }
         //FAB初始化
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.INVISIBLE);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -248,6 +249,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             fragmentTransaction = fragMgr.beginTransaction();
            // fragmentTransaction.addToBackStack(null);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_foods_container).commit();
+            fab.setVisibility(View.INVISIBLE);
+
         }
         else if (id == R.id.nav_recipe)
         {
@@ -256,6 +259,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             fragmentTransaction = fragMgr.beginTransaction();
            // fragmentTransaction.addToBackStack(null);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_recipe_container).commit();
+            fab.setVisibility(View.VISIBLE);
         }
         else if (id == R.id.nav_repair)
         {
@@ -263,6 +267,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             fragmentTransaction = fragMgr.beginTransaction();
             // fragmentTransaction.addToBackStack(null);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_company_container).commit();
+            fab.setVisibility(View.INVISIBLE);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -274,6 +279,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     Frag_Company_Container frag_company_container;
     FragmentManager fragMgr ;
     FragmentTransaction fragmentTransaction;
+    FloatingActionButton fab;
 
 
 }

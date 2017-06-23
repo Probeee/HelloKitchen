@@ -1,8 +1,10 @@
 package tw.org.iii.hellokitchen.Frag_Company;
 
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.vision.text.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,15 +45,38 @@ public class Frag_CompanyDetail_Info extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    String companyName;
     String companyIntro ;
     String companyAddress ;
     String companyTel ;
     String companyEmail ;
     String companyOwner ;
+
+    private View.OnClickListener btnPhone_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //or Action_Call
+            Intent call = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + textView_tel.getText().toString()));
+            startActivity(call);
+        }
+    };
+    private View.OnClickListener btnMail_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            Intent mail = new Intent(Intent.ACTION_SEND);
+            mail.setType("message/rfc822");
+            mail.putExtra(Intent.EXTRA_EMAIL, new String[] {textView_email.getText().toString()});
+            mail.putExtra(Intent.EXTRA_SUBJECT, companyName + "貴公司您好，想請問裝修事項");
+            startActivity(mail);
+        }
+    };
+
 
     public Frag_CompanyDetail_Info() {
         // Required empty public constructor
@@ -106,12 +133,15 @@ public class Frag_CompanyDetail_Info extends Fragment {
         textView_tel.setText(companyTel);
         textView_address.setText(companyAddress);
 
-
-
+        btnMail = (Button) v.findViewById(R.id.btnMail);
+        btnMail.setOnClickListener(btnMail_Click);
+        btnPhone = (Button) v.findViewById(R.id.btnPhone);
+        btnPhone.setOnClickListener(btnPhone_Click);
     }
 
     private void GetInfo()
     {
+        companyName = getArguments().getString("companyName");
         companyIntro = getArguments().getString("company_intro");
         companyOwner = getArguments().getString("company_owner");
         companyTel = getArguments().getString("company_tel");
@@ -125,6 +155,6 @@ public class Frag_CompanyDetail_Info extends Fragment {
     TextView textView_tel;
     TextView textView_email;
     TextView textView_address;
-
+    Button btnMail, btnPhone;
 
 }
