@@ -208,7 +208,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
                             String deleteRecipeId = recipeObjects.get(position).getRecipe_id();
                             String deleteMemberId = recipeObjects.get(position).getMember_id();
                             //刪除動作至servlet
-                            Toast.makeText(getContext(),deleteRecipeId,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(),deleteRecipeId,Toast.LENGTH_SHORT).show();
                             recipesDeleteUpdate(deleteRecipeId,deleteMemberId);
                         }
                     })

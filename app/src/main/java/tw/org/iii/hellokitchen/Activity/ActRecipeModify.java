@@ -445,6 +445,7 @@ public class ActRecipeModify extends AppCompatActivity
         recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
         recipeImgBytes = stream.toByteArray();
         recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
+
         txtRecipeName.setText(recipeName);
         txtRecipeDetail.setText(recipeDetail);
         txtRecipeAmount.setText(recipeAmount);
@@ -648,6 +649,7 @@ public class ActRecipeModify extends AppCompatActivity
 
         try
         {
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_id, recipeId);
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_name, txtRecipeName.getText());
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Member_id, userEmail);
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_status, recipeStatus);
@@ -659,12 +661,14 @@ public class ActRecipeModify extends AppCompatActivity
             for (int i = 0; i < myRecipeMaterialList.size(); i++)
             {
                 JSONObject myJsonObject = new JSONObject();
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_id, recipeId);
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_id, myRecipeMaterialIdList.get(i));
                 //myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_id, String.format("m%03d", (i + 1)));
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_name,
                         myRecipeMaterialList.get(i).toString());
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_amount,
                         myRecipeMaterialList.get(i).toString());
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_picture, "noData");
                 Log.d("test",myRecipeMaterialIdList.get(i)+"\t"+myRecipeMaterialList.get(i));
                 myRecipeMaterialJsonArray.put(i, myJsonObject.toString());
             }
@@ -672,21 +676,25 @@ public class ActRecipeModify extends AppCompatActivity
             for (int i = 0; i < myRecipeMethodList.size(); i++)
             {
                 JSONObject myJsonObject = new JSONObject();
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_id, recipeId);
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_id, myRecipeMethodIdList.get(i) );
                // myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_id, String.format("m%03d", (lastIndexOfRecipes_Method + 1)));
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_detail,myRecipeMethodList.get(i).toString());
                 Log.d("test",myRecipeMethodIdList.get(i)+"\t"+myRecipeMethodList.get(i));
+                myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method_picture, "noData");
                 myRecipeMethodJsonArray.put(i, myJsonObject.toString());
             }
 
                 /*把食譜總表和食材總表和製作方法總表打包成JSONObject*/
 
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe, myRecipeJsonObject);
+            myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Member_id, memberID);
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material, myRecipeMaterialJsonArray);
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method, myRecipeMethodJsonArray);
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_picture_file, recipeImgBytesBase64);
 
-           // recipesUpLoad(myRecipesJsonObject);
+            recipesUpLoad(myRecipesJsonObject);
+
 
         }
         catch (JSONException e)
@@ -695,6 +703,71 @@ public class ActRecipeModify extends AppCompatActivity
         }
     }
 
+
+    /*上傳資料方法*/
+    private void recipesUpLoad(final JSONObject json)
+    {
+
+        final ProgressDialog message = new ProgressDialog(ActRecipeModify.this);
+        message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        message.setTitle("更新中...");
+        message.setCancelable(true);
+        message.show();
+
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                OkHttpClient client = new OkHttpClient();
+
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(JSON, json.toString());
+                Request request = new Request.Builder()
+                        .url(TheDefined.Web_Server_URL + "/AndroidRecipeUpdateServlet")
+                        .post(body)
+                        .build();
+                try
+                {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful())
+                    {
+                        String responseString = response.body().string();
+                        //回傳的內容轉存為JSON物件
+                        JSONObject responseJSON = new JSONObject(responseString);
+                        Log.d("responseString",responseString);
+                        //取得Message的屬性
+                        String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
+                        if (response.isSuccessful())
+                        {
+                            if (info.equals(TheDefined.Android_JSON_Value_Success))
+                            {
+                                TheDefined.showToastByRunnable(ActRecipeModify.this, "更新成功", Toast.LENGTH_LONG);
+                                message.cancel();
+                                onBackPressed();
+                            } else if (info.equals(TheDefined.Android_JSON_Value_Fail))
+                            {
+                                TheDefined.showToastByRunnable(ActRecipeModify.this, "更新失敗", Toast.LENGTH_LONG);
+                                message.cancel();
+                            }
+                        }
+                        else
+                        {
+                            TheDefined.showToastByRunnable(ActRecipeModify.this, "更新失敗", Toast.LENGTH_LONG);
+                            message.cancel();
+                        }
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    TheDefined.showToastByRunnable(ActRecipeModify.this, "伺服器無法取得回應", Toast.LENGTH_LONG);
+                    message.cancel();
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 
 
 

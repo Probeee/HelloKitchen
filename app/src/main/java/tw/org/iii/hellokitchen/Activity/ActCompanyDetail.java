@@ -134,6 +134,7 @@ public class ActCompanyDetail extends AppCompatActivity  {
     private void bundleToCompanyDetailPageTwo()
     {
         Bundle bundle = new Bundle();
+        bundle.putString("companyName", companyName);
         bundle.putString("company_intro",companyIntro);
         bundle.putString("company_owner",companyOwner);
         bundle.putString("company_tel", companyTel);

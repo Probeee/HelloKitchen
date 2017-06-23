@@ -123,6 +123,12 @@ public class Frag_Foods_Register extends Fragment {
     private DatePickerDialog.OnDateSetListener buyDead_setting = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, dayOfMonth);
+            if (calendar.getTimeInMillis() < buyDate.getTimeInMillis()) {
+                Toast.makeText(getActivity(), "請選擇購買日期之後日期", Toast.LENGTH_SHORT).show();
+                return;
+            }
             txtDeadDate.setText(String.valueOf(year) + "/" +
                     String.valueOf(month + 1) + "/" +
                     String.valueOf(dayOfMonth));

@@ -321,9 +321,10 @@ public class Frag_CompanyDetail_Gallery extends Fragment implements BaseSliderVi
                 mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
                 break;
             default:
-                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Default);
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
                 break;
         }
+
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(3000);

@@ -226,12 +226,10 @@ public class ActRecipeUpload extends AppCompatActivity
             try
             {
                 //讀取照片，型態為Bitmap
-                recipeBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                //recipeBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                 recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 800);
-                BitmapDrawable background = new BitmapDrawable(recipeBitmap);
 
-                 llImageView.setBackground(background);
-                //llImageView.getBackground().setAlpha(100);
+                llImageView.setImageBitmap(recipeBitmap);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
@@ -334,6 +332,7 @@ public class ActRecipeUpload extends AppCompatActivity
                             if (info.equals(TheDefined.Android_JSON_Value_Success))
                             {
                                 TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳成功", Toast.LENGTH_LONG);
+
                             } else if (info.equals(TheDefined.Android_JSON_Value_Fail))
                             {
                                 TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
