@@ -220,7 +220,7 @@ public class ActRecipeDetail extends AppCompatActivity
                                 Recipes_Material myRM = new Recipes_Material(jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_id),
                                         jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Material_id),
                                         jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Material_name),
-                                        "noData",
+                                        jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Material_amount),
                                         "noData");
                                 myRMList.add(myRM);
                             }
@@ -318,12 +318,14 @@ public class ActRecipeDetail extends AppCompatActivity
         {
             ViewHolder holder = null;
             String s = myRMList.get(position).getMaterial_name();
+            String s1 = myRMList.get(position).getMaterial_amount();
             if (convertView == null)
             {
                 convertView = inflater.inflate(R.layout.layout_list_of_details,null);
                 // inflate custom layout called row
                 holder = new ViewHolder();
                 holder.tv =(TextView) convertView.findViewById(R.id.listview_item);
+                holder.tv2 = (TextView)convertView.findViewById(R.id.listview_item2);
 
                 // initialize textview
                 convertView.setTag(holder);
@@ -335,6 +337,7 @@ public class ActRecipeDetail extends AppCompatActivity
 
 
             holder.tv.setText((position+1)+"."+s);
+            holder.tv2.setText(s1);
 
             // set the name to the text;
             return convertView;
@@ -344,6 +347,7 @@ public class ActRecipeDetail extends AppCompatActivity
     static class ViewHolder
     {
         TextView tv;
+        TextView tv2;
     }
 
     public class CustomAdapter_methods extends BaseAdapter
@@ -387,7 +391,7 @@ public class ActRecipeDetail extends AppCompatActivity
             String s = myRMdList.get(position).getMethod_detail();
             if (convertView == null)
             {
-                convertView = inflater.inflate(R.layout.layout_list_of_details,null);
+                convertView = inflater.inflate(R.layout.layout_list_of_details_method,null);
                 // inflate custom layout called row
                 holder2 = new ViewHolder2();
                 holder2.tv2 =(TextView) convertView.findViewById(R.id.listview_item);

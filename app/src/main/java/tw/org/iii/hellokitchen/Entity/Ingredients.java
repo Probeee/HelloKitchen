@@ -24,7 +24,8 @@ public class Ingredients
     private String day;
 
 
-    private Long time;//計算時間用
+
+    public Long time;//計算時間用
 
 
     public Long getTime()

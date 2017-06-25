@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_FindByIngredients">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/container_recipe_ingredient_find_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blanchedalmond"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gridRecipeIngredientFindPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp">
+
+            </GridView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

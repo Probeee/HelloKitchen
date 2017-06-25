@@ -4,6 +4,16 @@
 
     <TextView
         android:id="@+id/listview_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="italic"/>
+    <TextView
+        android:id="@+id/listview_item2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -12,5 +22,4 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="italic"/>
-
 </LinearLayout>

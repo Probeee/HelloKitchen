@@ -57,10 +57,14 @@ import tw.org.iii.hellokitchen.Utility.TheDefined;
 public class ActRecipeModify extends AppCompatActivity
 {
     private ArrayList<EditText> txtMethodList;    //EditText 食譜製作方式 List
-    private ArrayList<EditText> txtMaterialList;  //EditText 食譜食材 List
+    private ArrayList<EditText> txtMaterialNameList;  //EditText 食譜食材 List
+    private ArrayList<EditText> txtMaterialAmountList;  //EditText 食譜食材 List
+
     private ArrayList<String> myRecipeMethodList;   //存放食譜製作方式 List
     private ArrayList<String> myRecipeMethodIdList; //存放食譜製作方式Id List
-    private ArrayList<String> myRecipeMaterialList; //存放食譜食材 List
+
+    private ArrayList<String> myRecipeMaterialNameList; //存放食譜食材名稱 List
+    private ArrayList<String> myRecipeMaterialAmountList; //存放食譜食材數量 List
     private ArrayList<String> myRecipeMaterialIdList; //存放食譜食材 List
 
     private final List<Recipes_Material> myRMList  = new ArrayList<>();
@@ -216,7 +220,7 @@ public class ActRecipeModify extends AppCompatActivity
             txtMethodList.remove(id);
             myRecipeMethodList.set(id,"delete");
             //myRecipeMethodIdList.remove(id);
-            //lastIndexOfRecipes_Method -=1;
+            lastIndexOfRecipes_Method -=1;
             addListView(); //重新整理 view
         }
     };
@@ -227,7 +231,8 @@ public class ActRecipeModify extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
-            myRecipeMaterialList.add("");
+            myRecipeMaterialNameList.add("");
+            myRecipeMaterialAmountList.add("");
             myRecipeMaterialIdList.add(String.format("m%03d", (lastIndexOfRecipes_Material+ 1)));
             lastIndexOfRecipes_Material +=1;
             addListView();
@@ -237,7 +242,7 @@ public class ActRecipeModify extends AppCompatActivity
     private View.OnClickListener btnDeleteMaterial_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (myRecipeMaterialList.size() == 1)
+            if (myRecipeMaterialNameList.size() == 1)
             {
                 Toast.makeText(ActRecipeModify.this, "最少要一個食材", Toast.LENGTH_SHORT).show();
                 return;
@@ -245,9 +250,13 @@ public class ActRecipeModify extends AppCompatActivity
             Button delBtn =  (Button)v; //在new 出所按下的按鈕
             int id = delBtn.getId(); //獲取被點擊的按鈕的id
             Log.i("id", String.valueOf(id));
-            txtMaterialList.get(id); //從 objectList得到此比資料
-            txtMaterialList.remove(id);
-            myRecipeMaterialList.set(id,"delete");
+            txtMaterialNameList.get(id); //從 objectList得到此比資料
+            txtMaterialNameList.remove(id);
+            myRecipeMaterialNameList.set(id,"delete");
+            txtMaterialAmountList.get(id); //從 objectList得到此比資料
+            txtMaterialAmountList.remove(id);
+            myRecipeMaterialAmountList.set(id,"delete");
+            lastIndexOfRecipes_Material -=1;
            // myRecipeMaterialList.remove(id);
             addListView(); //重新整理 view
         }
@@ -283,9 +292,11 @@ public class ActRecipeModify extends AppCompatActivity
         buttonViewMaterial = LayoutInflater.from(ActRecipeModify.this).inflate(R.layout.activity_act_recipe_upload_object_button_material, null);
 
         txtMethodList = new ArrayList<>();
-        txtMaterialList = new ArrayList<>();
+        txtMaterialNameList = new ArrayList<>();
+        txtMaterialAmountList = new ArrayList<>();
 
-        myRecipeMaterialList = new ArrayList<>();
+        myRecipeMaterialNameList = new ArrayList<>();
+        myRecipeMaterialAmountList = new ArrayList<>();
         myRecipeMaterialIdList = new ArrayList<>();
 
        // myRecipeMaterialList.add("");
@@ -388,7 +399,7 @@ public class ActRecipeModify extends AppCompatActivity
                                 Recipes_Material myRM = new Recipes_Material(jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_id),
                                         jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Material_id),
                                         jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Material_name),
-                                        "noData",
+                                        jsonRM.getString(TheDefined.Android_JSON_Key_Recipe_Material_amount),
                                         "noData");
                                 myRMList.add(myRM);
                             }
@@ -459,7 +470,8 @@ public class ActRecipeModify extends AppCompatActivity
     {
         for(int i=0;i<myRMList.size();i++)
         {
-            myRecipeMaterialList.add(myRMList.get(i).getMaterial_name());
+            myRecipeMaterialNameList.add(myRMList.get(i).getMaterial_name());
+            myRecipeMaterialAmountList.add(myRMList.get(i).getMaterial_amount());
             myRecipeMaterialIdList.add(myRMList.get(i).getMaterial_id());
 
         }
@@ -485,48 +497,61 @@ public class ActRecipeModify extends AppCompatActivity
         ll_in_sv.removeAllViews();
         ll_in_sv_Material.removeAllViews();
         //recipeMaterial資料來源
-        for (int i =0; i < myRecipeMaterialList.size(); i++)
-        {
-            View view = LayoutInflater.from(ActRecipeModify.this).inflate(R.layout.activity_act_recipe_upload_object_material, null); //物件來源
-            LinearLayout llMaterial = (LinearLayout) view.findViewById(R.id.llMaterial); //取得recipe_upload_object中LinearLayout
-            if(!myRecipeMaterialList.get(i).contains("delete"))
-            {
-                lblMaterial = (TextView) llMaterial.findViewById(R.id.lblMaterial);
-                lblMaterial.setText(String.valueOf(i + 1));
 
-                txtMaterial = (EditText) llMaterial.findViewById(R.id.txtMaterial); //獲取LinearLayout中各元件
-                txtMaterial.setText(myRecipeMaterialList.get(i)); //放入recipeMaterial相關資料來源
-                txtMaterial.setId(i);  //將txtMaterial帶入id 以供監聽時辨識使用
+        int countOfMaterial = 0;
+        for (int i =0; i < myRecipeMaterialNameList.size(); i++)
+        {
+            if(!myRecipeMaterialNameList.get(i).contains("delete"))
+            {
+                View view = LayoutInflater.from(ActRecipeModify.this).inflate(R.layout.activity_act_recipe_upload_object_material, null); //物件來源
+                LinearLayout llMaterial = (LinearLayout) view.findViewById(R.id.llMaterial); //取得recipe_upload_object中LinearLayout
+
+                lblMaterial = (TextView) llMaterial.findViewById(R.id.lblMaterial);
+                lblMaterial.setText(String.valueOf(countOfMaterial+ 1));
+
+                txtMaterialName = (EditText) llMaterial.findViewById(R.id.txtMaterialName); //獲取LinearLayout中各元件
+                txtMaterialName.setText(myRecipeMaterialNameList.get(i)); //放入recipeMaterial相關資料來源
+                txtMaterialName.setId(i);  //將txtMaterial帶入id 以供監聽時辨識使用
+
+                txtMaterialAmount = (EditText) llMaterial.findViewById(R.id.txtMaterialAmount); //獲取LinearLayout中各元件
+                txtMaterialAmount.setText(myRecipeMaterialAmountList.get(i)); //放入recipeMaterial相關資料來源
+                txtMaterialAmount.setId(i);  //將txtMaterial帶入id 以供監聽時辨識使用
 
                 btnDeleteMaterial = (Button) llMaterial.findViewById(R.id.btnDeleteMaterial);
                 btnDeleteMaterial.setId(i);  //將btnDeleteMaterial帶入id 以供監聽時辨識使用
                 btnDeleteMaterial.setOnClickListener(btnDeleteMaterial_Click); //設定監聽method
 
-                txtMaterialList.add(txtMaterial); //將txtMaterial的元件放入map並存入list中
+                txtMaterialNameList.add(txtMaterialName); //將txtMaterial的元件放入map並存入list中
+                txtMaterialAmountList.add(txtMaterialAmount); //將txtMaterial的元件放入map並存入list中
 
                 //將上面新建的例元件新增到主頁面的ll_in_sv中
                 ll_in_sv_Material.addView(view);
+                countOfMaterial ++ ;
             }
         }
 
         /*每次view更新將txtMaterial上的文字記錄下來*/
-        for (int i = 0; i < txtMaterialList.size(); i++)
+        for (int i = 0; i < txtMaterialNameList.size(); i++)
         {
-            MyRecipeMaterialTextWatcher(txtMaterialList.get(i));
+            MyRecipeMaterialNameTextWatcher(txtMaterialNameList.get(i));
+            MyRecipeMaterialAmountTextWatcher(txtMaterialAmountList.get(i));
         }
 
         //最後一筆都放上新增按鈕
         ll_in_sv_Material.addView(buttonViewMaterial);
 
         //recipeMethod資料來源
+        int countOfMethod = 0;
+
         for (int i = 0; i <myRecipeMethodList.size(); i++)
         {
             View view = LayoutInflater.from(ActRecipeModify.this).inflate(R.layout.activity_act_recipe_upload_object, null); //物件來源
             LinearLayout llMethod = (LinearLayout) view.findViewById(R.id.llMethod); //取得recipe_upload_object中LinearLayout
+
             if(!myRecipeMethodList.get(i).contains("delete"))
             {
                 lblMethod = (TextView) llMethod.findViewById(R.id.lblMethod);
-                lblMethod.setText(String.valueOf(i + 1));
+                lblMethod.setText(String.valueOf(countOfMethod + 1));
 
                 txtMethod = (EditText) llMethod.findViewById(R.id.txtMethod); //獲取LinearLayout中各元件
                 txtMethod.setText(myRecipeMethodList.get(i)); //放入recipeMethod相關資料來源
@@ -540,6 +565,7 @@ public class ActRecipeModify extends AppCompatActivity
 
                 //將上面新建的例元件新增到主頁面的ll_in_sv中
                 ll_in_sv.addView(view);
+                countOfMethod ++ ;
             }
         }
         /*每次view更新將txtMethod上的文字記錄下來*/
@@ -553,8 +579,7 @@ public class ActRecipeModify extends AppCompatActivity
 
 
     /*將RecipeMaterial更新最新輸入資料*/
-    private void MyRecipeMaterialTextWatcher(final EditText editText)
-    {
+    private void MyRecipeMaterialNameTextWatcher(final EditText editText) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -568,10 +593,31 @@ public class ActRecipeModify extends AppCompatActivity
 
             @Override
             public void afterTextChanged(Editable s) {
-                myRecipeMaterialList.set(editText.getId(), editText.getText().toString());
+                myRecipeMaterialNameList.set(editText.getId(), editText.getText().toString());
             }
         });
     }
+
+    /*將RecipeMaterial更新最新輸入資料*/
+    private void MyRecipeMaterialAmountTextWatcher(final EditText editText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                myRecipeMaterialAmountList.set(editText.getId(), editText.getText().toString());
+            }
+        });
+    }
+
 
     /*將RecipeMethod更新最新輸入資料*/
     private void MyRecipeMethodTextWatcher(final EditText editText)
@@ -658,18 +704,18 @@ public class ActRecipeModify extends AppCompatActivity
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_picture, "imgPath");
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_detail, txtRecipeDetail.getText());
 
-            for (int i = 0; i < myRecipeMaterialList.size(); i++)
+            for (int i = 0; i < myRecipeMaterialNameList.size(); i++)
             {
                 JSONObject myJsonObject = new JSONObject();
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_id, recipeId);
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_id, myRecipeMaterialIdList.get(i));
                 //myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_id, String.format("m%03d", (i + 1)));
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_name,
-                        myRecipeMaterialList.get(i).toString());
+                        myRecipeMaterialNameList.get(i).toString());
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_amount,
-                        myRecipeMaterialList.get(i).toString());
+                        myRecipeMaterialAmountList.get(i).toString());
                 myJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material_picture, "noData");
-                Log.d("test",myRecipeMaterialIdList.get(i)+"\t"+myRecipeMaterialList.get(i));
+                Log.d("test",myRecipeMaterialIdList.get(i)+"\t"+myRecipeMaterialNameList.get(i)+"\t"+myRecipeMaterialAmountList.get(i));
                 myRecipeMaterialJsonArray.put(i, myJsonObject.toString());
             }
 
@@ -772,7 +818,7 @@ public class ActRecipeModify extends AppCompatActivity
 
 
     private TextView lblMethod, lblMaterial;
-    private EditText txtMethod, txtMaterial, txtRecipeName, txtRecipeAmount,
+    private EditText txtMethod, txtMaterialName,txtMaterialAmount, txtRecipeName, txtRecipeAmount,
             txtRecipeCookTime, txtRecipeDetail;
     private Button btnRecipeInsert, btnRecipeCancel, btnAddMethodTxtList,
             btnDelete, btnAddMaterialTxtList, btnDeleteMaterial, btnRecipeImgCamera, btnRecipeImg;

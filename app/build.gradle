@@ -22,7 +22,7 @@ android {
     }
     packagingOptions {
         pickFirst 'META-INF/LICENSE'
-        pickFirst  'META-INF/io.netty.versions.properties'
+        pickFirst 'META-INF/io.netty.versions.properties'
         pickFirst 'META-INF/INDEX.LIST'
     }
 
@@ -46,6 +46,7 @@ dependencies {
     compile 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
     compile 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
     testCompile 'junit:junit:4.12'
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.google.android.gms:play-services:10.2.6'
@@ -59,7 +60,6 @@ dependencies {
     compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
-    testCompile 'junit:junit:4.12'
     compile 'com.google.apis:google-api-services-translate:v2-rev51-1.22.0'
-
+    testCompile 'junit:junit:4.12'
 }

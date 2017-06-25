@@ -100,6 +100,7 @@ public class Frag_Recipe_Container extends Fragment {
 
         final Frag_Recipe_Gallery frag_recipe_gallery = new Frag_Recipe_Gallery();
         final Frag_Recipe_Manage frag_recipe_manage = new Frag_Recipe_Manage();
+        final Frag_Recipe_FindByIngredients frag_recipe_findByIngredients = new Frag_Recipe_FindByIngredients();
         fragMgr = getFragmentManager();
         fragmentTransaction = fragMgr.beginTransaction();
         fragmentTransaction.add(R.id.frag_recipe_container,frag_recipe_gallery).commit();
@@ -127,6 +128,13 @@ public class Frag_Recipe_Container extends Fragment {
 
                     fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     fragmentTransaction.replace(R.id.frag_recipe_container,frag_recipe_manage);
+                    fragmentTransaction.commit();
+                }
+                if(position==2)
+                {
+
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    fragmentTransaction.replace(R.id.frag_recipe_container,frag_recipe_findByIngredients);
                     fragmentTransaction.commit();
                 }
             }
