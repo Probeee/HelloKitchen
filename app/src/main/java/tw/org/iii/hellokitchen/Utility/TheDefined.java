@@ -45,8 +45,8 @@ public class TheDefined
 
     /*server URL*/
     //public static final String Web_Server_URL = "http://192.168.1.110:8080/HelloKitchen0622";
-    public static final String Web_Server_URL = "http://192.168.1.98:8080/HelloKitchen0622";
-    //public static final String Web_Server_URL = "http://52.199.7.63:8080/HelloKitchen0622";
+  //  public static final String Web_Server_URL = "http://192.168.1.98:8080/HelloKitchen0622";
+    public static final String Web_Server_URL = "http://52.199.7.63:8080/HelloKitchen0623";
     //public static final String Web_Server_URL = "http://192.168.0.100:8080/HelloKitchen0622";
     /*JSON Key & Value*/
     public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";

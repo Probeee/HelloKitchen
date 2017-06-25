@@ -293,10 +293,12 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
             protected List<Recipes> doInBackground(Object... params)
             {
                 OkHttpClient client = new OkHttpClient();
+
                 FormBody body = new FormBody.Builder()
                         .add(TheDefined.Android_JSON_Key_Recipe_id, recipeId)
                         .add(TheDefined.Android_JSON_Key_Member_id, memberId)
                         .build();
+
                 Request request = new Request.Builder()
                         .url(TheDefined.Web_Server_URL + "/AndroidRecipeDeleteServlet")
                         .post(body)

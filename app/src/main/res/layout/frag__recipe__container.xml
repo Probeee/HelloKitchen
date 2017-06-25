@@ -31,7 +31,12 @@
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="食譜管理" />
+                    android:text="個人食譜管理" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="食材找食譜" />
 
             </android.support.design.widget.TabLayout>
         </LinearLayout>
