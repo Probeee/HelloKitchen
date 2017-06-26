@@ -186,37 +186,43 @@ public class Frag_Recipe_FindByIngredients extends Fragment
                     if (response.isSuccessful())
                     {
                         String responseString = response.body().string();
-                        try
-                        {
-                            JSONArray responseJSON = new JSONArray(responseString);
-                            for (int i = 0; i < responseJSON.length(); i++)
+                        if (!responseString.equals(TheDefined.Android_JSON_Value_Fail)) {
+                            try
                             {
-                                JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
-                                Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
-                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
-                                        jsonObject.getString(TheDefined.Android_JSON_Key_Member_id),
-                                        jsonObject.getString(TheDefined.Android_JSON_Key_Upload_date),
-                                        Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
-                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
-                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
-                                        TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture),
-                                        jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_detail));
+                                JSONArray responseJSON = new JSONArray(responseString);
+                                for (int i = 0; i < responseJSON.length(); i++)
+                                {
+                                    JSONObject jsonObject = new JSONObject(responseJSON.get(i).toString());
+                                    Recipes myRecipes = new Recipes(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_id),
+                                            jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_name),
+                                            jsonObject.getString(TheDefined.Android_JSON_Key_Member_id),
+                                            jsonObject.getString(TheDefined.Android_JSON_Key_Upload_date),
+                                            Boolean.valueOf(jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_status)),
+                                            jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_amount),
+                                            jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_cooktime),
+                                            TheDefined.Web_Server_URL + "/" + jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_picture),
+                                            jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_detail));
 
-                                recipesList.add(myRecipes);
-                                Log.d("myRecipes", myRecipes.getRecipe_id());
-                                Log.d("myRecipes", myRecipes.getRecipe_name());
-                                Log.d("myRecipes", myRecipes.getMember_id());
-                                Log.d("myRecipes", "" + myRecipes.getRecipe_status());
-                                Log.d("myRecipes", myRecipes.getRecipe_amount());
-                                Log.d("myRecipes", myRecipes.getRecipe_cooktime());
-                                Log.d("myRecipes", myRecipes.getRecipe_picture());
-                                Log.d("myRecipes", myRecipes.getRecipe_detail());
+                                    recipesList.add(myRecipes);
+                                    Log.d("myRecipes", myRecipes.getRecipe_id());
+                                    Log.d("myRecipes", myRecipes.getRecipe_name());
+                                    Log.d("myRecipes", myRecipes.getMember_id());
+                                    Log.d("myRecipes", "" + myRecipes.getRecipe_status());
+                                    Log.d("myRecipes", myRecipes.getRecipe_amount());
+                                    Log.d("myRecipes", myRecipes.getRecipe_cooktime());
+                                    Log.d("myRecipes", myRecipes.getRecipe_picture());
+                                    Log.d("myRecipes", myRecipes.getRecipe_detail());
+                                }
                             }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            TheDefined.showToastByRunnable(getActivity(), "查無相關食譜", Toast.LENGTH_LONG);
+                            message.cancel();
                         }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
+
                     }
                 } catch (Exception e)
                 {
@@ -231,7 +237,7 @@ public class Frag_Recipe_FindByIngredients extends Fragment
             protected void onPostExecute(List<Recipes> objects)
             {
                 super.onPostExecute(objects);
-                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery, 1);
+                adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList, photoGallery,0);
                 photoGallery.setAdapter(adapter);
                 message.cancel();
             }

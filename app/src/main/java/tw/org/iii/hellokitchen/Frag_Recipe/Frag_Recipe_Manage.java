@@ -112,6 +112,16 @@ public class Frag_Recipe_Manage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        photoGallery.setAdapter(null);
+        recipesList.clear();
         try
         {
             servlet_Recipe_Manage_Data();
@@ -125,6 +135,7 @@ public class Frag_Recipe_Manage extends Fragment {
             e.printStackTrace();
         }
     }
+
     @Override
     public void onDestroyView()
     {
@@ -139,8 +150,10 @@ public class Frag_Recipe_Manage extends Fragment {
         recipesList.clear();
     }
 
+
+
     /*從servlet將食譜抓下來*/
-    private void servlet_Recipe_Manage_Data() throws IOException, JSONException
+    public void servlet_Recipe_Manage_Data() throws IOException, JSONException
     {
         final ProgressDialog message = new ProgressDialog(getActivity());
         message.setProgressStyle(ProgressDialog.STYLE_SPINNER);

@@ -257,6 +257,22 @@ public class Frag_Foods_Register extends Fragment {
         public void afterTextChanged(Editable s) {
         }
     };
+    private TextWatcher txtIngredient_TextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            myIngredients.setName(txtIngredient.getText().toString());
+        }
+    };
 
     private void clear() {
         txtIngredient.setText("");
@@ -601,6 +617,7 @@ public class Frag_Foods_Register extends Fragment {
 
         lblDetails = (TextView) v.findViewById(R.id.lblDetails);
         txtIngredient = (EditText) v.findViewById(R.id.txtIngredient);
+        txtIngredient.addTextChangedListener(txtIngredient_TextWatcher);
         txtAmount = (EditText) v.findViewById(R.id.txtAmount);
         txtAmount.addTextChangedListener(txtAmount_TextWatcher);
         txtBuyDate = (EditText) v.findViewById(R.id.txtBuyDate);

@@ -1,5 +1,7 @@
 package tw.org.iii.hellokitchen.Activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -50,7 +52,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import tw.org.iii.hellokitchen.Entity.Recipes_Material;
 import tw.org.iii.hellokitchen.Entity.Recipes_Method;
+import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Container;
+import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Manage;
 import tw.org.iii.hellokitchen.R;
+import tw.org.iii.hellokitchen.Utility.RecipeGalleryAdapterPicasso;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 
@@ -275,8 +280,10 @@ public class ActRecipeModify extends AppCompatActivity
         recipeId = bundle.getString("recipeId");
         recipeName = bundle.getString("recipeName");
         recipeAmount = bundle.getString("recipeAmount");
+        recipeAmount.replace("人份","");
         recipeStatus =  bundle.getBoolean("recipeStatus");
         recipeCooktime = bundle.getString("recipeCooktime");
+        recipeCooktime.replace("分鐘","");
         recipePicture =bundle.getString("recipePicture");
         memberID =bundle.getString("MemberID");
         recipeDetail = bundle.getString("recipeDetail");
@@ -699,8 +706,8 @@ public class ActRecipeModify extends AppCompatActivity
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_name, txtRecipeName.getText());
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Member_id, userEmail);
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_status, recipeStatus);
-            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_amount, txtRecipeAmount.getText() + "人份");
-            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_cooktime, txtRecipeCookTime.getText() + "分鐘");
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_amount, txtRecipeAmount.getText() );
+            myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_cooktime, txtRecipeCookTime.getText() );
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_picture, "imgPath");
             myRecipeJsonObject.put(TheDefined.Android_JSON_Key_Recipe_detail, txtRecipeDetail.getText());
 
@@ -779,19 +786,15 @@ public class ActRecipeModify extends AppCompatActivity
                     if (response.isSuccessful())
                     {
                         String responseString = response.body().string();
-                        //回傳的內容轉存為JSON物件
-                        JSONObject responseJSON = new JSONObject(responseString);
-                        Log.d("responseString",responseString);
-                        //取得Message的屬性
-                        String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
                         if (response.isSuccessful())
                         {
-                            if (info.equals(TheDefined.Android_JSON_Value_Success))
+                            if (responseString.equals(TheDefined.Android_JSON_Value_Success))
                             {
                                 TheDefined.showToastByRunnable(ActRecipeModify.this, "更新成功", Toast.LENGTH_LONG);
                                 message.cancel();
-                                onBackPressed();
-                            } else if (info.equals(TheDefined.Android_JSON_Value_Fail))
+                                finish();
+
+                            } else if (responseString.equals(TheDefined.Android_JSON_Value_Fail))
                             {
                                 TheDefined.showToastByRunnable(ActRecipeModify.this, "更新失敗", Toast.LENGTH_LONG);
                                 message.cancel();
@@ -809,7 +812,7 @@ public class ActRecipeModify extends AppCompatActivity
                 {
                     TheDefined.showToastByRunnable(ActRecipeModify.this, "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
-                    e.printStackTrace();
+                    Log.d("Error",e.getMessage());
                 }
             }
         }).start();
@@ -827,4 +830,7 @@ public class ActRecipeModify extends AppCompatActivity
     //private LinearLayout llImageView;
     private ImageView llImageView;
     private RadioGroup radioStatus;
+
+    FragmentManager fragMgr;
+    FragmentTransaction fragmentTransaction ;
 }
