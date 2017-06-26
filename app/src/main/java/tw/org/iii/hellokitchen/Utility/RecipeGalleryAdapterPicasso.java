@@ -61,6 +61,8 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
     private int tabNum ;
     private RecipeGalleryAdapterPicasso adapter;
 
+
+
     public RecipeGalleryAdapterPicasso(Context context, List<Recipes> objects, GridView photoGridView,int tabNum)
     {
         super(context, 0, objects );
@@ -85,6 +87,8 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         }
 
     }
+
+
 
     /**從List裡面的物件產生畫面**/
     @Override
@@ -236,6 +240,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
         bundle.putString("MemberID", recipeObjects.get(position).getMember_id());
         bundle.putString("recipeDetail", recipeObjects.get(position).getRecipe_detail());
         bundle.putString("recipeUploadDate", recipeObjects.get(position).getUpload_date());
+
 
         if(tabNum ==0)
         {

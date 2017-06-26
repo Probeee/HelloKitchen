@@ -129,6 +129,8 @@ public class Frag_Recipe_Container extends Fragment {
                     fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     fragmentTransaction.replace(R.id.frag_recipe_container,frag_recipe_manage);
                     fragmentTransaction.commit();
+
+
                 }
                 if(position==2)
                 {
