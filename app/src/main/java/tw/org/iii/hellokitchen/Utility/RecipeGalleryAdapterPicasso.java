@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 
 import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -121,6 +123,8 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
                 .config(Bitmap.Config.ALPHA_8)
                 .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 75 / 100)
                 .tag(recipe_id)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(imageView);

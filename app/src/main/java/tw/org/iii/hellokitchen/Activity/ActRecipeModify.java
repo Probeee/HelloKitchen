@@ -34,6 +34,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.api.client.util.Base64;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -134,9 +136,10 @@ public class ActRecipeModify extends AppCompatActivity
 
             try
             {
+                //Picasso.with(this).load(uri).into(imageView);
                 //讀取照片，型態為Bitmap
                 recipeBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 800);
+                recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 1024);
                // BitmapDrawable background = new BitmapDrawable(recipeBitmap);
                 llImageView.setImageBitmap(recipeBitmap);
                // llImageView.setBackground(background);
@@ -148,7 +151,9 @@ public class ActRecipeModify extends AppCompatActivity
                 recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
 
 
-            }catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
         }
@@ -451,18 +456,20 @@ public class ActRecipeModify extends AppCompatActivity
         Picasso
                 .with(this)
                 .load(recipePicture)
-                .config(Bitmap.Config.ALPHA_8)
-                .resize(llImageView.getMeasuredWidth(), llImageView.getMeasuredHeight())
                 .tag(recipeId)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .placeholder(R.drawable.photo)   // optional
                 .error(R.drawable.icon_pictureloading_error)      // optional
                 .into(llImageView);
 
-        recipeBitmap = ((BitmapDrawable)llImageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
-        recipeImgBytes = stream.toByteArray();
-        recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
+       // ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        //recipeBitmap = ((BitmapDrawable)llImageView.getDrawable()).getBitmap();
+       // recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
+       // recipeImgBytes = stream.toByteArray();
+       // recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
+        Log.d("B64.1",recipeImgBytesBase64);
+        recipeImgBytesBase64 = "";
 
         txtRecipeName.setText(recipeName);
         txtRecipeDetail.setText(recipeDetail);
@@ -652,7 +659,7 @@ public class ActRecipeModify extends AppCompatActivity
     private View.OnClickListener btnRecipeInsert_Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (recipeImgBytesBase64.equals("") || recipeImgBytesBase64 == null)
+            if (recipeImgBytesBase64 == null)
             {
                 Toast.makeText(ActRecipeModify.this, "請加入食譜代表圖片", Toast.LENGTH_SHORT).show();
                 return;
@@ -745,7 +752,7 @@ public class ActRecipeModify extends AppCompatActivity
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Material, myRecipeMaterialJsonArray);
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_Method, myRecipeMethodJsonArray);
             myRecipesJsonObject.put(TheDefined.Android_JSON_Key_Recipe_picture_file, recipeImgBytesBase64);
-
+            Log.d("B64.2",recipeImgBytesBase64);
             recipesUpLoad(myRecipesJsonObject);
 
 
