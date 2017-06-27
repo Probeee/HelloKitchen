@@ -141,6 +141,7 @@ public class Frag_Recipe_FindByIngredients extends Fragment
             {   //沒過期才加入
                 indegredientList.add(i);
                 recipesNameList.add(i.getName());
+                Log.d("Name",i.getName());
             }
         }
         Collections.sort(indegredientList, new Comparator<Ingredients>()
@@ -172,9 +173,10 @@ public class Frag_Recipe_FindByIngredients extends Fragment
                 {
                     //上傳字串
                     jsonArrayRequest.put(recipesNameList.get(i));
+                    Log.d("Name",recipesNameList.get(i));
                 }
 
-                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                MediaType JSON = MediaType.parse("application/json; charset=UTF-8");
                 RequestBody body = RequestBody.create(JSON, jsonArrayRequest.toString());
                 Request request = new Request.Builder()
                         .url(TheDefined.Web_Server_URL + "/AndroidRecipeSearchServlet")
@@ -185,7 +187,9 @@ public class Frag_Recipe_FindByIngredients extends Fragment
                     Response response = client.newCall(request).execute();
                     if (response.isSuccessful())
                     {
+
                         String responseString = response.body().string();
+                        Log.d("Name",responseString);
                         if (!responseString.equals(TheDefined.Android_JSON_Value_Fail)) {
                             try
                             {
@@ -204,6 +208,7 @@ public class Frag_Recipe_FindByIngredients extends Fragment
                                             jsonObject.getString(TheDefined.Android_JSON_Key_Recipe_detail));
 
                                     recipesList.add(myRecipes);
+
                                     Log.d("myRecipes", myRecipes.getRecipe_id());
                                     Log.d("myRecipes", myRecipes.getRecipe_name());
                                     Log.d("myRecipes", myRecipes.getMember_id());

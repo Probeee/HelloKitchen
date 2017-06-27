@@ -139,6 +139,13 @@ public class Frag_Recipe_Gallery extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
         try
         {
             servlet_Recipe_Data();
@@ -151,6 +158,7 @@ public class Frag_Recipe_Gallery extends Fragment {
         {
             e.printStackTrace();
         }
+
     }
 
     private View.OnClickListener button__Click = new View.OnClickListener()
@@ -203,6 +211,9 @@ public class Frag_Recipe_Gallery extends Fragment {
         }
 
     };
+
+
+
     @Override
     public void onDestroyView()
     {

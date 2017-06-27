@@ -234,7 +234,7 @@ public class ActRecipeUpload extends AppCompatActivity
             {
                 //讀取照片，型態為Bitmap
                 //recipeBitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 800);
+                recipeBitmap = scaleBitmapDown(BitmapFactory.decodeStream(cr.openInputStream(uri)), 1024);
 
                 llImageView.setImageBitmap(recipeBitmap);
 
@@ -330,18 +330,17 @@ public class ActRecipeUpload extends AppCompatActivity
                     if (response.isSuccessful())
                     {
                         String responseString = response.body().string();
-                        //回傳的內容轉存為JSON物件
-                        JSONObject responseJSON = new JSONObject(responseString);
                         Log.d("responseString",responseString);
                         //取得Message的屬性
-                        String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
                         if (response.isSuccessful())
                         {
-                            if (info.equals(TheDefined.Android_JSON_Value_Success))
+                            if (responseString.equals(TheDefined.Android_JSON_Value_Success))
                             {
+                                Thread.sleep(5000);
                                 TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳成功", Toast.LENGTH_LONG);
-
-                            } else if (info.equals(TheDefined.Android_JSON_Value_Fail))
+                                message.cancel();
+                                finish();
+                            } else if (responseString.equals(TheDefined.Android_JSON_Value_Fail))
                             {
                                 TheDefined.showToastByRunnable(ActRecipeUpload.this, "上傳失敗", Toast.LENGTH_LONG);
                             }
