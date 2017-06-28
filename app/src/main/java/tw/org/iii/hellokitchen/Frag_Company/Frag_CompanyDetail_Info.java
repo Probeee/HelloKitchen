@@ -2,6 +2,7 @@ package tw.org.iii.hellokitchen.Frag_Company;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -32,7 +33,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import tw.org.iii.hellokitchen.Activity.ActMessageUserToCompany;
 import tw.org.iii.hellokitchen.R;
+import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,6 +59,7 @@ public class Frag_CompanyDetail_Info extends Fragment {
     String companyTel ;
     String companyEmail ;
     String companyOwner ;
+    private SharedPreferences table ;
 
     private View.OnClickListener btnPhone_Click = new View.OnClickListener() {
         @Override
@@ -74,6 +78,31 @@ public class Frag_CompanyDetail_Info extends Fragment {
             mail.putExtra(Intent.EXTRA_EMAIL, new String[] {textView_email.getText().toString()});
             mail.putExtra(Intent.EXTRA_SUBJECT, companyName + "貴公司您好，想請問裝修事項");
             startActivity(mail);
+        }
+    };
+
+    private View.OnClickListener btnMessage_Click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            /*if(TheDefined.LOGIN_USER_IDENT.contains("USER"))
+            {*/
+                table = getActivity().getSharedPreferences("LoginUser",0);
+                bundle.putString("userAccount",table.getString("UserEmail", ""));
+                bundle.putString("companyAccount", companyEmail);
+                intent.setClass(getActivity(), ActMessageUserToCompany.class);
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            /*}
+            else if (TheDefined.LOGIN_USER_IDENT.contains("COMPANY"))
+            {
+
+            }
+            else
+            {
+                return;
+            }*/
         }
     };
 
@@ -133,10 +162,14 @@ public class Frag_CompanyDetail_Info extends Fragment {
         textView_tel.setText(companyTel);
         textView_address.setText(companyAddress);
 
+
         btnMail = (Button) v.findViewById(R.id.btnMail);
         btnMail.setOnClickListener(btnMail_Click);
         btnPhone = (Button) v.findViewById(R.id.btnPhone);
         btnPhone.setOnClickListener(btnPhone_Click);
+        btnMessage = (Button)v.findViewById(R.id.btn_message);
+        btnMessage.setOnClickListener(btnMessage_Click);
+
     }
 
     private void GetInfo()
@@ -155,6 +188,6 @@ public class Frag_CompanyDetail_Info extends Fragment {
     TextView textView_tel;
     TextView textView_email;
     TextView textView_address;
-    Button btnMail, btnPhone;
+    Button btnMail, btnPhone,btnMessage;
 
 }

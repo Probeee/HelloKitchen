@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,9 +34,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.api.client.util.Base64;
-import com.google.api.services.vision.v1.model.Image;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -241,7 +239,7 @@ public class ActRecipeUpload extends AppCompatActivity
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
                 recipeImgBytes = stream.toByteArray();
-                recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
+                recipeImgBytesBase64 = Base64.encodeToString(recipeImgBytes, Base64.NO_WRAP);
 
 
             }catch (IOException e) {
