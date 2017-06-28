@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -33,7 +34,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.api.client.util.Base64;
+
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -148,7 +149,7 @@ public class ActRecipeModify extends AppCompatActivity
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 recipeBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream );
                 recipeImgBytes = stream.toByteArray();
-                recipeImgBytesBase64 = Base64.encodeBase64String(recipeImgBytes);
+                recipeImgBytesBase64 = Base64.encodeToString(recipeImgBytes, Base64.NO_WRAP);
 
 
             }

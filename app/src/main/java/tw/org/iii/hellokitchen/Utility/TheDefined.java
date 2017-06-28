@@ -15,6 +15,7 @@ public class TheDefined
 {
     public static final String LOGIN_USER_NAME = "LOGIN_USER_NAME" ;
     public static final String LOGIN_USER_MAIL = "LOGIN_USER_MAIL" ;
+    public static final String LOGIN_USER_IDENT = "LOGIN_USER_IDENT" ;
 
     //--GoogleMap & GooglePlace--//
     public static final String StringBuilder_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
@@ -46,7 +47,7 @@ public class TheDefined
     /*server URL*/
     //public static final String Web_Server_URL = "http://192.168.1.110:8080/HelloKitchen0622";
     //public static final String Web_Server_URL = "http://192.168.1.119:8080/HelloKitchen27";
-    public static final String Web_Server_URL = "http://52.199.7.63:8080/HelloKitchen";
+
     //public static final String Web_Server_URL = "http://192.168.0.100:8080/HelloKitchen0622";
     /*JSON Key & Value*/
     public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
@@ -81,6 +82,7 @@ public class TheDefined
     //---------------------------------------------------------------------------------------------------
     public static final String Android_JSONArray_Key_Recipe_Material="Android_JSONArray_Key_Recipe_Material";
     public static final String Android_JSONArray_Key_Recipe_Method = "Android_JSONArray_Key_Recipe_Method";
+    public static final String Android_JSONArray_Key_Message = "Android_JSONArray_Key_Message";
     //------------------------------------------------------------------------------------------------
     public static final String Android_JSON_Key_Information = "Android_JSON_Key_Information";  //JSON 回傳訊息Key
     public static final String Android_JSON_Value_Success = "Android_JSON_Value_Success";      //JSON 回傳訊息Value
@@ -104,5 +106,10 @@ public class TheDefined
     public static final String Android_JSON_Key_Company_Picture_description ="Android_JSON_Key_Company_Picture_description";
     public static final String Android_JSON_Key_Company_Picture_name ="Android_JSON_Key_Company_Picture_name";
     public static final String Android_JSON_Key_Company_Picture_path ="Android_JSON_Key_Company_Picture_path";
+    //-------JSON KEY For Message
+    public static final String Android_JSON_Key_Message_Sender ="Android_JSON_Key_Message_Sender";
+    public static final String Android_JSON_Key_Message_Receiver ="Android_JSON_Key_Message_Receiver";
+    public static final String Android_JSON_Key_Message_Message ="Android_JSON_Key_Message_Message";
+    public static final String Android_JSON_Key_Message_Time ="Android_JSON_Key_Message_Time";
 
 }

@@ -268,6 +268,8 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             // fragmentTransaction.addToBackStack(null);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_company_container).commit();
             fab.setVisibility(View.INVISIBLE);
+            //增加一個變數來判斷是廠商還是使用者
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

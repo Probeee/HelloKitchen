@@ -45,8 +45,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
     compile 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
-    testCompile 'junit:junit:4.12'
 
+    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     compile 'com.google.android.gms:play-services:10.2.6'

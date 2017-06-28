@@ -147,6 +147,7 @@ public class Frag_Login extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString(TheDefined.LOGIN_USER_NAME, table.getString("UserName", ""));
             bundle.putString(TheDefined.LOGIN_USER_MAIL ,table.getString("UserEmail", ""));
+
             intent.putExtras(bundle);
             startActivity(intent);
             getActivity().finish();
