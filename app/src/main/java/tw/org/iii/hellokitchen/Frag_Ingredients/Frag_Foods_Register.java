@@ -552,7 +552,7 @@ public class Frag_Foods_Register extends Fragment {
                 }
                 //Set your API-Key from https://console.developers.google.com/
                 Log.d("test","BeforeExcuted");
-                list.setKey("AIzaSyAWwN_1aKCGPkR7oPrXBGzzvJGiY12wVFo");
+                list.setKey(TheDefined.GoogleApiKey);
                 TranslationsListResponse response = null;
                 try
                 {

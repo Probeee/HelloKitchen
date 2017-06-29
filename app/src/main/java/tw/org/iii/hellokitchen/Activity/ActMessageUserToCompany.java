@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +46,8 @@ public class ActMessageUserToCompany extends AppCompatActivity
     private String companyAccount;
     private List<Message> messageList ;
     private ChatArrayAdapter chatArrayAdapter;
+    private LinearLayout singleMessageContainer;
+    private LinearLayout singleMessageBigContainer;
 
 
     View.OnClickListener btnSendMessage_Click = new View.OnClickListener()
@@ -50,17 +55,89 @@ public class ActMessageUserToCompany extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
-            //sendChatMessage();
+            sendChatMessage();
         }
     };
 
     private void sendChatMessage()
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd_HH:mm:ss");
-        String currentDateandTime = sdf.format(new Date());
-        chatArrayAdapter.add(new Message(userAccount,companyAccount, editTextMessage.getText().toString(),currentDateandTime));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String currentDateAndTime = sdf.format(new Date());
+        final Message newMessage = new Message(userAccount,companyAccount, editTextMessage.getText().toString(),currentDateAndTime);
+        chatArrayAdapter.add(newMessage);
         editTextMessage.setText("");
 
+        new AsyncTask<Void, Object, Void>()
+        {
+            @Override
+            protected Void doInBackground(Void... params)
+            {
+
+                String responseString = "";
+                OkHttpClient client = new OkHttpClient();
+                JSONObject myRequestJsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
+                try
+                {
+                    myRequestJsonObject.put("action","uploadnewmessage");
+                    myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Sender,newMessage.getSender());
+                    myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Receiver,newMessage.getReceiver());
+                    myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Message,newMessage.getMessage());
+                    myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Time,newMessage.getTime());
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                RequestBody body = RequestBody.create(JSON, myRequestJsonObject.toString());
+                Request request = new Request.Builder()
+                        .url(TheDefined.Web_Server_URL + "/AndroidMessageServlet")
+                        .post(body)
+                        .build();
+
+                try
+                {
+                    Response response = client.newCall(request).execute();
+                    if (response.isSuccessful())
+                    {
+                        responseString = response.body().string();
+                        if (!responseString.equals(TheDefined.Android_JSON_Value_Fail))
+                        {
+                            try
+                            {
+                                JSONObject jsonMessages= new JSONObject(responseString);
+                                Log.d("response",responseString);
+                                if(jsonMessages.getString("responseString").equalsIgnoreCase("sendserversuccess"))
+                                {
+                                   // callFireBase();
+                                }
+                                else
+                                {
+
+                                }
+
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            //無對話訊息;
+                        }
+                    }
+                } catch (Exception e)
+                {
+
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+
+        }.execute();
     }
 
 
@@ -71,7 +148,8 @@ public class ActMessageUserToCompany extends AppCompatActivity
         setContentView(R.layout.act_message_user_to_company);
         GetInfo();
         InitialComponent();
-       // loadMessagesFromServer();
+        loadMessagesFromServer();
+
     }
 
 
@@ -85,10 +163,9 @@ public class ActMessageUserToCompany extends AppCompatActivity
     private void InitialComponent()
     {
         lvMessage = (ListView)findViewById(R.id.listViewMessageUtoCom);
-        editTextMessage = (EditText)findViewById(R.id.inputMessage);
         btnSendMessage = (Button)findViewById(R.id.buttonSendMessage);
         btnSendMessage.setOnClickListener(btnSendMessage_Click);
-        chatArrayAdapter = new ChatArrayAdapter(getApplicationContext(), R.layout.layout_list_message);
+        editTextMessage = (EditText)findViewById(R.id.inputMessage);
     }
 
     private void loadMessagesFromServer()
@@ -106,6 +183,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
                 JSONObject myRequestJsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
                 try
                 {
+                    myRequestJsonObject.put("action","downloadallmessages");
                     myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Sender,userAccount);
                     myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Receiver,companyAccount);
                 }
@@ -121,32 +199,35 @@ public class ActMessageUserToCompany extends AppCompatActivity
                         .url(TheDefined.Web_Server_URL + "/AndroidMessageServlet")
                         .post(body)
                         .build();
+                Log.d("response",myRequestJsonObject.toString());
                 try
                 {
                     Response response = client.newCall(request).execute();
                     if (response.isSuccessful())
                     {
                         responseString = response.body().string();
-
-                        try
-                        {
-                            myRequestJsonObject = new JSONObject(responseString);
-                            JSONArray jsonMessages= new JSONArray(myRequestJsonObject.get(TheDefined.Android_JSONArray_Key_Message).toString());
-                            for (int i = 0; i < jsonMessages.length(); i++)
+                        if (!responseString.equals(TheDefined.Android_JSON_Value_Fail)) {
+                            try
                             {
-                                JSONObject jsonRM = new JSONObject(jsonMessages.get(i).toString());
-                                Message myMessage = new Message(jsonRM.getString(TheDefined.Android_JSON_Key_Message_Sender),
-                                        jsonRM.getString(TheDefined.Android_JSON_Key_Message_Receiver),
-                                        jsonRM.getString(TheDefined.Android_JSON_Key_Message_Message),
-                                        jsonRM.getString(TheDefined.Android_JSON_Key_Message_Time));
-                                messageList.add(myMessage);
+                                JSONArray jsonMessages= new JSONArray(responseString);
+                                Log.d("response",responseString);
+                                for (int i = 0; i < jsonMessages.length(); i++)
+                                {
+                                    JSONObject jsonRM = new JSONObject(jsonMessages.get(i).toString());
+                                    Message myMessage = new Message(jsonRM.getString(TheDefined.Android_JSON_Key_Message_Sender),
+                                            jsonRM.getString(TheDefined.Android_JSON_Key_Message_Receiver),
+                                            jsonRM.getString(TheDefined.Android_JSON_Key_Message_Message),
+                                            jsonRM.getString(TheDefined.Android_JSON_Key_Message_Time));
+                                    messageList.add(myMessage);
+                                }
                             }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            //無對話訊息;
                         }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
-
                     }
                 } catch (Exception e)
                 {
@@ -169,10 +250,15 @@ public class ActMessageUserToCompany extends AppCompatActivity
 
     private void AddDataToListView()
     {
+
+
+        chatArrayAdapter = new ChatArrayAdapter(getApplicationContext(), R.layout.layout_list_message);
         lvMessage.setAdapter(chatArrayAdapter);
         lvMessage.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        lvMessage.setAdapter(chatArrayAdapter);
+        //lvMessage.setAdapter(chatArrayAdapter);
         lvMessage.setSelection(chatArrayAdapter.getCount() - 1);
+
+
     }
 
     public class ChatArrayAdapter extends ArrayAdapter
@@ -180,7 +266,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
 
         private TextView chatText;
         private TextView chatTimeText;
-        private LinearLayout singleMessageContainer;
+
 
 
         public void add(Message object)
@@ -213,12 +299,28 @@ public class ActMessageUserToCompany extends AppCompatActivity
                 row = inflater.inflate( R.layout.layout_list_message, parent, false);
             }
             singleMessageContainer = (LinearLayout) row.findViewById(R.id.singleMessageContainer);
+            singleMessageBigContainer = (LinearLayout) row.findViewById(R.id.singleMessageBigContainer);
+
             Message chatMessageObj = getItem(position);
             chatText = (TextView) row.findViewById(R.id.singleMessage);
             chatText.setText(chatMessageObj.getMessage());
             chatTimeText = (TextView) row.findViewById(R.id.singleMessageTime);
-            chatTimeText.setText(chatMessageObj.getTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            try
+            {
+                Date date = sdf.parse(chatMessageObj.getTime());
+                SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String dateString = sdf2.format(date);
+                chatTimeText.setText(dateString);
+            } catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+
             singleMessageContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
+            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? R.drawable.customborderoutmessage:R.drawable.customborderinmessage);
+            singleMessageBigContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
+
             return row;
         }
 
