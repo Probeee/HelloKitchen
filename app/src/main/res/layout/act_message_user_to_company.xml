@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight="6"
+        android:layout_weight="9"
+        android:divider="@color/azure"
         android:elevation="0dp"
         android:padding="3dp"></ListView>
 
