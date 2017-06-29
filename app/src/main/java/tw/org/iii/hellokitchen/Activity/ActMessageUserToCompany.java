@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -114,7 +116,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
                                 }
                                 else
                                 {
-
+                                    Toast.makeText(getBaseContext(),"伺服器沒有回應 請重新嘗試",Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -168,6 +170,19 @@ public class ActMessageUserToCompany extends AppCompatActivity
         editTextMessage = (EditText)findViewById(R.id.inputMessage);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        //左上角的返回鍵
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
     private void loadMessagesFromServer()
     {
         messageList = new ArrayList<>();

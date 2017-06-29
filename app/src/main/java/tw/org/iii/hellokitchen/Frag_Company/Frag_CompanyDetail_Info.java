@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import tw.org.iii.hellokitchen.Activity.ActMessageCompanyToUser;
 import tw.org.iii.hellokitchen.Activity.ActMessageUserToCompany;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
@@ -92,6 +93,7 @@ public class Frag_CompanyDetail_Info extends Fragment {
                 bundle.putString("userAccount",table.getString("UserEmail", ""));
                 bundle.putString("companyAccount", companyEmail);
                 intent.setClass(getActivity(), ActMessageUserToCompany.class);
+               // intent.setClass(getActivity(), ActMessageCompanyToUser.class);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             /*}
