@@ -199,7 +199,7 @@ public class Frag_Login extends Fragment {
         }
     };
 
-    /*SQLite 登入方法*/
+   /* *//*SQLite 登入方法*//*
     private void find_the_Account()
     {
         //找尋是否有該會員
@@ -237,7 +237,7 @@ public class Frag_Login extends Fragment {
         {
             Toast.makeText(getActivity(),ex.getMessage(),Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
     /*facebook 註冊登入監聽事件*/
     private void processFacebookLogin() {
@@ -461,10 +461,17 @@ public class Frag_Login extends Fragment {
                         //取得Message的屬性
                         String info = responseJSON.getString(TheDefined.Android_JSON_Key_Information);
                         String memberName = responseJSON.getString(TheDefined.Android_JSON_Key_Member_Name);
+
+
+
                         Log.d("info", responseString);
                         Log.d("member_name", responseString);
 
-                        if (info.equals(TheDefined.Android_JSON_Value_Success)) {
+                        if (info.equals(TheDefined.Android_JSON_Value_Success))
+                        {
+                            String memberIdent = responseJSON.getString(TheDefined.LOGIN_USER_IDENT);
+                            Log.d("errorMsg",memberIdent);
+
                             Intent intent = new Intent();
                             intent.setClass(getActivity(),ActRealMain.class);
                             Bundle bundle = new Bundle();
@@ -475,6 +482,7 @@ public class Frag_Login extends Fragment {
                             SharedPreferences.Editor row = table.edit();
                             row.putString("UserEmail", email.getText().toString()).commit();
                             row.putString("UserName", memberName).commit();
+                            row.putString("UserIdent",memberIdent).commit();
 
                             intent.putExtras(bundle);
                             startActivity(intent);
@@ -488,6 +496,7 @@ public class Frag_Login extends Fragment {
                         }
                     }
                 } catch (Exception e) {
+                    Log.d("errorMsg",e.getMessage());
                     TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
                     e.printStackTrace();

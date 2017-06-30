@@ -89,13 +89,40 @@ public class Frag_CompanyDetail_Info extends Fragment {
             Bundle bundle = new Bundle();
             /*if(TheDefined.LOGIN_USER_IDENT.contains("USER"))
             {*/
-                table = getActivity().getSharedPreferences("LoginUser",0);
-                bundle.putString("userAccount",table.getString("UserEmail", ""));
-                bundle.putString("companyAccount", companyEmail);
+            table = getActivity().getSharedPreferences("LoginUser",0);
+            bundle.putString("userAccount",table.getString("UserEmail", ""));
+            bundle.putString("companyAccount", companyEmail);
+
+            if(table.getString("UserIdent", "").equalsIgnoreCase("user"))
+            {
+                //如果是使用者登入
                 intent.setClass(getActivity(), ActMessageUserToCompany.class);
-               // intent.setClass(getActivity(), ActMessageCompanyToUser.class);
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
+            }
+            else if(table.getString("UserIdent", "").equalsIgnoreCase("company"))
+            {
+                //如果是廠商登入
+                if(table.getString("UserEmail", "").equalsIgnoreCase(companyEmail))
+                {
+                    //如果該廠商選擇自己的頁面 開啟名單
+                    intent.setClass(getActivity(), ActMessageCompanyToUser.class);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+                else
+                {
+                    //如果該廠商沒選擇自己的頁面 同使用者登入
+                    intent.setClass(getActivity(), ActMessageUserToCompany.class);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+            }
+
+
+
+
+
             /*}
             else if (TheDefined.LOGIN_USER_IDENT.contains("COMPANY"))
             {

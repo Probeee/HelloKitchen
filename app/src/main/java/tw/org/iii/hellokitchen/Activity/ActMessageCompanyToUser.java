@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,14 +43,14 @@ public class ActMessageCompanyToUser extends AppCompatActivity
         setContentView(R.layout.act_message_company_to_user);
         GetInfo();
         InitialComponent();
-        memberList.add("test01@gmail.com");
+       /* memberList.add("test01@gmail.com");
         memberList.add("test02@gmail.com");
         memberList.add("test03@gmail.com");
         memberList.add("test04@gmail.com");
         memberList.add("test05@gmail.com");
-        memberList.add("test06@gmail.com");
-        //loadUsersFromServer();
-        AddDataToListView();
+        memberList.add("test06@gmail.com");*/
+        loadUsersFromServer();
+        //AddDataToListView();
     }
 
     private void GetInfo()
@@ -105,11 +106,11 @@ public class ActMessageCompanyToUser extends AppCompatActivity
                         {
                             try
                             {
-                                JSONObject jsonUsers= new JSONObject(responseString);
+                                JSONArray jsonUsers= new JSONArray(responseString);
 
                                 for (int i = 0; i < jsonUsers.length(); i++)
                                 {
-                                    String user = jsonUsers.getString(TheDefined.Android_JSON_Key_Message_Sender);
+                                    String user = jsonUsers.get(i).toString();
                                     memberList.add(user);
                                 }
                             }
@@ -156,7 +157,7 @@ public class ActMessageCompanyToUser extends AppCompatActivity
             Intent intent = new Intent();
             intent.setClass(ActMessageCompanyToUser.this, ActMessageUserToCompany.class);
             Bundle bundle = new Bundle();
-            TextView textView = (TextView) view.findViewById(R.id.listview_item);
+            TextView textView = (TextView) view.findViewById(R.id.listview_item_user);
             bundle.putString("userAccount",companyAccount );
             bundle.putString("companyAccount",String.valueOf(textView.getText()));
             Log.d("test",companyAccount);
@@ -206,10 +207,10 @@ public class ActMessageCompanyToUser extends AppCompatActivity
 
             if (convertView == null)
             {
-                convertView = inflater.inflate(R.layout.layout_list_of_details_method,null);
+                convertView = inflater.inflate(R.layout.layout_list_of_users,null);
                 // inflate custom layout called row
                 holder = new ViewHolder();
-                holder.tv =(TextView) convertView.findViewById(R.id.listview_item);
+                holder.tv =(TextView) convertView.findViewById(R.id.listview_item_user);
 
                 // initialize textview
                 convertView.setTag(holder);
