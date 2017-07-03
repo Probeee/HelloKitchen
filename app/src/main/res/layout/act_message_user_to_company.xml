@@ -4,21 +4,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/listViewMessageUtoCom"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="9"
-        android:divider="@color/azure"
-        android:elevation="0dp"
-        android:padding="3dp"></ListView>
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listViewMessageUtoCom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="9"
+            android:elevation="0dp"
+            android:padding="3dp"></ListView>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="5dp"
+        android:background="#000000" />
 
     <LinearLayout
         android:id="@+id/form"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
+        android:background="@drawable/customborder"
         android:elevation="0dp"
         android:gravity="bottom|right"
         android:orientation="horizontal">
