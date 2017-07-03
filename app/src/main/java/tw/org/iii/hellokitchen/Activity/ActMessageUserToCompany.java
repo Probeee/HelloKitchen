@@ -333,7 +333,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
             }
 
             singleMessageContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
-            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? R.drawable.customborderoutmessage:R.drawable.customborderinmessage);
+            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? R.drawable.out_message_bg : R.drawable.in_message_bg);
             singleMessageBigContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
 
             return row;
