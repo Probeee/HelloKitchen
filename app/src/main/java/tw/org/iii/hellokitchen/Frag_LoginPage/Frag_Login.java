@@ -287,11 +287,14 @@ public class Frag_Login extends Fragment {
 
                                 new Thread(new Runnable(){
                                     public void run(){
+
+                                        table = getActivity().getSharedPreferences("UserToken",0);
                                         OkHttpClient client = new OkHttpClient();
                                         JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
                                         try {
                                             jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, fbEmail);
                                             jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, fbId);
+                                            jsonObject.put(TheDefined.Android_User_Phone_Token, table.getString("PhoneToken", "Fail"));
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -436,11 +439,15 @@ public class Frag_Login extends Fragment {
 
         new Thread(new Runnable(){
             public void run(){
+
+                table = getActivity().getSharedPreferences("UserToken",0);
+
                 OkHttpClient client = new OkHttpClient();
                 JSONObject jsonObject = new JSONObject();  //用來當內層被丟進陣列內的JSON物件
                 try {
                     jsonObject.put(TheDefined.Android_JSON_Key_Member_Id, email.getText().toString().trim());
                     jsonObject.put(TheDefined.Android_JSON_Key_Member_Password, password.getText().toString().trim());
+                    jsonObject.put(TheDefined.Android_User_Phone_Token, table.getString("PhoneToken", "Fail"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

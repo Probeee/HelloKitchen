@@ -43,6 +43,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     private java.util.Calendar calendar;
     public String user_name;
     public String user_mail;
+    private static int navItem= 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,9 +71,9 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(0).setChecked(true).setEnabled(false);
         View hview = navigationView.getHeaderView(0);
         try
         {
@@ -241,6 +242,10 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        for(int i=0;i<3;i++)
+        {
+            navigationView.getMenu().getItem(i).setEnabled(true);
+        }
 
         if (id == R.id.nav_ingredients)
         {
@@ -260,17 +265,19 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
            // fragmentTransaction.addToBackStack(null);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_recipe_container).commit();
             fab.setVisibility(View.VISIBLE);
+
         }
         else if (id == R.id.nav_repair)
         {
             fragMgr = getFragmentManager();
             fragmentTransaction = fragMgr.beginTransaction();
             // fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_company_container).commit();
+            fragmentTransaction.replace(R.id.fragment_main_of_three_container, frag_company_container).commit();
             fab.setVisibility(View.INVISIBLE);
             //增加一個變數來判斷是廠商還是使用者
 
         }
+        item.setChecked(true).setEnabled(false);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -282,6 +289,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     FragmentManager fragMgr ;
     FragmentTransaction fragmentTransaction;
     FloatingActionButton fab;
+    NavigationView navigationView;
 
 
 }

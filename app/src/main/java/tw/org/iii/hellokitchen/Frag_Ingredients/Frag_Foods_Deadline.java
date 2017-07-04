@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -135,7 +136,7 @@ public class Frag_Foods_Deadline extends Fragment {
                 viewHolder.txt_name = (TextView) convertView.findViewById(R.id.indegredient_name);
                 viewHolder.txt_endDate = (TextView) convertView.findViewById(R.id.indegredient_deadDate);
                 viewHolder.txt_dayLeft = (TextView) convertView.findViewById(R.id.indegredient_dayLeft);
-                viewHolder.btn_delete = (Button)convertView.findViewById(R.id.btn_delete_ingredients);
+                viewHolder.btn_delete = (ImageButton)convertView.findViewById(R.id.btn_delete_ingredients);
                 convertView.setTag(viewHolder);
             }
             else
@@ -188,7 +189,7 @@ public class Frag_Foods_Deadline extends Fragment {
         private TextView txt_name;
         private TextView txt_endDate;
         private TextView txt_dayLeft;
-        private Button btn_delete;
+        private ImageButton btn_delete;
 
     }
 

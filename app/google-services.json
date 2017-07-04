@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "828850367485",
+    "firebase_url": "https://hellokitchen-23f77.firebaseio.com",
+    "project_id": "hellokitchen-23f77",
+    "storage_bucket": "hellokitchen-23f77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828850367485:android:7f6435548635fb14",
+        "android_client_info": {
+          "package_name": "tw.org.iii.hellokitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828850367485-e0oudi02igfis4gm9o5kv7jmcv08mcbn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.org.iii.hellokitchen",
+            "certificate_hash": "41f12c13427a39ba7daf01da5c07e5935ff85a37"
+          }
+        },
+        {
+          "client_id": "828850367485-5kmpo4pj3frtntmrb19tcpo1db4jctqf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.org.iii.hellokitchen",
+            "certificate_hash": "4bf251a2651c5a1f959657e5a085f5fa83225646"
+          }
+        },
+        {
+          "client_id": "828850367485-254fr63o8rrcoq76us3s27nccafj4vhn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6S2yfepGkyf6m_Xq98oUc70qLqwIhYoo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828850367485-254fr63o8rrcoq76us3s27nccafj4vhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

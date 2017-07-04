@@ -146,6 +146,7 @@ public class Frag_Recipe_Gallery extends Fragment {
     public void onResume()
     {
         super.onResume();
+        recipesList.clear();
         try
         {
             servlet_Recipe_Data();

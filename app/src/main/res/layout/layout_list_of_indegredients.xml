@@ -2,6 +2,7 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp" >
@@ -104,12 +105,13 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_delete_ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:text="刪除" />
+                android:background="@drawable/ic_trash_bin" />
 
         </LinearLayout>
 

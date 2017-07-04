@@ -140,7 +140,7 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
 
             // \n is for new line
             // Toast.makeText(getActivity(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-            tv_location.setText("Your Location is - Lat: " + latitude + " Long: "+ longitude  + "\n");
+            //tv_location.setText("Your Location is - Lat: " + latitude + " Long: "+ longitude  + "\n");
         }
         else
         {
@@ -163,8 +163,8 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
         MapsInitializer.initialize(getActivity());
         mgoogleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("You are here").snippet("Hello Kitty"));
-        CameraPosition position = CameraPosition.builder().target(new LatLng(latitude,longitude)).zoom(16).bearing(0).tilt(0).build();
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("您的位置").snippet(""));
+        CameraPosition position = CameraPosition.builder().target(new LatLng(latitude,longitude)).zoom(14).bearing(0).tilt(0).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(position));
     }
 
@@ -353,7 +353,9 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
                     // Placing a marker on the touched position
                     Marker m = mgoogleMap.addMarker(markerOptions);
 
+
                 }
+                tv_location.setText("您所在之位置方圓1公里內有:"+list.size()+"間超市!");
             }
             else
             {
@@ -403,6 +405,7 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
                     e.printStackTrace();
                 }
             }
+
             return placesList;
         }
 
