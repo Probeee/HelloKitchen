@@ -17,8 +17,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tw.org.iii.hellokitchen.Frag_Company.Frag_Company_Container;
 import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Container;
@@ -43,7 +48,9 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     private java.util.Calendar calendar;
     public String user_name;
     public String user_mail;
-    private static int navItem= 0;
+    private static List<String> fragments = new ArrayList<>();
+    private static List<Integer> navItems = new ArrayList<>();
+    String backStateName ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,8 +67,15 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         frag_company_container = new Frag_Company_Container();
         //一開始先顯示食材頁面
         fragMgr = getFragmentManager();
+
         fragmentTransaction = fragMgr.beginTransaction();
+        backStateName= frag_foods_container.getClass().getName();
+        fragments.add(backStateName);
+        navItems.add(0);
+        fragmentTransaction.addToBackStack(backStateName);
         fragmentTransaction.add(R.id.fragment_main_of_three_container,frag_foods_container).commit();
+        Log.d("List",fragments.get(0).toString());
+
 
         //左方導覽列初始化
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -113,6 +127,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     @Override
     public void onBackPressed()
     {
+        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if (drawer.isDrawerOpen(GravityCompat.START))
@@ -121,7 +136,32 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         }
         else
         {
-            super.onBackPressed();
+            if(fragments.size()>0 && navItems.size()>0)
+            {
+                fragments.remove(fragments.size()-1);
+                navigationView.getMenu().getItem(navItems.get(navItems.size()-1)).setEnabled(true).setChecked(false);
+                navItems.remove(navItems.size()-1);
+                Log.d("List",navItems.size()+"");
+                for(int i = 0 ;i <navItems.size();i++)
+                {
+                    Log.d("List",navItems.get(i).toString());
+                }
+                if(fragments.size() == 0)
+                {
+                    finish();
+                }
+                else
+                {
+                    navigationView.getMenu().getItem(navItems.get(navItems.size()-1)).setEnabled(false).setChecked(true);
+                }
+
+
+            }
+            else
+            {
+               return;
+            }
+
         }
     }
 
@@ -251,8 +291,13 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         {
             //選食材
             fragMgr = getFragmentManager();
+
             fragmentTransaction = fragMgr.beginTransaction();
-           // fragmentTransaction.addToBackStack(null);
+            backStateName= frag_foods_container.getClass().getName();
+
+            fragments.add(backStateName);
+            navItems.add(0);
+            fragmentTransaction.addToBackStack(backStateName);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_foods_container).commit();
             fab.setVisibility(View.INVISIBLE);
 
@@ -261,27 +306,45 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         {
             // 選食譜
             fragMgr = getFragmentManager();
+
             fragmentTransaction = fragMgr.beginTransaction();
-           // fragmentTransaction.addToBackStack(null);
+            backStateName= frag_recipe_container.getClass().getName();
+
+            fragments.add(backStateName);
+            navItems.add(1);
+            fragmentTransaction.addToBackStack(backStateName);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container,frag_recipe_container).commit();
             fab.setVisibility(View.VISIBLE);
+
 
         }
         else if (id == R.id.nav_repair)
         {
             fragMgr = getFragmentManager();
+
             fragmentTransaction = fragMgr.beginTransaction();
-            // fragmentTransaction.addToBackStack(null);
+            backStateName= frag_company_container.getClass().getName();
+
+            fragments.add(backStateName);
+            navItems.add(2);
+            fragmentTransaction.addToBackStack(backStateName);
             fragmentTransaction.replace(R.id.fragment_main_of_three_container, frag_company_container).commit();
             fab.setVisibility(View.INVISIBLE);
+
             //增加一個變數來判斷是廠商還是使用者
 
         }
         item.setChecked(true).setEnabled(false);
+        for(int i=0;i<fragments.size();i++)
+        {
+            Log.d("List",fragments.get(i));
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     Frag_Foods_Container frag_foods_container;
     Frag_Recipe_Container frag_recipe_container;

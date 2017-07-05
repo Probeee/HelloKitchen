@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/CardView.Dark"
     app:statusBarBackground="@color/orange"
     tools:context="tw.org.iii.hellokitchen.Activity.ActRealMain">
 
@@ -26,7 +27,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/holo_green_dark"
+                    android:background="?android:attr/colorPrimary"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
             </android.support.design.widget.AppBarLayout>

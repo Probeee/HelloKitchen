@@ -120,8 +120,10 @@ public class ActMessageUserToCompany extends AppCompatActivity
                             try
                             {
                                 String toToken = responseJsonObj.getString(TheDefined.Android_User_Phone_Token);
-                                Log.d("response2",responseString);
-                                callFirebaseMessages(toToken, newMessage.getSender());
+                                if (!toToken.equalsIgnoreCase(TheDefined.Android_JSON_Value_Null)) {
+                                    Log.d("response2",responseString);
+                                    callFirebaseMessages(toToken, newMessage.getSender());
+                                }
                             }
                             catch (JSONException e)
                             {
