@@ -18,8 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@drawable/nav_list_backgorund"
+        app:itemTextColor="@color/black"
         android:fitsSystemWindows="true"
+        android:persistentDrawingCache="all"
         app:headerLayout="@layout/nav_header_act__foods"
+
         app:menu="@menu/act__foods_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

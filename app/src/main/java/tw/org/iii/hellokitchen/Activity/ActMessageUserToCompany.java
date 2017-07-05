@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,10 +86,12 @@ public class ActMessageUserToCompany extends AppCompatActivity
                     myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Receiver,newMessage.getReceiver());
                     myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Message,newMessage.getMessage());
                     myRequestJsonObject.put(TheDefined.Android_JSON_Key_Message_Time,newMessage.getTime());
+                    Log.d("test","objectput");
                 }
                 catch (JSONException e)
                 {
                     e.printStackTrace();
+                    Log.d("test",e.getMessage());
                 }
 
                 MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -98,41 +101,43 @@ public class ActMessageUserToCompany extends AppCompatActivity
                         .post(body)
                         .build();
 
+                Log.d("test",myRequestJsonObject.toString());
+                Log.d("test",TheDefined.Web_Server_URL + "/AndroidMessageServlet");
                 try
                 {
                     Response response = client.newCall(request).execute();
+
+                    responseString = response.body().string();
+                    Log.d("test",responseString);
                     if (response.isSuccessful())
                     {
-                        responseString = response.body().string();
-                        if (!responseString.equals(TheDefined.Android_JSON_Value_Fail))
+                      //  responseString = response.body().string();
+                        JSONObject responseJsonObj = new JSONObject(responseString);
+                        Log.d("test","responseEnter");
+
+                        if (responseJsonObj.getString(TheDefined.Android_JSON_Key_Information).equals(TheDefined.Android_JSON_Value_Success))
                         {
                             try
                             {
-                                JSONObject jsonMessages= new JSONObject(responseString);
-                                Log.d("response",responseString);
-                                if(jsonMessages.getString("responseString").equalsIgnoreCase("sendserversuccess"))
-                                {
-                                   // callFireBase();
-                                }
-                                else
-                                {
-                                    Toast.makeText(getBaseContext(),"伺服器沒有回應 請重新嘗試",Toast.LENGTH_SHORT).show();
-                                }
-
+                                String toToken = responseJsonObj.getString(TheDefined.Android_User_Phone_Token);
+                                Log.d("response2",responseString);
+                                callFirebaseMessages(toToken, newMessage.getSender());
                             }
                             catch (JSONException e)
                             {
                                 e.printStackTrace();
+                                Log.d("test",e.getMessage());
                             }
                         }
                         else
                         {
-                            //無對話訊息;
+                            Toast.makeText(getBaseContext(),"伺服器沒有回應 請重新嘗試",Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (Exception e)
                 {
 
+                    Log.d("test",e.getMessage());
                     e.printStackTrace();
                 }
 
@@ -142,6 +147,45 @@ public class ActMessageUserToCompany extends AppCompatActivity
         }.execute();
     }
 
+    private void callFirebaseMessages(final String toToken, final String sender) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("body", "來自" + sender + "一則新訊息");
+                    jsonObject.put("sound", "default");
+                    JSONObject json = new JSONObject();
+                    json.put("to", toToken);
+                    json.put("notification", jsonObject);
+                    json.put("data", jsonObject);
+
+                    Log.d("json2", json.toString());
+                    RequestBody body = RequestBody.create(JSON, json.toString());
+                    Request request = new Request.Builder()
+                            .url("https://fcm.googleapis.com/fcm/send")
+                            .addHeader("Content-Type", "application/json")
+                            .addHeader("Authorization", TheDefined.FirebaseApiKey)
+                            .post(body)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    final String responseString = response.body().string();
+                    Log.d("responseString", responseString);
+                    /*if (response.isSuccessful())
+                    {
+
+                    }*/
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -182,7 +226,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     private void loadMessagesFromServer()
     {
         messageList = new ArrayList<>();
@@ -333,7 +377,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
             }
 
             singleMessageContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
-            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? R.drawable.out_message_bg : R.drawable.in_message_bg);
+            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? R.drawable.out_message_bg:R.drawable.in_message_bg);
             singleMessageBigContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
 
             return row;
