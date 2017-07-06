@@ -30,6 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:text="食材名稱"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
@@ -40,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="食材名稱"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -56,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:text="剩餘天數"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
@@ -66,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="剩餘天數"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -82,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:text="到期日期"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
@@ -92,26 +95,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="到期日期"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
 
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/btn_delete_ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_trash_bin" />
 
         </LinearLayout>
 

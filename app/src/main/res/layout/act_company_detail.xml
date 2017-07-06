@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/peachpuff"
+                android:background="?android:attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.AppBarLayout>
@@ -37,12 +37,11 @@
                 style="@style/MyTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/burlywood"
+                android:background="#A2D4AB"
                 android:fadeScrollbars="true"
-                app:tabIndicatorColor="@color/peachpuff"
+                app:tabIndicatorColor="@color/dimgrey"
                 app:tabIndicatorHeight="3dp"
-                app:tabSelectedTextColor="@color/ghostwhite"
-                app:tabTextColor="@color/com_facebook_button_background_color_disabled">
+                app:tabSelectedTextColor="@color/black">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"

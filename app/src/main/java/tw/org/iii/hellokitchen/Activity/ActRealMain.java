@@ -136,26 +136,27 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         }
         else
         {
-            if(fragments.size()>0 && navItems.size()>0)
+            if(fragments.size()>0&& navItems.size()>0)
             {
                 fragments.remove(fragments.size()-1);
                 navigationView.getMenu().getItem(navItems.get(navItems.size()-1)).setEnabled(true).setChecked(false);
                 navItems.remove(navItems.size()-1);
-                Log.d("List",navItems.size()+"");
-                for(int i = 0 ;i <navItems.size();i++)
-                {
-                    Log.d("List",navItems.get(i).toString());
-                }
                 if(fragments.size() == 0)
                 {
-                    finish();
+                   fragmentTransaction = fragMgr.beginTransaction();
+                    backStateName= frag_foods_container.getClass().getName();
+                    fragments.add(backStateName);
+                    navItems.add(0);
+                    fragmentTransaction.addToBackStack(backStateName);
+                    fragmentTransaction.add(R.id.fragment_main_of_three_container,frag_foods_container).commit();
+                    navigationView.getMenu().getItem(0).setChecked(true).setEnabled(false);
+                    return;
+                    //finish();
                 }
                 else
                 {
                     navigationView.getMenu().getItem(navItems.get(navItems.size()-1)).setEnabled(false).setChecked(true);
                 }
-
-
             }
             else
             {
@@ -236,7 +237,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
                 minutes =  String.valueOf(minute);
             }
             time = hours + ":" +  minutes ;
-            Toast.makeText(ActRealMain.this,time,Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActRealMain.this,"設定時間:"+time,Toast.LENGTH_SHORT).show();
             scheduleNotification(hourOfDay,minute);
 
 
@@ -267,7 +268,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
     {
         Notification.Builder builder = new Notification.Builder(ActRealMain.this);
         builder.setContentTitle("過期通知");
-        builder.setContentText("您有過期食材");
+        builder.setContentText("您有食材已過期，記得清理喔!");
         builder.setSmallIcon(R.drawable.account_icon);
         builder.setDefaults(Notification.DEFAULT_ALL);
         return builder.build();
@@ -294,7 +295,6 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
 
             fragmentTransaction = fragMgr.beginTransaction();
             backStateName= frag_foods_container.getClass().getName();
-
             fragments.add(backStateName);
             navItems.add(0);
             fragmentTransaction.addToBackStack(backStateName);
@@ -309,7 +309,6 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
 
             fragmentTransaction = fragMgr.beginTransaction();
             backStateName= frag_recipe_container.getClass().getName();
-
             fragments.add(backStateName);
             navItems.add(1);
             fragmentTransaction.addToBackStack(backStateName);
@@ -324,7 +323,6 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
 
             fragmentTransaction = fragMgr.beginTransaction();
             backStateName= frag_company_container.getClass().getName();
-
             fragments.add(backStateName);
             navItems.add(2);
             fragmentTransaction.addToBackStack(backStateName);

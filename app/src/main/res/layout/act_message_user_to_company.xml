@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
+        android:background="@color/cornsilk"
         android:orientation="vertical">
 
         <ListView
@@ -35,8 +36,8 @@
     <LinearLayout
         android:id="@+id/form"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="30dp"
+        android:layout_weight="1"
         android:background="@drawable/customborder"
         android:elevation="0dp"
         android:gravity="bottom|right"
@@ -56,7 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Send" />
+            android:text="送出"
+            android:textSize="24sp" />
     </LinearLayout>
 
 </LinearLayout>

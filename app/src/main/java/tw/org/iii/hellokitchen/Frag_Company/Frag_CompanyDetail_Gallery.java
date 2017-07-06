@@ -117,11 +117,11 @@ public class Frag_CompanyDetail_Gallery extends Fragment implements BaseSliderVi
         linearCover = (LinearLayout)v.findViewById(R.id.linearLayout_company_cover);
         LoadCover(linearCover);
         imageView = (ImageView)v.findViewById(R.id.imageView_CompanyLogo);
-        LoadLogo(imageView);
+
         mDemoSlider = (SliderLayout)v.findViewById(R.id.slider);
         myRMList= new ArrayList<>();
         LoadPicList();
-
+        LoadLogo(imageView);
         return v;
     }
 

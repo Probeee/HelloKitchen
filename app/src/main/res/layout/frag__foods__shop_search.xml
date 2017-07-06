@@ -20,7 +20,8 @@
                 android:id="@+id/textView_shopSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="shop" />
+                android:text=""
+                android:textSize="22sp" />
         </LinearLayout>
 
         <LinearLayout

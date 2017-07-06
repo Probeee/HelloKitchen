@@ -255,7 +255,8 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="25dp"
                     android:text="登錄食材"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:background="@drawable/custombutton"/>
             </LinearLayout>
 
             <LinearLayout
@@ -271,7 +272,8 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="50dp"
                     android:text="重新輸入"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:background="@drawable/custombutton"/>
             </LinearLayout>
         </LinearLayout>
 
