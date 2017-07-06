@@ -9,6 +9,7 @@
     tools:openDrawer="start">
 
     <include
+        style="@style/MyTabTextAppearance"
         layout="@layout/app_bar_act__foods"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -18,12 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/nav_list_backgorund"
-        app:itemTextColor="@color/black"
+        android:background="@color/antiquewhite"
         android:fitsSystemWindows="true"
         android:persistentDrawingCache="all"
         app:headerLayout="@layout/nav_header_act__foods"
-
+        app:itemTextAppearance="@style/NavDrawerTextStyle"
+        app:itemTextColor="@color/black"
         app:menu="@menu/act__foods_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -8,18 +8,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
+
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
@@ -46,6 +52,43 @@ public class Frag_Foods_Deadline extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private SwipeMenuListView.OnMenuItemClickListener lv_OnMenuItemClickListener = new SwipeMenuListView.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
+            switch (index) {
+                case 0:
+                    // delete
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("確定刪除該食材嗎?")
+                            .setPositiveButton("確認", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    // 確認
+                                    //TODO UPDATE the model here
+                                    myDBHelper = MyDBHelper.getInstance(getActivity());
+                                    db = myDBHelper.getWritableDatabase();
+                                    db.delete("tingredients","ingredients_id = "+indegredientList.get(position).get_id(),null);
+                                    indegredientList.remove(indegredientList.get(position));
+                                    myAdapter.notifyDataSetChanged();
+                                    myAdapter = new CustomAdapter_Ingredients(getActivity());
+                                    lv.setAdapter(myAdapter);
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    // 取消
+
+                                }
+                            });
+                    AlertDialog about_dialog = builder.create();
+                    about_dialog.show();
+                    break;
+            }
+            return false;
+        }
+    };
 
 
     public Frag_Foods_Deadline() {
@@ -84,13 +127,36 @@ public class Frag_Foods_Deadline extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.frag__foods__deadline, container, false);
-        lv = (ListView) v.findViewById(R.id.indegredient_list);
+        lv = (SwipeMenuListView) v.findViewById(R.id.indegredient_list);
         indegredientList = new ArrayList<>();
         myDBHelper = MyDBHelper.getInstance(getActivity());
         db = myDBHelper.getWritableDatabase();
         Query();
         myAdapter = new CustomAdapter_Ingredients(getActivity());
         lv.setAdapter(myAdapter);
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getActivity());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+                        0x3F, 0x25)));
+                // set item width
+                deleteItem.setWidth(dp2px(90));
+                // set a icon
+                deleteItem.setIcon(R.drawable.ic_delete);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+        lv.setMenuCreator(creator);
+
+        lv.setOnMenuItemClickListener(lv_OnMenuItemClickListener);
+
         return v;
     }
 
@@ -135,7 +201,6 @@ public class Frag_Foods_Deadline extends Fragment {
                 viewHolder.txt_name = (TextView) convertView.findViewById(R.id.indegredient_name);
                 viewHolder.txt_endDate = (TextView) convertView.findViewById(R.id.indegredient_deadDate);
                 viewHolder.txt_dayLeft = (TextView) convertView.findViewById(R.id.indegredient_dayLeft);
-                viewHolder.btn_delete = (Button)convertView.findViewById(R.id.btn_delete_ingredients);
                 convertView.setTag(viewHolder);
             }
             else
@@ -145,41 +210,6 @@ public class Frag_Foods_Deadline extends Fragment {
             viewHolder.txt_name.setText(i.getName());
             viewHolder.txt_dayLeft.setText(String.valueOf(i.getDay()));
             viewHolder.txt_endDate.setText(i.getDeadDate());
-            viewHolder.btn_delete.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage("Really Want to Delete?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which)
-                                {
-                                    // 確認
-                                    //TODO UPDATE the model here
-                                    myDBHelper = MyDBHelper.getInstance(getActivity());
-                                    db = myDBHelper.getWritableDatabase();
-                                    db.delete("tingredients","ingredients_id = "+indegredientList.get(position).get_id(),null);
-                                    indegredientList.remove(indegredientList.get(position));
-                                    notifyDataSetChanged();
-                                    myAdapter = new CustomAdapter_Ingredients(getActivity());
-                                    lv.setAdapter(myAdapter);
-
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which)
-                                {
-                                    // 取消
-
-                                }
-                            });
-                    AlertDialog about_dialog = builder.create();
-                    about_dialog.show();
-                }
-            });
-
-
             return convertView;
         }
     }
@@ -188,7 +218,7 @@ public class Frag_Foods_Deadline extends Fragment {
         private TextView txt_name;
         private TextView txt_endDate;
         private TextView txt_dayLeft;
-        private Button btn_delete;
+
 
     }
 
@@ -219,11 +249,15 @@ public class Frag_Foods_Deadline extends Fragment {
         });
     }
 
+    private int dp2px(int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getResources().getDisplayMetrics());
+    }
 
     List<Ingredients> indegredientList;
     MyDBHelper myDBHelper;
     SQLiteDatabase db;
     CustomAdapter_Ingredients myAdapter;
-    ListView lv ;
+    SwipeMenuListView lv ;
 
 }

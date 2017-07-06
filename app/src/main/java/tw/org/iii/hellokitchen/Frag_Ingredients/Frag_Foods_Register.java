@@ -300,7 +300,7 @@ public class Frag_Foods_Register extends Fragment {
         try
         {
             sdb.insertOrThrow("tingredients", null, values);
-            getFragmentManager().popBackStack();
+           // getFragmentManager().popBackStack();
             Toast.makeText(getActivity(),"食材登錄成功",Toast.LENGTH_LONG).show();
             clear();
         }
@@ -310,7 +310,8 @@ public class Frag_Foods_Register extends Fragment {
         }
     }
 
-    public Frag_Foods_Register() {
+    public Frag_Foods_Register()
+    {
         // Required empty public constructor
     }
 

@@ -22,7 +22,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="搜尋食譜" />
+                android:text="搜尋食譜"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/editText_Search_Recipe"
@@ -39,7 +40,6 @@
             android:id="@+id/container_recipe_gallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blanchedalmond"
             android:clickable="true"
             android:orientation="vertical">
 

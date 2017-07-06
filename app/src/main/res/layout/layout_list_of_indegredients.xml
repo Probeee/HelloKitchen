@@ -2,6 +2,7 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp" >
@@ -29,6 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:text="食材名稱"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
@@ -39,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="食材名稱"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -55,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:text="剩餘天數"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
@@ -65,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="剩餘天數"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -81,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="5dp"
                     android:text="到期日期"
                     android:textAlignment="textStart"
                     android:textSize="20sp" />
@@ -91,25 +95,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:text="到期日期"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
 
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_delete_ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="刪除" />
 
         </LinearLayout>
 

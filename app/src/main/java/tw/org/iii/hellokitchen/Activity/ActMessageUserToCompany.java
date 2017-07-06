@@ -3,6 +3,7 @@ package tw.org.iii.hellokitchen.Activity;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -212,6 +213,8 @@ public class ActMessageUserToCompany extends AppCompatActivity
         btnSendMessage = (Button)findViewById(R.id.buttonSendMessage);
         btnSendMessage.setOnClickListener(btnSendMessage_Click);
         editTextMessage = (EditText)findViewById(R.id.inputMessage);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

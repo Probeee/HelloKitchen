@@ -150,7 +150,7 @@ public class ActRecipeDetail extends AppCompatActivity
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
             {
                 collapsingToolbarLayout.setBackground(new BitmapDrawable(getApplicationContext().getResources(), bitmap));
-                collapsingToolbarLayout.getBackground().setAlpha(75);//設定非透明度75
+                collapsingToolbarLayout.getBackground().setAlpha(85);//設定非透明度75
 
             }
 
@@ -254,7 +254,7 @@ public class ActRecipeDetail extends AppCompatActivity
             {
                 super.onPostExecute(aVoid);
               
-                textViewCookTime.setText(recipeCooktime);
+                textViewCookTime.setText(recipeCooktime + "分鐘");
                 textViewIntro.setText( recipeDetail );
 
                 CustomAdapter_materials adapter = new CustomAdapter_materials(getBaseContext());
