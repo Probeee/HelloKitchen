@@ -15,6 +15,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -196,6 +197,7 @@ public class Frag_Login extends Fragment {
             fragmentTransaction.replace(R.id.frag_container,frag_register);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+
         }
     };
 

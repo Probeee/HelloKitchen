@@ -269,7 +269,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         Notification.Builder builder = new Notification.Builder(ActRealMain.this);
         builder.setContentTitle("過期通知");
         builder.setContentText("您有食材已過期，記得清理喔!");
-        builder.setSmallIcon(R.drawable.account_icon);
+        builder.setSmallIcon(R.drawable.bell);
         builder.setDefaults(Notification.DEFAULT_ALL);
         return builder.build();
     }

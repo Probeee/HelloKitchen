@@ -61,13 +61,14 @@
         <activity
             android:name=".Activity.ActRecipeDetail"
             android:label="@string/title_activity_act_recipe_detail"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.ActCompanyDetail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.ActRecipeUpload" />
-        <activity android:name=".Activity.ActRecipeModify" />
-        <activity android:name=".Activity.ActMessageUserToCompany" />
+        <activity android:name=".Activity.ActRecipeUpload"  />
+        <activity android:name=".Activity.ActRecipeModify"  />
+        <activity android:name=".Activity.ActMessageUserToCompany" android:theme="@style/AppTheme2"/>
         <activity android:name=".Activity.ActMessageCompanyToUser"></activity>
 
         <service android:name=".Utility.MyInstanceIDService">
