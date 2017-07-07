@@ -6,6 +6,9 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,7 +92,14 @@ public class Frag_Register extends Fragment {
         btn_reg.setOnClickListener(btn_reg_click);
 
 
+
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Toast.makeText(getActivity(), "廠商註冊請用Web!",Toast.LENGTH_LONG).show();
     }
 
     View.OnClickListener btn_reg_click = new View.OnClickListener()

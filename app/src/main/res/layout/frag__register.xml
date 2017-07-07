@@ -34,7 +34,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="5"
 
                     android:orientation="horizontal">
 
@@ -55,7 +55,9 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical|center_horizontal|center"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
 
                             <TextView
                                 android:id="@+id/textView"
@@ -63,7 +65,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
                                 android:gravity="center"
-                                android:text="Register"
+                                android:text="User Register"
                                 android:textAlignment="center"
                                 android:textAllCaps="false"
                                 android:textSize="24sp"
@@ -76,7 +78,9 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical|center_horizontal"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -95,8 +99,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:padding="5dp"
-                                        android:src="@drawable/account_icon" />
+                                        android:padding="10dp"
+                                        android:src="@drawable/mail" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -104,13 +108,17 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="12dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="12dp">
 
                                     <EditText
                                         android:id="@+id/editText_email"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Email"
                                         android:inputType="textEmailAddress"
                                         android:padding="3dp"
@@ -125,7 +133,9 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical|center_horizontal"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -144,7 +154,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:padding="5dp"
+                                        android:padding="8dp"
                                         android:src="@drawable/password_icon" />
                                 </LinearLayout>
 
@@ -153,13 +163,17 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="12dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="12dp">
 
                                     <EditText
                                         android:id="@+id/editText_password"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Password"
                                         android:inputType="textPassword"
                                         android:padding="3dp"
@@ -174,7 +188,9 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical|center_horizontal"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -195,13 +211,17 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="12dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="12dp">
 
                                     <EditText
                                         android:id="@+id/editText_passwordCheck"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Confirm Password"
                                         android:inputType="textPassword"
                                         android:padding="3dp"
@@ -216,7 +236,9 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical|center_horizontal"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -229,14 +251,16 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="2"
                                     android:gravity="center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:padding="12dp">
 
                                     <ImageView
                                         android:id="@+id/imageView4"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
                                         android:layout_gravity="center_vertical"
-                                        android:background="@drawable/name_icon" />
+                                        android:background="@drawable/account_icon"
+                                        android:padding="10dp" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -244,13 +268,17 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="12dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="12dp">
 
                                     <EditText
                                         android:id="@+id/editText_name"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Your Name Here"
                                         android:inputType="textPersonName"
                                         android:padding="3dp"
@@ -258,12 +286,15 @@
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical|center_horizontal"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -275,7 +306,8 @@
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="2"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:padding="5dp">
 
                                     <ImageView
                                         android:id="@+id/imageView5"
@@ -290,13 +322,17 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingBottom="12dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingTop="12dp">
 
                                     <EditText
                                         android:id="@+id/editText_tel"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Phone NO."
                                         android:inputType="phone"
                                         android:padding="3dp"
@@ -340,16 +376,18 @@
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
                                         android:layout_weight="5"
-                                        android:orientation="horizontal">
+                                        android:orientation="horizontal"
+                                        android:paddingBottom="5dp">
 
                                         <Button
                                             android:id="@+id/btn_register"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@android:color/holo_orange_light"
-                                            android:text="Register"
-                                            android:textColor="@color/com_facebook_share_button_text_color" />
+                                            android:background="@drawable/round_button_register"
+                                            android:text="完成註冊"
+                                            android:textColor="@color/com_facebook_share_button_text_color"
+                                            android:textSize="18sp" />
 
                                     </LinearLayout>
 
@@ -378,5 +416,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </FrameLayout>

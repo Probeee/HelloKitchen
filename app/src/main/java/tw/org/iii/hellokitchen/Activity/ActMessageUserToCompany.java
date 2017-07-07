@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -118,6 +119,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
 
                         if (responseJsonObj.getString(TheDefined.Android_JSON_Key_Information).equals(TheDefined.Android_JSON_Value_Success))
                         {
+                            /*
                             try
                             {
                                 String toToken = responseJsonObj.getString(TheDefined.Android_User_Phone_Token);
@@ -128,7 +130,7 @@ public class ActMessageUserToCompany extends AppCompatActivity
                             {
                                 e.printStackTrace();
                                 Log.d("test",e.getMessage());
-                            }
+                            }*/
                         }
                         else
                         {
@@ -210,11 +212,12 @@ public class ActMessageUserToCompany extends AppCompatActivity
     private void InitialComponent()
     {
         lvMessage = (ListView)findViewById(R.id.listViewMessageUtoCom);
-        btnSendMessage = (Button)findViewById(R.id.buttonSendMessage);
+        btnSendMessage = (ImageButton)findViewById(R.id.buttonSendMessage);
         btnSendMessage.setOnClickListener(btnSendMessage_Click);
         editTextMessage = (EditText)findViewById(R.id.inputMessage);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("對話用戶:"+companyAccount);
     }
 
     @Override
@@ -390,5 +393,5 @@ public class ActMessageUserToCompany extends AppCompatActivity
 
     ListView lvMessage;
     EditText editTextMessage;
-    Button btnSendMessage;
+    ImageButton btnSendMessage;
 }

@@ -121,7 +121,7 @@ public class RecipeGalleryAdapterPicasso extends ArrayAdapter<Recipes> implement
                 .with(context)
                 .load(recipeObjects.get(position).getRecipe_picture())
                 .config(Bitmap.Config.ALPHA_8)
-                .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 75 / 100)
+                .resize(gridViewPhoto.getColumnWidth(), gridViewPhoto.getColumnWidth() * 80 / 100)
                 .tag(recipe_id)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)

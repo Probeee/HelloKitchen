@@ -89,7 +89,8 @@
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="2"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:padding="5dp">
 
                                     <ImageView
                                         android:id="@+id/imageView"
@@ -105,16 +106,21 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingRight="5dp">
 
                                     <EditText
                                         android:id="@+id/editText_login_email"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginBottom="15dp"
+                                        android:layout_marginTop="15dp"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Email"
-                                        android:text="test01@gmail.com"
-                                        android:padding="3dp" />
+                                        android:paddingLeft="3dp"
+                                        android:paddingRight="3dp"
+                                        android:text="test01@gmail.com" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -144,7 +150,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:padding="5dp"
+                                        android:padding="7dp"
                                         android:src="@drawable/password_icon" />
                                 </LinearLayout>
 
@@ -153,17 +159,21 @@
                                     android:layout_height="match_parent"
                                     android:layout_weight="8"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingRight="5dp">
 
                                     <EditText
                                         android:id="@+id/editText_login_password"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginBottom="15dp"
+                                        android:layout_marginTop="15dp"
                                         android:layout_weight="1"
+                                        android:background="@drawable/round_edittext"
                                         android:hint="Password"
-                                        android:text="123456"
                                         android:inputType="textPassword"
-                                        android:padding="3dp" />
+                                        android:padding="3dp"
+                                        android:text="123456" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -203,10 +213,11 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@android:color/holo_green_light"
+                                            android:background="@drawable/round_button_login"
                                             android:padding="3dp"
-                                            android:text="Login"
-                                            android:textColor="@color/com_facebook_share_button_text_color" />
+                                            android:text="登入"
+                                            android:textColor="@color/com_facebook_share_button_text_color"
+                                            android:textSize="18sp" />
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -245,9 +256,10 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:background="@android:color/holo_orange_light"
-                                            android:text="Register"
-                                            android:textColor="@color/com_facebook_share_button_text_color" />
+                                            android:background="@drawable/round_button_register"
+                                            android:text="註冊"
+                                            android:textColor="@color/com_facebook_share_button_text_color"
+                                            android:textSize="18sp" />
 
                                     </LinearLayout>
 
