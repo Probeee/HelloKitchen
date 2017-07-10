@@ -196,13 +196,29 @@
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_message"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="2"
-                    android:text="打開留言板" />
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.5">
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_message"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="留言板"
+                        android:background="@drawable/custombutton"
+                        android:drawableLeft="@drawable/messageboard"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

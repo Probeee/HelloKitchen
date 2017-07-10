@@ -20,18 +20,21 @@
             <Button
                 android:id="@+id/button_Up"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:text="搜尋食譜"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:background="@drawable/customsearchbutton"
+                android:drawableLeft="@drawable/search"/>
 
             <EditText
                 android:id="@+id/editText_Search_Recipe"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
                 android:ems="10"
-
                 android:hint="請輸入關鍵字" />
 
         </LinearLayout>

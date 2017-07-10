@@ -13,8 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -41,29 +41,30 @@
                     android:id="@+id/txtIngredient"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:background="@drawable/bg_edittext"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:orientation="horizontal"
-                android:gravity="center" >
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnCamera"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/camera"/>
+                    android:background="@drawable/camera" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:orientation="horizontal"
-                android:gravity="center" >
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnPhoto"
@@ -73,10 +74,20 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#000000" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -119,7 +130,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:inputType="numberSigned"
-                    android:textSize="20dp" />
+                    android:digits="1234567890"
+                    android:textSize="20dp"
+                    android:background="@drawable/bg_edittext"/>
             </LinearLayout>
 
             <LinearLayout
@@ -137,10 +150,20 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#000000" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -160,7 +183,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="5.5"
                 android:orientation="horizontal">
 
                 <EditText
@@ -169,27 +192,38 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:inputType="date"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:background="@drawable/bg_edittext"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnBuyDatePicker"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/date" />
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#000000" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -209,7 +243,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="5.5"
                 android:orientation="horizontal">
 
                 <EditText
@@ -218,78 +252,64 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:inputType="date"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:background="@drawable/bg_edittext"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnDeadDatePicker"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/date" />
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#000000" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-
-            <LinearLayout
+            <Button
+                android:id="@+id/btnInsert"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/custombutton"
+                android:text="登錄食材"
+                android:textSize="20dp" />
 
-                <Button
-                    android:id="@+id/btnInsert"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginRight="25dp"
-                    android:text="登錄食材"
-                    android:textSize="20dp"
-                    android:background="@drawable/custombutton"/>
-            </LinearLayout>
 
-            <LinearLayout
+            <Button
+                android:id="@+id/btnClear"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnClear"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="50dp"
-                    android:text="重新輸入"
-                    android:textSize="20dp"
-                    android:background="@drawable/custombutton"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/lblDetails"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/custombutton"
+                android:text="重新輸入"
                 android:textSize="20dp" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 
