@@ -24,6 +24,7 @@ import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,7 +97,6 @@ public class Frag_Foods_Register extends Fragment {
     private final static int PHOTO_ID = 99 ;*/
 
     private View v ;
-    private TextView lblDetails;
     private EditText txtIngredient, txtAmount, txtBuyDate, txtDeadDate;
     private Button btnCamera, btnPhoto, btnAddAmount, btnMinusAmount,
             btnBuyDatePicker, btnDeadDatePicker, btnInsert, btnClear;
@@ -208,6 +208,12 @@ public class Frag_Foods_Register extends Fragment {
     {
         @Override
         public void onClick(View v) {
+            if (myIngredients.getAmount() > 100) {
+                myIngredients.setAmount(100);
+                txtAmount.setText(String.valueOf(myIngredients.getAmount()));
+                Toast.makeText(getActivity(), "數量最多100", Toast.LENGTH_SHORT).show();
+                return;
+            }
             myIngredients.AddAmount();
             txtAmount.setText(String.valueOf(myIngredients.getAmount()));
         }
@@ -241,6 +247,8 @@ public class Frag_Foods_Register extends Fragment {
         }
     };
 
+    private int temp;
+
     private TextWatcher txtAmount_TextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -248,13 +256,43 @@ public class Frag_Foods_Register extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (txtAmount.getText().toString().equalsIgnoreCase("-") ||
+                    txtAmount.getText().toString().equalsIgnoreCase("+") ||
+                    txtAmount.getText().toString().equalsIgnoreCase("0")) {
+                txtAmount.setText("");
+                return;
+            }
+
             if (!txtAmount.getText().toString().equals("")) {
-                myIngredients.setAmount(Integer.parseInt(txtAmount.getText().toString()));
+                if (start > 1){
+                    int num = Integer.parseInt(s.toString());
+                    if (num > 100) {
+                        s = String.valueOf(100);
+                        txtAmount.setText(s);
+                    }else if(num < 0)
+                        s = String.valueOf(0);
+                    myIngredients.setAmount(Integer.parseInt(txtAmount.getText().toString()));
+                    return;
+                }
             }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
+            if (s != null && !s.equals("")) {
+                int markVal = 0;
+                try {
+                    markVal = Integer.parseInt(s.toString());
+                }catch (NumberFormatException e){
+                    markVal = 0;
+                }
+                if (markVal > 100) {
+                    Toast.makeText(getActivity(), "數量最多100", Toast.LENGTH_SHORT).show();
+                    txtAmount.setText(String.valueOf(100));
+                }
+                myIngredients.setAmount(markVal);
+                return;
+            }
         }
     };
     private TextWatcher txtIngredient_TextWatcher = new TextWatcher() {
@@ -300,7 +338,7 @@ public class Frag_Foods_Register extends Fragment {
         try
         {
             sdb.insertOrThrow("tingredients", null, values);
-           // getFragmentManager().popBackStack();
+            // getFragmentManager().popBackStack();
             Toast.makeText(getActivity(),"食材登錄成功",Toast.LENGTH_LONG).show();
             clear();
         }
@@ -382,7 +420,6 @@ public class Frag_Foods_Register extends Fragment {
     private void callCloudVision(final Bitmap bitmap) throws IOException
     {
         // Switch text to loading
-        lblDetails.setText(R.string.loading_message);
         final ProgressDialog message = new ProgressDialog(getActivity());
         message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         message.setTitle("正在讀取資料");
@@ -472,7 +509,6 @@ public class Frag_Foods_Register extends Fragment {
             protected void onPostExecute(String result)
             {
                 callTrans(result);
-                lblDetails.setText(result);
                 message.dismiss();
             }
         }.execute();
@@ -615,8 +651,6 @@ public class Frag_Foods_Register extends Fragment {
 
     /*初始化UI物件*/
     private void InitialComponet(View v) {
-
-        lblDetails = (TextView) v.findViewById(R.id.lblDetails);
         txtIngredient = (EditText) v.findViewById(R.id.txtIngredient);
         txtIngredient.addTextChangedListener(txtIngredient_TextWatcher);
         txtAmount = (EditText) v.findViewById(R.id.txtAmount);
@@ -629,6 +663,8 @@ public class Frag_Foods_Register extends Fragment {
         txtDeadDate.setCursorVisible(false);
         txtDeadDate.setFocusable(false);
         txtDeadDate.setFocusableInTouchMode(false);
+        txtDeadDate.setOnClickListener(btnDeadDatePicker_Click);
+        txtBuyDate.setOnClickListener(btnBuyDatePicker_Click);
 
         btnCamera = (Button) v.findViewById(R.id.btnCamera);
         btnCamera.setOnClickListener(btnCamera_Click);

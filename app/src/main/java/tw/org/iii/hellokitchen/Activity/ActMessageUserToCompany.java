@@ -66,6 +66,9 @@ public class ActMessageUserToCompany extends AppCompatActivity
 
     private void sendChatMessage()
     {
+        if (editTextMessage.getText().toString().equals("")) {
+            return;
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String currentDateAndTime = sdf.format(new Date());
         final Message newMessage = new Message(userAccount,companyAccount, editTextMessage.getText().toString(),currentDateAndTime);

@@ -334,7 +334,9 @@
                                     android:id="@+id/btnRecipeInsert"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="發布" />
+                                    android:background="@drawable/custombutton"
+                                    android:text="發布"
+                                    android:textSize="18sp" />
 
                             </LinearLayout>
 

@@ -254,7 +254,7 @@ public class ActRecipeDetail extends AppCompatActivity
             {
                 super.onPostExecute(aVoid);
               
-                textViewCookTime.setText(recipeCooktime + "分鐘");
+                textViewCookTime.setText(recipeCooktime + "分鐘   " +recipeAmount+"人份");
                 textViewIntro.setText( recipeDetail );
 
                 CustomAdapter_materials adapter = new CustomAdapter_materials(getBaseContext());
