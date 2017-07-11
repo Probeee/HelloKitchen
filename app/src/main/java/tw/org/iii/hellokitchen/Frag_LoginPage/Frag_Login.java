@@ -142,7 +142,7 @@ public class Frag_Login extends Fragment {
         table = getActivity().getSharedPreferences("LoginUser",0);
         if(!table.getString("UserEmail","").isEmpty() && !table.getString("UserName","").isEmpty())
         {
-            Toast.makeText(getActivity(), table.getString("UserEmail", "") + "-" + table.getString("UserName", ""), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), table.getString("UserEmail", "") + "-" + table.getString("UserName", ""), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setClass(getActivity(),ActRealMain.class);
             Bundle bundle = new Bundle();
@@ -430,7 +430,7 @@ public class Frag_Login extends Fragment {
     /*將登入資料打包JSON上傳至伺服器servlet驗證*/   /* 需要改一下帶三個參數 帳號, 密碼, 是否為facebook使用者 */
     private void servlet_Find_The_Account() {
 
-        final ProgressDialog message = new ProgressDialog(getActivity());
+        message = new ProgressDialog(getActivity());
         message.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         message.setTitle("登入中");
         message.setCancelable(false);
@@ -492,19 +492,30 @@ public class Frag_Login extends Fragment {
                             message.cancel();
                             getActivity().finish();
 
-                        } else if (info.equals(TheDefined.Android_JSON_Value_Fail)) {
+                        }
+                        else if (info.equals(TheDefined.Android_JSON_Value_Fail))
+                        {
                             TheDefined.showToastByRunnable(getActivity(),"帳號密碼有誤",Toast.LENGTH_LONG); //在Thread中執行toast
                             message.cancel();
                         }
                     }
                 } catch (Exception e) {
-                    Log.d("errorMsg",e.getMessage());
+                    //Log.d("errorMsg",e.getMessage());
                     TheDefined.showToastByRunnable(getActivity(), "伺服器無法取得回應", Toast.LENGTH_LONG);
                     message.cancel();
                     e.printStackTrace();
                 }
             }
         }).start();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if ( message!=null && message.isShowing() ){
+            message.cancel();
+        }
+
     }
 
     /*取得facebook api Hash Key (不同PC)*/
@@ -531,4 +542,6 @@ public class Frag_Login extends Fragment {
     EditText password;
 
     LoginButton btn_facebook_login;
+
+    ProgressDialog message;
 }

@@ -249,9 +249,6 @@ public class Frag_CompanyDetail_Gallery extends Fragment implements BaseSliderVi
                                         jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_path),
                                         "noData",
                                         "noData");
-                                Log.d("GetPID", jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_id));
-                                Log.d("GetCID", jsonObject2.getString(TheDefined.Android_JSON_Key_Company_id));
-                                Log.d("GetPATH", jsonObject2.getString(TheDefined.Android_JSON_Key_Company_Picture_path));
                                 myRMList.add(myCP);
                             }
                         }

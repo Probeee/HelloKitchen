@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import tw.org.iii.hellokitchen.Activity.ActMain;
+import tw.org.iii.hellokitchen.Activity.ActRealMain;
 import tw.org.iii.hellokitchen.Entity.Ingredients;
+import tw.org.iii.hellokitchen.R;
 
 
 /**
@@ -21,20 +26,42 @@ import tw.org.iii.hellokitchen.Entity.Ingredients;
 
 public class AlarmBroadCastReceiver extends BroadcastReceiver
 {
+    PendingIntent pendingIntent;
+    Context context;
     @Override
     public void onReceive(Context context, Intent intent)
     {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Notification notification = intent.getParcelableExtra("notification");
+       // Notification notification = intent.getParcelableExtra("notification");
         int id = intent.getIntExtra("notification_id",1);
 
         int count = FindCount(context);
+        this.context = context;
         Log.d("Count",String.valueOf(count));
         if(count>0)
-          notificationManager.notify(id, notification);
+        {
+            pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, ActMain.class), 0);
+            Notification notification = getNotification();
+            notificationManager.notify(id, notification);
+
+        }
         else
           notificationManager.cancel(id);
     }
+
+    private Notification getNotification()
+    {
+        Notification.Builder builder = new Notification.Builder(context);
+        builder.setContentTitle("過期通知");
+        builder.setContentText("您有食材已過期，記得清理喔!");
+        builder.setSmallIcon(R.drawable.bell);
+        builder.setAutoCancel(true);
+        builder.setDefaults(Notification.DEFAULT_ALL);
+        builder.setContentIntent(pendingIntent);
+        return builder.build();
+    }
+
+
     public int FindCount(Context c)
     {
         int count = 0;

@@ -10,6 +10,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ public class Frag_Company_Container extends Fragment {
      */
     public GridView photoGallery;
 
+
     /**
      * GridView所使用的Adapter
      */
@@ -57,7 +60,7 @@ public class Frag_Company_Container extends Fragment {
     private CompanyGalleryAdapterPicasso adapter;
 
     private List<Company> companyList;
-
+    private List<Company> companySearchList;
 
 
     public Frag_Company_Container() {
@@ -105,8 +108,19 @@ public class Frag_Company_Container extends Fragment {
         {
             companyList.clear();
         }
+        if(companySearchList == null)
+        {
+            companySearchList = new ArrayList<>();
+        }
+        else
+        {
+            companySearchList.clear();
+        }
 
         this.photoGallery = (GridView)v.findViewById(R.id.gridCompanyPhoto );
+        button = (Button)v.findViewById(R.id.button_companySearch);
+        button.setOnClickListener(button_Click);
+        editText = (EditText)v.findViewById(R.id.editText_Search_Company);
         return v;
     }
     @Override
@@ -206,6 +220,58 @@ public class Frag_Company_Container extends Fragment {
         }.execute();
     }
 
+    private View.OnClickListener button_Click = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            String condition = editText.getText().toString();
+            //recipesList = getAllRecipe();
+            companySearchList.clear();
+            if(condition != null)
+            {
+                //有搜尋條件時候
+                for(int count = 0; count< companyList.size();count++)
+                {
+                    if( companyList.get(count).getCompany_name().contains(condition))
+                    {
+                        companySearchList.add(companyList.get(count));
+                    }
+                }
 
+                photoGallery.setAdapter(null);
+                adapter.notifyDataSetChanged();
+                adapter = new CompanyGalleryAdapterPicasso(getActivity(), companySearchList, photoGallery);
+                photoGallery.setAdapter(adapter);
+            }
+            else
+            {
+                //沒有搜尋條件時候
+                photoGallery.setAdapter(null);
+                adapter.notifyDataSetChanged();
+                //recipesList_status.clear();
+                companySearchList.clear();
+                try
+                {
+                    servlet_Recipe_Data();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                //adapter = new RecipeGalleryAdapterPicasso(getActivity(), recipesList_status, photoGallery);
+                // photoGallery.setAdapter(adapter);
+
+            }
+        }
+
+    };
+
+    Button button;
+    EditText editText;
 
 }
