@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,11 +34,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import tw.org.iii.hellokitchen.Entity.Ingredients;
 import tw.org.iii.hellokitchen.Frag_Company.Frag_Company_Container;
 import tw.org.iii.hellokitchen.Frag_Ingredients.Frag_Foods_Container;
 import tw.org.iii.hellokitchen.Frag_Recipe.Frag_Recipe_Container;
 import tw.org.iii.hellokitchen.R;
 import tw.org.iii.hellokitchen.Utility.AlarmBroadCastReceiver;
+import tw.org.iii.hellokitchen.Utility.MyDBHelper;
 import tw.org.iii.hellokitchen.Utility.TheDefined;
 
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
@@ -122,6 +126,37 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
 
         am = (AlarmManager) getSystemService(ALARM_SERVICE);
         calendar = java.util.Calendar.getInstance();
+
+        FindExpire();
+    }
+
+    private void FindExpire()
+    {
+        int count = 0 ;
+        MyDBHelper myDBHelper = MyDBHelper.getInstance(this);
+        SQLiteDatabase db = myDBHelper.getReadableDatabase();
+        Cursor cursor = db.query("tingredients", null, null, null, null, null, null);
+
+        while (cursor.moveToNext())
+        {
+            String _id = cursor.getString(0);
+            String name = cursor.getString(1);
+            String startDate = cursor.getString(2);
+            String endDate = cursor.getString(3);
+            String amount = cursor.getString(4);
+            String member = cursor.getString(5);
+            Ingredients i  = new Ingredients(_id, name, startDate, endDate,amount,member);
+
+            if(i.getTime()<0)
+            {
+                count++;
+            }
+        }
+
+        if(count >0)
+        {
+            Toast.makeText(this,"共有"+count+"個食材過期~請刪除",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -254,11 +289,12 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
         calendar.set(java.util.Calendar.MILLISECOND, 0);
         //加入notification
         Intent notificationIntent = new Intent(this, AlarmBroadCastReceiver.class);
-
-        Notification notification = getNotification();
+       // Notification notification = getNotification();
         notificationIntent.putExtra("notification_id", 1);
-        notificationIntent.putExtra("notification", notification);
+        //notificationIntent.putExtra("notification", notification);
+        notificationIntent.setAction(Intent.ACTION_MAIN);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), pendingIntent);
         am.setRepeating(AlarmManager.RTC_WAKEUP,  calendar.getTimeInMillis(), (24 * 60 * 60 * 1000),pendingIntent);//am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + 1000, (24 * 60 * 60 * 1000),pendingIntent);

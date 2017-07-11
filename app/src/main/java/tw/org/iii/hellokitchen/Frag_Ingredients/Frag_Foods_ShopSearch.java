@@ -336,7 +336,10 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
                     // Getting name
                     String name = hmPlace.get("place_name");
 
+
                     Log.d("Map", "place: " + name);
+                    Log.d("Map", "place: " + lat);
+                    Log.d("Map", "place: " + lng);
 
                     // Getting vicinity
                     String vicinity = hmPlace.get("vicinity");
@@ -355,7 +358,7 @@ public class Frag_Foods_ShopSearch extends Fragment implements OnMapReadyCallbac
 
 
                 }
-                tv_location.setText("您所在之位置方圓1公里內有:"+list.size()+"間超市!");
+                tv_location.setText("您所在之位置方圓"+Integer.parseInt(TheDefined.Radius)/1000+"公里內有:"+list.size()+"間超市!");
             }
             else
             {
