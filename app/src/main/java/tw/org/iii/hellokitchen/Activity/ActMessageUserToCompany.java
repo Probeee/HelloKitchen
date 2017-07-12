@@ -387,9 +387,9 @@ public class ActMessageUserToCompany extends AppCompatActivity
                 e.printStackTrace();
             }
 
-            singleMessageContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
-            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? R.drawable.out_message_bg:R.drawable.in_message_bg);
-            singleMessageBigContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount) ? Gravity.LEFT : Gravity.RIGHT);
+            singleMessageContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount.trim()) ? Gravity.LEFT : Gravity.RIGHT);
+            chatText.setBackgroundResource(chatMessageObj.getSender().equalsIgnoreCase(companyAccount.trim()) ? R.drawable.out_message_bg:R.drawable.in_message_bg);
+            singleMessageBigContainer.setGravity(chatMessageObj.getSender().equalsIgnoreCase(companyAccount.trim()) ? Gravity.LEFT : Gravity.RIGHT);
 
             return row;
         }

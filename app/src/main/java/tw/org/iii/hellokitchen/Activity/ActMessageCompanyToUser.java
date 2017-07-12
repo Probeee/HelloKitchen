@@ -174,7 +174,7 @@ public class ActMessageCompanyToUser extends AppCompatActivity
             intent.setClass(ActMessageCompanyToUser.this, ActMessageUserToCompany.class);
             Bundle bundle = new Bundle();
             TextView textView = (TextView) view.findViewById(R.id.listview_item_user);
-            bundle.putString("userAccount",companyAccount );
+            bundle.putString("userAccount",companyAccount);
             bundle.putString("companyAccount",String.valueOf(textView.getText()));
             Log.d("test",companyAccount);
             Log.d("test",String.valueOf(textView.getText()));

@@ -103,7 +103,7 @@ public class Frag_CompanyDetail_Info extends Fragment {
             else if(table.getString("UserIdent", "").equalsIgnoreCase("company"))
             {
                 //如果是廠商登入
-                if(table.getString("UserEmail", "").equalsIgnoreCase(companyEmail))
+                if(table.getString("UserEmail", "").equalsIgnoreCase(companyEmail.trim()))
                 {
                     //如果該廠商選擇自己的頁面 開啟名單
                     intent.setClass(getActivity(), ActMessageCompanyToUser.class);

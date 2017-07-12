@@ -126,7 +126,7 @@ public class ActCompanyDetail extends AppCompatActivity  {
         Bundle bundle = new Bundle();
         bundle.putString("companyId",companyId);
         bundle.putString("companyName", companyName);
-        bundle.putString("company_logo",companyLogo );
+        bundle.putString("company_logo",companyLogo);
         bundle.putString("company_cover",companyCover);
         frag_companyDetail_gallery.setArguments(bundle);
     }
@@ -138,7 +138,7 @@ public class ActCompanyDetail extends AppCompatActivity  {
         bundle.putString("company_intro",companyIntro);
         bundle.putString("company_owner",companyOwner);
         bundle.putString("company_tel", companyTel);
-        bundle.putString("company_email",companyEmail );
+        bundle.putString("company_email",companyEmail);
         bundle.putString("company_address",companyAddress);
         frag_companyDetail_info.setArguments(bundle);
     }

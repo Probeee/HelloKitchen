@@ -120,7 +120,7 @@
                                         android:hint="Email"
                                         android:paddingLeft="3dp"
                                         android:paddingRight="3dp"
-                                        android:text="Zara@yahoo.com " />
+                                        android:text="ab3093123@gmail.com" />
                                 </LinearLayout>
                             </LinearLayout>
 
@@ -173,7 +173,7 @@
                                         android:hint="Password"
                                         android:inputType="textPassword"
                                         android:padding="3dp"
-                                        android:text=" Zara01 " />
+                                        android:text="ab3093123" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
