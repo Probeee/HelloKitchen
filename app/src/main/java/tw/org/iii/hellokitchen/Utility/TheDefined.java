@@ -47,7 +47,7 @@ public class TheDefined
     }
 
     /*server URL*/
-    
+
     /*JSON Key & Value*/
     public static final String Android_User_Phone_Token = "Android_User_Phone_Token";
 

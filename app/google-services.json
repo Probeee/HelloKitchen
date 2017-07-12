@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "828850367485-na5mfn94kqvjt368vvlbpifb4ds4jvg1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.org.iii.hellokitchen",
+            "certificate_hash": "90fbf0b85722f9f0df3096d94232e07e27aa50fb"
+          }
+        },
+        {
           "client_id": "828850367485-e0oudi02igfis4gm9o5kv7jmcv08mcbn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
