@@ -16,17 +16,19 @@ public class TheDefined
     public static final String LOGIN_USER_NAME = "LOGIN_USER_NAME" ;
     public static final String LOGIN_USER_MAIL = "LOGIN_USER_MAIL" ;
     public static final String LOGIN_USER_IDENT = "LOGIN_USER_IDENT" ;
+    public static final String GoogleApiKey = "";
+    public static final String FirebaseApiKey = "";
 
     //--GoogleMap & GooglePlace--//
     public static final String StringBuilder_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-    public static final String Radius = "2000";
+    public static final String Radius = "3000";
     public static final String Language = "zh-TW";
     public static final String KeyWords = "supermarket" + "+" +"%E8%B6%85%E5%B8%82" + "+" + "%e8%8f%9c%e5%b8%82%e5%a0%b4%0d%0a" ;
     public static final String Sensor =  "true" ;
-    public static final String ApiKey = "AIzaSyDdKE-JYbnGeOJCZ6CeL7nt4cjvZdqqXDU";
+    public static final String ApiKey = "";
 
     //--GoogleCloudVision--//
-    public static final String CLOUD_VISION_API_KEY = "AIzaSyCUQswIVonpnGupn5qZM1PlniXQfh8S2Z4";
+    public static final String CLOUD_VISION_API_KEY = "";
     public static final String ANDROID_CERT_HEADER = "X-Android-Cert";
     public static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
     public static final String TAG = ActMain.class.getSimpleName();
@@ -47,9 +49,11 @@ public class TheDefined
     /*server URL*/
     //public static final String Web_Server_URL = "http://192.168.1.110:8080/HelloKitchen0622";
     //public static final String Web_Server_URL = "http://192.168.1.119:8080/HelloKitchen27";
-
-    //public static final String Web_Server_URL = "http://192.168.0.100:8080/HelloKitchen0622";
+    public static final String Web_Server_URL = "";
+    //public static final String Web_Server_URL = "http://192.168.1.96:8080/HelloKitchen";
     /*JSON Key & Value*/
+    public static final String Android_User_Phone_Token = "Android_User_Phone_Token";
+
     public static final String Android_JSON_Key_Member_Id = "Android_JSON_Key_Member_Id";
     public static final String Android_JSON_Key_Member_Name = "Android_JSON_Key_Member_Name";
     public static final String Android_JSON_Key_Member_Password = "Android_JSON_Key_Member_Password";

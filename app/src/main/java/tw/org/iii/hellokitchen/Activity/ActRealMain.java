@@ -153,8 +153,7 @@ public class ActRealMain extends AppCompatActivity implements NavigationView.OnN
             }
         }
 
-        if(count >0)
-        {
+        if(count >0) {
             Toast.makeText(this,"共有"+count+"個食材過期~請刪除",Toast.LENGTH_LONG).show();
         }
     }
